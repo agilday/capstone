@@ -1,0 +1,240 @@
+# Example Project Design Doc - Amazon Music Playlist Service Design
+
+Please use the following as a reference while completing your design. It is
+based on the Unit 3 project, with the additional requirement of listing playlists
+for a user. This impacts both the APIs exposed as well as the table design.
+
+## 1. Problem Statement
+
+[PetPro Scheduler] is an application designed to assist a busy pet groomer in keeping his days organized and flowing well.
+
+This design document describes PetPro Scheduler, which will allow the user to create and manage appointments, keep client profiles, and maintain a menu of services.
+
+## 2. Top Questions to Resolve in Review
+
+1. ?
+
+
+## 3. Use Cases
+
+U1. As a user, I want to be able to create a new client profile.
+
+U2. As a user, I want to be able to edit a client profile.
+
+U3. As a user, I want to be able to delete a client profile.
+
+U4. As a user, I want to be able to view all profiles in alphabetical order.
+
+U5. As a user, I want to be able to view one specific profile.
+
+U6. As a user, I want to be able to create a new appointment.
+
+U7. As a user, I want to be able to delete an appointment.
+
+U8. As a user, I want to be able to view all appointments.
+
+U9. As a user, I want to be able to create a menu of services.
+
+U10. As a user, I want to be able to edit my menu of services.
+
+## 4. Project Scope
+
+### 4.1. In Scope
+
+* Creating, retrieving, and updating a service menu
+* creating and retrieving appointments
+* creating, retrieving, and updating client profiles
+
+### 4.2. Out of Scope
+
+* Processing and tracking payments
+* Sending alerts and appointment reminders
+
+## 5. Proposed Architecture Overview
+
+This initial iteration will provide the minimum lovable product (MLP) including
+creating, retrieving, and updating a client profile; creating, retrieving, and updating an appointment; as well as adding to, editing, and
+retrieving a service menu.
+
+We will use API Gateway and Lambda to create 8 endpoints (`GetProfile`,
+`CreateProfile`, `UpdateProfile`,
+`CreateAppointment`, `DeleteAppointment`, `GetAppointments`, and
+`GetServiceMenu` and `UpdateMenu`)
+that will handle the creation, update, and retrieval of profiles, appointments, and the service menu to satisfy our
+requirements.
+
+We will store appointments in a table in DynamoDB. services
+themselves will also be stored in DynamoDB. Client profiles will also be stored in a DynamoDB table.
+
+PetPro Scheduler will also provide a web interface for the user to manage
+appointments. A main page providing a list view of all of the appointments
+will let them create new appointments and link off to pages for the service menu and client profiles to update
+metadata and add clients.
+
+## 6. API
+
+### 6.1. Public Models
+
+```
+// ClientProfileModel
+
+String clientId;
+String name;
+String phone;
+String notes;
+List<String> pets;
+```
+
+```
+// AppointmentModel
+
+string appointmentId;
+String client;
+DateTime dateTime;
+String pet;
+String service;
+```
+
+### 6.2. Get Profile Endpoint
+
+* Accepts `GET` requests to `/profiles/:id`
+* Accepts a clientID and returns the corresponding ClientProfileModel.
+    * If the given clientID is not found, will throw a
+      `ProfileNotFoundException`
+
+### 6.3. Create Profile Endpoint
+
+* Accepts `POST` requests to `/profiles`
+* Accepts data to create a new profile with a provided name, a given customer
+  ID, a phone number, a list of pets, and optional notes. Returns the new profile, including a unique
+  clientID.
+* For security concerns, we will validate the provided profile name does not
+  contain any invalid characters: `" ' \`
+    * If the playlist name contains any of the invalid characters, will throw an
+      `InvalidAttributeValueException`.
+
+### 6.4. Update Profile Endpoint
+
+* Accepts `PUT` requests to `/profiles/:id`
+* Accepts data to update a profile including a clientID, an updated profile
+  name, an updated phone number, updated notes, and updated list of pets. Returns the updated
+  profile.
+    * If the clientID is not found, will throw a `ProfileNotFoundException`
+* For security concerns, we will validate the provided profile name does not
+  contain invalid characters: `" ' \`
+    * If the profile name contains invalid characters, will throw an
+      `InvalidAttributeValueException`
+
+![Client sends submit profile update form to Website Profile page. Website
+profile page sends an update request to UpdateProfileActivity.
+UpdateProfileActivity saves updates to the profiles
+database.](images/example_design_document/UpdatePlaylistSD.png)
+
+### 6.5. Delete Profile Endpoint
+
+* Accepts `DELETE` requests to `/profiles/:id/profile`
+* Accepts a clientID to be deleted.
+    * If the clientID is not found, will throw a `ProfileNotFoundException`
+
+
+![Client submits the delete profile form to the Website profile page. The website
+profile page sends a delete profile request to the DeleteProfileActivity. The
+DeleteProfileActivity removes the profile from the profiles
+database.](images/example_design_document/AddSongSD.png)
+
+### 6.6. Get Profiles Endpoint
+
+* Accepts `GET` requests to `/profiles/`
+* Retrieves all profiles
+    * Returns the profile list in alphabetical order
+* If no profiles are found, will return an empty list
+
+
+### 6.7. Create Appointment Endpoint
+
+* Accepts `POST` requests to `/appointments`
+* Accepts data to create a new appointment with a provided client name, a given date and time,
+ a pet, and the service(s) to be performed. Returns the new appointment with a given appointmentId.
+
+
+### 6.8. Delete Appointment Endpoint
+
+* Accepts `DELETE` requests to `/appointments/:id/appointment`
+* Accepts a appointmentID to be deleted.
+    * If the appointmentID is not found, will throw an `AppointmentNotFoundException`
+
+
+![Client submits the delete appointment form to the Website appointments page. The website
+appointments page sends a delete appointment request to the DeleteAppointmentActivity. The
+DeleteAppointmentActivity removes the appointment from the appointments
+database.](images/example_design_document/AddSongSD.png)
+
+
+### 6.9. Get Appointments Endpoint
+
+* Accepts `GET` requests to `/appointments/`
+* Retrieves all appointments
+    * Returns the appointment list in chronological order
+* If no appointments are found, will return an empty list
+
+
+
+//ServiceMenuModel
+
+Set<String, Double> pricedServices;
+
+### 6. Get Services Endpoint
+
+* Accepts 'GET' requests to '/services/'
+* returns menu of services
+
+### 6. Update Services Endpoint
+
+* Accepts a 'PUT' request to '/services/'
+* Accepts data to update the service menu, with a provided service name and price.
+  Returns the updated Service Menu
+
+
+![The client visits the service menu page of the Website Service Menu. The Website Service
+Menu page sends a get menu request to the GetServiceMenuActivity. The
+GetServiceMenuActivity calls the service menu database to load the service menu. The
+service menu database returns the service menu to the GetServiceMenuActivity.
+The GetServiceMenuActivity returns a Set<String,String> to the Website Service Menu
+page. The Website Service Menu page presents a service menu to the
+client.](images/example_design_document/GetPlaylistSD.png)
+
+
+## 7. Tables
+
+### 7.1. `profiles`
+
+```
+id // partition key, string
+name // sort key, string
+phone // string
+notes // string
+pets // list
+```
+
+
+### 7.2. `appointments`
+
+```
+appointmentId // partition key, string
+client // string
+dateTime // string sort key, string
+pet // string
+service // string
+```
+
+### 7.2. `services`
+
+```
+service // partition key, string
+price // number
+```
+
+## 8. Pages
+
+
+https://www.canva.com/design/DAFjTBl3oQY/fhYcUkhDJ7psAiFOgjyE5g/edit?utm_content=DAFjTBl3oQY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
