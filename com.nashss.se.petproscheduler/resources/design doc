@@ -76,7 +76,7 @@ metadata and add clients.
 ### 6.1. Public Models
 
 ```
-// ClientProfileModel
+// ProfileModel
 
 String clientId;
 String name;
@@ -105,8 +105,7 @@ String service;
 ### 6.3. Create Profile Endpoint
 
 * Accepts `POST` requests to `/profiles`
-* Accepts data to create a new profile with a provided name, a given customer
-  ID, a phone number, a list of pets, and optional notes. Returns the new profile, including a unique
+* Accepts data to create a new profile with a provided name, a phone number, a list of pets, and optional notes. Returns the new profile, including a unique
   clientID.
 * For security concerns, we will validate the provided profile name does not
   contain any invalid characters: `" ' \`
@@ -142,7 +141,7 @@ profile page sends a delete profile request to the DeleteProfileActivity. The
 DeleteProfileActivity removes the profile from the profiles
 database.](images/example_design_document/AddSongSD.png)
 
-### 6.6. Get Profiles Endpoint
+### 6.6. Get All Profiles Endpoint
 
 * Accepts `GET` requests to `/profiles/`
 * Retrieves all profiles
@@ -181,32 +180,8 @@ database.](images/example_design_document/AddSongSD.png)
 
 //ServiceMenuModel
 
-Set<String, Double> pricedServices;
+Map<String, Double> pricedServices;
 
-### 6. Get Services Endpoint
-
-* Accepts 'GET' requests to '/services/'
-* returns menu of services
-
-### 6. Update Services Endpoint
-
-* Accepts a 'PUT' request to '/services/'
-* Accepts data to update the service menu, with a provided service name and price.
-  Returns the updated Service Menu
-
-
-![The client visits the service menu page of the Website Service Menu. The Website Service
-Menu page sends a get menu request to the GetServiceMenuActivity. The
-GetServiceMenuActivity calls the service menu database to load the service menu. The
-service menu database returns the service menu to the GetServiceMenuActivity.
-The GetServiceMenuActivity returns a Set<String,String> to the Website Service Menu
-page. The Website Service Menu page presents a service menu to the
-client.](images/example_design_document/GetPlaylistSD.png)
-
-
-## 7. Tables
-
-### 7.1. `profiles`
 
 ```
 id // partition key, string
@@ -220,9 +195,9 @@ pets // list
 ### 7.2. `appointments`
 
 ```
-appointmentId // partition key, string
+id // partition key, string
+dateTime // sort key, string
 client // string
-dateTime // string sort key, string
 pet // string
 service // string
 ```
