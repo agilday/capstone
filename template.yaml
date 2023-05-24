@@ -464,6 +464,8 @@ ServicesTable:
       AttributeDefinitions:
         - AttributeName: "service"
           AttributeType: "S"
+        - AttributeName: "price"
+          AttributeType: "N"
       KeySchema:
         - AttributeName: "service"
           KeyType: "HASH"

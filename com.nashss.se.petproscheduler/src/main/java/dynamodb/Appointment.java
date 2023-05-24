@@ -10,8 +10,8 @@ import java.util.Set;
 
 public class Appointment {
     private String id;
-    private String dateTime;
     private String client;
+    private String dateTime;
     private String pet;
     private String service;
 

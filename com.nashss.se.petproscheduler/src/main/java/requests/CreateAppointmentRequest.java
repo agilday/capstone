@@ -3,47 +3,51 @@ package requests;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
-import java.util.List;
-
-//import static com.nashss.se.musicplaylistservice.utils.CollectionUtils.copyToList;
 
 @JsonDeserialize(builder = CreateAppointmentRequest.Builder.class)
 public class CreateAppointmentRequest {
-    private final String name;
-    private final String customerId;
-    private final String customerName;
-    private final List<String> tags;
+    private final String id;
+    private final String client;
+    private final String dateTime;
+    private final String pet;
+    private final String service;
 
-    private CreateAppointmentRequest(String name, String customerId, String customerName, List<String> tags) {
-        this.name = name;
-        this.customerId = customerId;
-        this.customerName = customerName;
-        this.tags = tags;
+    private CreateAppointmentRequest(String id, String client, String dateTime, String pet, String service) {
+        this.id = id;
+        this.client = client;
+        this.dateTime = dateTime;
+        this.pet = pet;
+        this.service = service;
     }
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public String getClient() {
+        return client;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public List<String> getTags() {
-        return copyToList(tags);
+    public String getPet() {
+        return pet;
+    }
+
+    public String getService() {
+        return service;
     }
 
     @Override
     public String toString() {
         return "CreateAppointmentRequest{" +
-                "name='" + name + '\'' +
-                ", customerId='" + customerId + '\'' +
-                ", customerName='" + customerName + '\'' +
-                ", tags=" + tags +
+                "id='" + id + '\'' +
+                ", client='" + client + '\'' +
+                ", dateTime='" + dateTime + '\'' +
+                ", pet=" + pet +
+                ", service=" + service +
                 '}';
     }
 
@@ -54,33 +58,34 @@ public class CreateAppointmentRequest {
 
     @JsonPOJOBuilder
     public static class Builder {
-        private String name;
-        private String customerId;
-        private String customerName;
-        private List<String> tags;
+        private String id;
+        private String client;
+        private String dateTime;
+        private String pet;
+        private String service;
 
-        public Builder withName(String name) {
-            this.name = name;
+        public Builder withId(String id) {
+            this.id = id;
             return this;
         }
 
-        public Builder withCustomerId(String customerId) {
-            this.customerId = customerId;
+        public Builder withClient(String client) {
+            this.client = client;
             return this;
         }
 
-        public Builder withCustomerName(String customerName) {
-            this.customerName = customerName;
+        public Builder withDateTime(String dateTime) {
+            this.dateTime = dateTime;
             return this;
         }
 
-        public Builder withTags(List<String> tags) {
-            this.tags = copyToList(tags);
+        public Builder withPet(String pet) {
+            this.pet = pet;
             return this;
         }
 
         public CreateAppointmentRequest build() {
-            return new CreateAppointmentRequest(name, customerId, customerName, tags);
+            return new CreateAppointmentRequest(id, client, dateTime, pet, service);
         }
     }
 }

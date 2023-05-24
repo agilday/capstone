@@ -78,7 +78,7 @@ metadata and add clients.
 ```
 // ProfileModel
 
-String clientId;
+String id;
 String name;
 String phone;
 String notes;
