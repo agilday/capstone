@@ -81,7 +81,7 @@ metadata and add clients.
 String id;
 String name;
 String phone;
-String notes;
+List<String> notes;
 List<String> pets;
 ```
 
