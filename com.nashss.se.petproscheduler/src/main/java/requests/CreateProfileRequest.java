@@ -1,6 +1,7 @@
 package requests;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import dynamodb.Pet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +11,14 @@ public class CreateProfileRequest {
     private final String name;
     private final String phone;
     private final List<String> notes;
-    private final List<String> pets;
+    private final List<Pet> pets;
 
-    private CreateProfileRequest(String id, String name, String phone, List<String> notes, List<String> pets) {
+    private CreateProfileRequest(String id, String name, String phone, List<String> notes, List<Pet> pets) {
         this.id = id;
         this.name = name;
         this.phone = phone;
-        this.notes = new ArrayList<>();
-        this.pets = new ArrayList<>();
+        this.notes = notes;
+        this.pets = pets;
     }
 
     public String getId() {
@@ -36,7 +37,7 @@ public class CreateProfileRequest {
         return notes;
     }
 
-    public List<String> getPets() {
+    public List<Pet> getPets() {
         return pets;
     }
 
@@ -62,7 +63,7 @@ public class CreateProfileRequest {
         private String name;
         private String phone;
         private List<String> notes;
-        private List<String> pets;
+        private List<Pet> pets;
 
         public CreateProfileRequest.Builder withId(String id) {
             this.id = id;
@@ -84,7 +85,7 @@ public class CreateProfileRequest {
             return this;
         }
 
-        public CreateProfileRequest.Builder withPets(List<String> pets) {
+        public CreateProfileRequest.Builder withPets(List<Pet> pets) {
             this.pets = pets;
             return this;
         }

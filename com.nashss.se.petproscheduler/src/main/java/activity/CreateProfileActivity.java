@@ -2,7 +2,9 @@ package activity;
 
 import com.amazonaws.auth.profile.internal.Profile;
 import converters.ModelConverter;
+import dynamodb.ClientProfile;
 import dynamodb.ProfileDao;
+import models.ClientProfileModel;
 import models.ProfileModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 
 public class CreateProfileActivity {
     private final Logger log = LogManager.getLogger();
-    private final ProfileDao profileDao;
+    private final ClientProfileDao profileDao;
 
     /**
      * Instantiates a new CreatePlaylistActivity object.
@@ -23,7 +25,7 @@ public class CreateProfileActivity {
      * @param profileDao PlaylistDao to access the profile table.
      */
     @Inject
-    public CreateProfileActivity(ProfileDao profileDao) {
+    public CreateProfileActivity(ClientProfileDao profileDao) {
         this.profileDao = profileDao;
     }
 
@@ -38,7 +40,7 @@ public class CreateProfileActivity {
      *
      * @param createProfileRequest request object containing the profile name and customer ID
      *                              associated with it
-     * @return createProfileResult result object containing the API defined {@link ProfileModel}
+     * @return createProfileResult result object containing the API defined {@link ClientProfileModel}
      */
     public CreateProfileResult handleRequest(final CreateProfileRequest createProfileRequest) {
         log.info("Received CreateProfileRequest {}", createProfileRequest);
@@ -54,16 +56,16 @@ public class CreateProfileActivity {
         }
 
 
-        Profile newProfile = new Profile();
+        ClientProfile newProfile = new ClientProfile();
         newProfile.setId(MusicPlaylistServiceUtils.generatePlaylistId());
         newProfile.setName(createProfileRequest.getName());
-        newProfile.setPhone(createProfileRequest.getCustomerId());
+        newProfile.setPhone(createProfileRequest.getPhone());
         newProfile.setNotes(new ArrayList<>());
         newProfile.setPets(new ArrayList<>());
 
         profileDao.saveProfile(newProfile);
 
-        ProfileModel profileModel = new ModelConverter().toProfileModel(newProfile);
+        ClientProfileModel profileModel = new ModelConverter().toProfileModel(newProfile);
         return CreateProfileResult.builder()
                 .withProfile(profileModel)
                 .build();

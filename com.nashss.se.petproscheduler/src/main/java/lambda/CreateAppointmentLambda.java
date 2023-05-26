@@ -1,5 +1,6 @@
 package lambda;
 
+import com.amazonaws.services.lambda.runtime.RequestHandler;
 import requests.CreateAppointmentRequest;
 import results.CreateAppointmentResult;
 
@@ -14,8 +15,8 @@ public class CreateAppointmentLambda extends LambdaActivityRunner<CreateAppointm
                     CreateAppointmentRequest unauthenticatedRequest = input.fromBody(CreateAppointmentRequest.class);
                     return input.fromUserClaims(claims ->
                             CreateAppointmentRequest.builder()
-                                    .withName(unauthenticatedRequest.getName())
-                                    .withTags(unauthenticatedRequest.getTags())
+                                    .withId(unauthenticatedRequest.getId())
+                                    .withClient(unauthenticatedRequest.getClient())
                                     .withCustomerId(claims.get("email"))
                                     .withCustomerName(claims.get("name"))
                                     .build());

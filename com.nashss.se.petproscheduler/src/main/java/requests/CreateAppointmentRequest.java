@@ -84,6 +84,11 @@ public class CreateAppointmentRequest {
             return this;
         }
 
+        public Builder withService(String service) {
+            this.service = service;
+            return this;
+        }
+
         public CreateAppointmentRequest build() {
             return new CreateAppointmentRequest(id, client, dateTime, pet, service);
         }
