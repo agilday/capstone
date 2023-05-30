@@ -5,13 +5,13 @@ plugins {
     id 'com.adarshr.test-logger' version '3.2.0'
 }
 
-group 'com.nashss.se.musicplaylistservice'
+group 'com.nashss.se.petproscheduler'
 version '1.0.0'
 defaultTasks 'clean', 'build'
 
 repositories {
     mavenCentral()
-  
+
 }
 
 dependencies {
