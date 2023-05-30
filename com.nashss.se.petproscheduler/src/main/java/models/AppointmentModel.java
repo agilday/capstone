@@ -1,5 +1,7 @@
 package models;
 
+import dynamodb.Pet;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -7,11 +9,11 @@ public class AppointmentModel {
     private final String id;
     private final String client;
     private final String dateTime;
-    private final String pet;
+    private final Pet pet;
     private final String service;
 
     private AppointmentModel(String id, String client, String dateTime,
-                          String pet, String service) {
+                          Pet pet, String service) {
         this.id = id;
         this.client = client;
         this.dateTime = dateTime;
@@ -31,7 +33,7 @@ public class AppointmentModel {
         return dateTime;
     }
 
-    public String getPet() {
+    public Pet getPet() {
         return pet;
     }
 
@@ -74,7 +76,7 @@ public class AppointmentModel {
         private String id;
         private String client;
         private String dateTime;
-        private String pet;
+        private Pet pet;
         private String service;
 
         public Builder withId(String id) {
@@ -92,7 +94,7 @@ public class AppointmentModel {
             return this;
         }
 
-        public Builder withPet(String Pet) {
+        public Builder withPet(Pet pet) {
             this.pet = pet;
             return this;
         }

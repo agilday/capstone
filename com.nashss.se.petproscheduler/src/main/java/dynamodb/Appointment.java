@@ -13,7 +13,7 @@ public class Appointment {
     private String id;
     private String client;
     private String dateTime;
-    private String pet;
+    private Pet pet;
     private String service;
 
     @DynamoDBHashKey(attributeName = "id")
@@ -45,11 +45,11 @@ public class Appointment {
     }
 
     @DynamoDBAttribute(attributeName = "pet")
-    public String getPet() {
+    public Pet getPet() {
         return pet;
     }
 
-    public void setPet(String pet) {
+    public void setPet(Pet pet) {
         this.pet = pet;
     }
 
