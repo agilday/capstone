@@ -17,5 +17,6 @@ public class MetricsConstants {
         public static final String SERVICE = "Service";
         public static final String SERVICE_NAME = "petproscheduler";
         public static final String NAMESPACE_NAME = "U3/petproscheduler";
-    }
+        public static final String GETAPPOINTMENT_APPOINTMENTNOTFOUND_COUNT = ;
+}
 
