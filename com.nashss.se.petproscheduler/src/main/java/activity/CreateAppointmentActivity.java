@@ -1,6 +1,7 @@
 package activity;
 
 import converters.ModelConverter;
+import dynamodb.Appointment;
 import dynamodb.AppointmentDao;
 import models.AppointmentModel;
 import org.apache.logging.log4j.LogManager;
@@ -8,14 +9,10 @@ import requests.CreateAppointmentRequest;
 import results.CreateAppointmentResult;
 
 import javax.inject.Inject;
-import javax.management.InvalidAttributeValueException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Logger;
 
 public class CreateAppointmentActivity {
-    private final Logger log = LogManager.getLogger();
+    private final Logger log = (Logger) LogManager.getLogger();
     private final AppointmentDao appDao;
 
     /**
@@ -44,29 +41,12 @@ public class CreateAppointmentActivity {
     public CreateAppointmentResult handleRequest(final CreateAppointmentRequest createAppointmentRequest) {
         log.info("Received CreateAppointmentRequest {}", createAppointmentRequest);
 
-        if (!MusicPlaylistServiceUtils.isValidString(createAppointmentRequest.getName())) {
-            throw new InvalidAttributeValueException("Playlist name [" + createAppointmentRequest.getName() +
-                    "] contains illegal characters");
-        }
-
-        if (!MusicPlaylistServiceUtils.isValidString(createAppointmentRequest.getCustomerId())) {
-            throw new InvalidAttributeValueException("Playlist customer ID [" + createAppointmentRequest.getCustomerId() +
-                    "] contains illegal characters");
-        }
-
-        Set<String> playlistTags = null;
-        if (createAppointmentRequest.getTags() != null) {
-            playlistTags = new HashSet<>(createAppointmentRequest.getTags());
-        }
-
         Appointment newAppointment = new Appointment();
         newAppointment.setId(MusicPlaylistServiceUtils.generatePlaylistId());
-        newAppointment.setName(createAppointmentRequest.getName());
-        newAppointment.setCustomerId(createAppointmentRequest.getCustomerId());
-        newAppointment.setCustomerName(createAppointmentRequest.getCustomerName());
-        newAppointment.setSongCount(0);
-        newAppointment.setTags(playlistTags);
-        newAppointment.setSongList(new ArrayList<>());
+        newAppointment.setClient(createAppointmentRequest.getClient());
+        newAppointment.setDateTime(createAppointmentRequest.getDateTime());
+        newAppointment.setPet(createAppointmentRequest.getPet());
+        newAppointment.setService(createAppointmentRequest.getService());
 
         appDao.saveAppointment(newAppointment);
 

@@ -2,6 +2,7 @@ package dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 
 import java.util.HashSet;
@@ -10,8 +11,8 @@ import java.util.Set;
 
 public class Appointment {
     private String id;
-    private String dateTime;
     private String client;
+    private String dateTime;
     private String pet;
     private String service;
 
@@ -34,7 +35,7 @@ public class Appointment {
         this.client = client;
     }
 
-    @DynamoDBAttribute(attributeName = "dateTime")
+    @DynamoDBRangeKey(attributeName = "dateTime")
     public String getDateTime() {
         return dateTime;
     }

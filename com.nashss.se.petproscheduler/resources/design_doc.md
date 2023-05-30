@@ -17,25 +17,25 @@ This design document describes PetPro Scheduler, which will allow the user to cr
 
 ## 3. Use Cases
 
-U1. As a user, I want to be able to create a new client profile.
+U1. As a user, I want to be able to create a new client profile so that I can know exactly what clients I've had.
 
-U2. As a user, I want to be able to edit a client profile.
+U2. As a user, I want to be able to edit a client profile so that we can track important changes such as name or contact info.
 
-U3. As a user, I want to be able to delete a client profile.
+U3. As a user, I want to be able to delete a client profile so that I can keep my database "uncluttered".
 
-U4. As a user, I want to be able to view all profiles in alphabetical order.
+U4. As a user, I want to be able to view all client profiles in alphabetical order so that it will be easier to find a particular one in a list view.
 
-U5. As a user, I want to be able to view one specific profile.
+U5. As a user, I want to be able to view one specific profile so that I can view a client's info in greater detail.
 
-U6. As a user, I want to be able to create a new appointment.
+U6. As a user, I want to be able to create a new appointment so that I can be aware of my day's work.
 
-U7. As a user, I want to be able to delete an appointment.
+U7. As a user, I want to be able to delete an appointment so that I can keep my appointments database up-to-date.
 
-U8. As a user, I want to be able to view all appointments.
+U8. As a user, I want to be able to view all appointments so that I can see what appointments are upcoming in the future.
 
-U9. As a user, I want to be able to create a menu of services.
+U9. As a user, I want to be able to create a menu of services so that it's clear what services I offer.
 
-U10. As a user, I want to be able to edit my menu of services.
+U10. As a user, I want to be able to edit my menu of services so that the menu stays up-to-date as services and/or prices change.
 
 ## 4. Project Scope
 
@@ -76,13 +76,13 @@ metadata and add clients.
 ### 6.1. Public Models
 
 ```
-// ProfileModel
+// ClientProfileModel
 
-String clientId;
+String id;
 String name;
 String phone;
-String notes;
-List<String> pets;
+List<String> notes;
+List<Pet> pets;
 ```
 
 ```
@@ -90,7 +90,7 @@ List<String> pets;
 
 string appointmentId;
 String client;
-DateTime dateTime;
+String dateTime;
 String pet;
 String service;
 ```

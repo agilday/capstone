@@ -1,0 +1,120 @@
+{
+  "appointments": [
+    {
+      "PutRequest": {
+        "Item": {
+          "appointmentId": { "S": "123" },
+          "client": { "S": "John Doe" },
+          "dateTime": { "S": "7/3/23 9:00am" },
+          "pet": { "S": "Spot" },
+          "service": { "S": "full groom" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "appointmentId": { "S": "321" },
+          "client": { "S": "Victoria Beckham" },
+          "dateTime": { "S": "7/1/23 11:00am" },
+          "pet": { "S": "Spice" },
+          "service": { "S": "nail trim" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "appointmentId": { "S": "456" },
+          "client": { "S": "RuPaul" },
+          "dateTime": { "S": "6/30/23 12:00pm" },
+          "pet": { "S": "Linda" },
+          "service": { "S": "full groom" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "appointmentId": { "S": "654" },
+          "client": { "S": "Mike Tyson" },
+          "dateTime": { "S": "7/3/23 11:00am" },
+          "pet": { "S": "Birdie" },
+          "service": { "S": "wash + cut" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "appointmentId": { "S": "789" },
+          "client": { "S": "George Washington" },
+          "dateTime": { "S": "8/6/23 2:00pm" },
+          "pet": { "S": "Gunnar" },
+          "service": { "S": "wash + blow dry" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "appointmentId": { "S": "987" },
+          "client": { "S": "Wolfgang Mozart" },
+          "dateTime": { "S": "6/3/23 9:00am" },
+          "pet": { "S": "Beethoven" },
+          "service": { "S": "nail trim + ear cleaning" }
+        }
+      }
+    }
+  ],
+  "profiles": [
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "S": "123" },
+          "name": { "S": "John Doe" },
+          "phone": { "S": "215-456-7891" },
+          "notes": { "S": "Spot is deaf" },
+          "pets": { "S": ["Spot - Canine"] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "S": "321" },
+          "name": { "S": "Victoria Beckham" },
+          "phone": { "S": "215-159-9518" },
+          "notes": { "S": "Spice should not be kenneled near dogs" },
+          "pets": { "S": ["Spice - Feline"] }
+        }
+      }
+    }
+    ],
+    "services": [
+      {
+        "PutRequest": {
+          "Item": {
+            "service": { "S": "Full Groom" },
+            "price": {"N": "150"}
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "service": { "S": "nail trim" },
+            "price": {"N": "15"}
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "service": { "S": "Wash + Blow Dry" },
+            "price": {"N": "75"}
+          }
+        }
+      }
+  ]
+}

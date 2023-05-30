@@ -4,9 +4,12 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import exceptions.AppointmentNotFoundException;
+import metrics.MetricsConstants;
+import metrics.MetricsPublisher;
 
 import javax.inject.Inject;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AppointmentDao {
@@ -56,7 +59,7 @@ public class AppointmentDao {
     /**
      * Perform a search (via a "scan") of the playlist table for appointments matching the given criteria.
      *
-     * Both "appointmmentName" and "tags" attributes are searched.
+     * Both "appointmentName" and "tags" attributes are searched.
      * The criteria are an array of Strings. Each element of the array is search individually.
      * ALL elements of the criteria array must appear in the playlistName or the tags (or both).
      * Searches are CASE SENSITIVE.
