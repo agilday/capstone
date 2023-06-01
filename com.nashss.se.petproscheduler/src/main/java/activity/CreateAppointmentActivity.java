@@ -7,6 +7,7 @@ import models.AppointmentModel;
 import org.apache.logging.log4j.LogManager;
 import requests.CreateAppointmentRequest;
 import results.CreateAppointmentResult;
+import utils.PetProUtils;
 
 import javax.inject.Inject;
 import java.util.logging.Logger;
@@ -42,7 +43,7 @@ public class CreateAppointmentActivity {
         log.info("Received CreateAppointmentRequest {}", createAppointmentRequest);
 
         Appointment newAppointment = new Appointment();
-        newAppointment.setId(MusicPlaylistServiceUtils.generatePlaylistId());
+        newAppointment.setId(PetProUtils.generateId());
         newAppointment.setClient(createAppointmentRequest.getClient());
         newAppointment.setDateTime(createAppointmentRequest.getDateTime());
         newAppointment.setPet(createAppointmentRequest.getPet());
