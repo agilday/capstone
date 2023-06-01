@@ -3,7 +3,6 @@ package dynamodb;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import exceptions.AppointmentNotFoundException;
 import exceptions.ProfileNotFoundException;
 import metrics.MetricsConstants;
 import metrics.MetricsPublisher;
