@@ -1,24 +1,24 @@
 package models;
 
+import dynamodb.Pet;
+
 import java.util.List;
 import java.util.Objects;
 
 public class ClientProfileModel {
     private final String id;
     private final String name;
-    private final String customerId;
-    private final String customerName;
-    private final int songCount;
-    private final List<String> tags;
+    private final String phone;
+    private final List<String> notes;
+    private final List<Pet> pets;
 
-    private AppointmentModel(String id, String name, String customerId,
-                             String customerName, int songCount, List<String> tags) {
+    private ClientProfileModel(String id, String name, String phone,
+                             List<String> notes, List<Pet> pets) {
         this.id = id;
         this.name = name;
-        this.customerId = customerId;
-        this.customerName = customerName;
-        this.songCount = songCount;
-        this.tags = tags;
+        this.phone = phone;
+        this.notes = notes;
+        this.pets = pets;
     }
 
     public String getId() {
@@ -29,16 +29,16 @@ public class ClientProfileModel {
         return name;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public String getPhone() {
+        return phone;
     }
 
-    public int getSongCount() {
-        return songCount;
+    public List<String> getNotes() {
+        return notes;
     }
 
-    public List<String> getTags() {
-        return copyToList(tags);
+    public List<Pet> getPets() {
+        return pets;
     }
 
     @Override
@@ -50,69 +50,62 @@ public class ClientProfileModel {
             return false;
         }
 
-        AppointmentModel that = (AppointmentModel) o;
+        ClientProfileModel that = (ClientProfileModel) o;
 
-        return songCount == that.songCount &&
-                Objects.equals(id, that.id) && Objects.equals(name, that.name) &&
-                Objects.equals(customerId, that.customerId) &&
-                Objects.equals(customerName, that.customerName) &&
-                Objects.equals(tags, that.tags);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) &&
+                Objects.equals(phone, that.phone) &&
+                Objects.equals(notes, that.notes) &&
+                Objects.equals(pets, that.pets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, customerId, customerName, songCount, tags);
+        return Objects.hash(id, name, phone, notes, pets);
     }
 
     //CHECKSTYLE:OFF:Builder
-    public static AppointmentModel.Builder builder() {
-        return new AppointmentModel.Builder();
+    public static ClientProfileModel.Builder builder() {
+        return new ClientProfileModel.Builder();
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
+//    public String getCustomerName() {
+//        return customerName;
+//    }
 
     public static class Builder {
         private String id;
         private String name;
-        private String customerId;
-        private String customerName;
-        private int songCount;
-        private List<String> tags;
+        private String phone;
+        private List<String> notes;
+        private List<Pet> pets;
 
-        public AppointmentModel.Builder withId(String id) {
+        public ClientProfileModel.Builder withId(String id) {
             this.id = id;
             return this;
         }
 
-        public AppointmentModel.Builder withName(String name) {
+        public ClientProfileModel.Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public AppointmentModel.Builder withCustomerId(String customerId) {
-            this.customerId = customerId;
+        public ClientProfileModel.Builder withPhone(String phone) {
+            this.phone = phone;
             return this;
         }
 
-        public AppointmentModel.Builder withCustomerName(String customerName) {
-            this.customerName = customerName;
+        public ClientProfileModel.Builder withNotes(List<String> notes) {
+            this.notes = notes;
             return this;
         }
 
-        public AppointmentModel.Builder withSongCount(int songCount) {
-            this.songCount = songCount;
+        public ClientProfileModel.Builder withPets(List<Pet> pets) {
+            this.pets = pets;
             return this;
         }
 
-        public AppointmentModel.Builder withTags(List<String> tags) {
-            this.tags = copyToList(tags);
-            return this;
-        }
-
-        public PlaylistModel build() {
-            return new PlaylistModel(id, name, customerId, customerName, songCount, tags);
+        public ClientProfileModel build() {
+            return new ClientProfileModel(id, name, phone, notes, pets);
         }
     }
 
