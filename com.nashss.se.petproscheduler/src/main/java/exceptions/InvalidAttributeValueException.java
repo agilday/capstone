@@ -1,13 +1,16 @@
 package exceptions;
 
-public class AppointmentNotFoundException extends RuntimeException {
+/**
+ * Exception to throw when a provided value has invalid attribute values.
+ */
+public class InvalidAttributeValueException extends InvalidAttributeException {
 
-    private static final long serialVersionUID = -912326717789387971L;
+    private static final long serialVersionUID = 8007453316698012851L;
 
     /**
      * Exception with no message or cause.
      */
-    public AppointmentNotFoundException() {
+    public InvalidAttributeValueException() {
         super();
     }
 
@@ -15,7 +18,7 @@ public class AppointmentNotFoundException extends RuntimeException {
      * Exception with a message, but no cause.
      * @param message A descriptive message for this exception.
      */
-    public AppointmentNotFoundException(String message) {
+    public InvalidAttributeValueException(String message) {
         super(message);
     }
 
@@ -23,7 +26,7 @@ public class AppointmentNotFoundException extends RuntimeException {
      * Exception with no message, but with a cause.
      * @param cause The original throwable resulting in this exception.
      */
-    public AppointmentNotFoundException(Throwable cause) {
+    public InvalidAttributeValueException(Throwable cause) {
         super(cause);
     }
 
@@ -32,8 +35,7 @@ public class AppointmentNotFoundException extends RuntimeException {
      * @param message A descriptive message for this exception.
      * @param cause The original throwable resulting in this exception.
      */
-    public AppointmentNotFoundException(String message, Throwable cause) {
+    public InvalidAttributeValueException(String message, Throwable cause) {
         super(message, cause);
     }
-
 }
