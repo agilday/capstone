@@ -51,7 +51,7 @@ public class CreateProfileActivity {
         }
 
         if (!PetProUtils.isValidString(createProfileRequest.getId())) {
-            throw new InvalidAttributeValueException("Playlist customer ID [" + createProfileRequest.getCustomerId() +
+            throw new InvalidAttributeValueException("Playlist customer ID [" + createProfileRequest.getId() +
                     "] contains illegal characters");
         }
 
@@ -63,7 +63,7 @@ public class CreateProfileActivity {
         newProfile.setNotes(new ArrayList<>());
         newProfile.setPets(new ArrayList<>());
 
-        profileDao.saveProfile(newProfile);
+        profileDao.saveClientProfile(newProfile);
 
         ClientProfileModel profileModel = new ModelConverter().toProfileModel(newProfile);
         return CreateProfileResult.builder()
