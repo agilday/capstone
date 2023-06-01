@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import requests.CreateProfileRequest;
 import results.CreateProfileResult;
+import utils.PetProUtils;
 
 import javax.inject.Inject;
 import javax.management.InvalidAttributeValueException;
@@ -41,22 +42,22 @@ public class CreateProfileActivity {
      *                              associated with it
      * @return createProfileResult result object containing the API defined {@link ClientProfileModel}
      */
-    public CreateProfileResult handleRequest(final CreateProfileRequest createProfileRequest) {
+    public CreateProfileResult handleRequest(final CreateProfileRequest createProfileRequest) throws InvalidAttributeValueException {
         log.info("Received CreateProfileRequest {}", createProfileRequest);
 
-        if (!MusicPlaylistServiceUtils.isValidString(createProfileRequest.getName())) {
+        if (!PetProUtils.isValidString(createProfileRequest.getName())) {
             throw new InvalidAttributeValueException("Playlist name [" + createProfileRequest.getName() +
                     "] contains illegal characters");
         }
 
-        if (!MusicPlaylistServiceUtils.isValidString(createProfileRequest.getCustomerId())) {
+        if (!PetProUtils.isValidString(createProfileRequest.getId())) {
             throw new InvalidAttributeValueException("Playlist customer ID [" + createProfileRequest.getCustomerId() +
                     "] contains illegal characters");
         }
 
 
         ClientProfile newProfile = new ClientProfile();
-        newProfile.setId(MusicPlaylistServiceUtils.generatePlaylistId());
+        newProfile.setId(PetProUtils.generateId());
         newProfile.setName(createProfileRequest.getName());
         newProfile.setPhone(createProfileRequest.getPhone());
         newProfile.setNotes(new ArrayList<>());
