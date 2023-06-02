@@ -16,10 +16,10 @@ public class Pet {
     private String vaccineExpr;
     private boolean aggression;
     private List<String> notes;
-    private Enum status;
+    private Status status;
 
     public Pet(String name, String species, String breed, String vaccineExpr, boolean aggression,
-               List<String> notes, Enum status) {
+               List<String> notes, Status status) {
         this.name = name;
         this.species = species;
         this.breed = breed;
@@ -85,11 +85,11 @@ public class Pet {
         this.notes = notes;
     }
 
-    public Enum getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Enum status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -118,4 +118,3 @@ public class Pet {
 
 }
 
-}
