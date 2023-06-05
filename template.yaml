@@ -201,21 +201,21 @@ Resources:
                   - logs:PutLogEvents
                   - cloudwatch:PutMetricData
                 Resource: '*'
-        - PolicyName: 'AccessProfilesTable'
+        - PolicyName: 'AccessClientProfilesTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/profiles"
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/clientprofiles"
 
-        - PolicyName: 'AccessEventsTable'
+        - PolicyName: 'AccessAppointmentTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/events"
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/appointments"
 
   #-----------------------------------------------------
   # Lambda Functions Configuration
@@ -259,27 +259,27 @@ Resources:
 #          Properties:
 #            Path: /profiles/{id}
 #            Method: put
-
-  CreateProfileLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: com.nashss.se.petproscheduler
-      Handler: com.nashss.se.petproscheduler.lambda.CreateProfileLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /profiles/create
-            Method: post
-
+#
+#  CreateProfileLambda:
+#    Type: AWS::Serverless::Function
+#    Properties:
+#      Role: !GetAtt AccessRole.Arn
+#      CodeUri: PetProSchedulerServiceLambda
+#      Handler: petproschedulerservice.lambda.CreateProfileLambda::handleRequest
+#      Runtime: java11
+#      Architectures:
+#        - x86_64
+#      MemorySize: 512
+#      Environment:
+#        Variables:
+#          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+#      Events:
+#        MusicPlaylistService:
+#          Type: Api
+#          Properties:
+#            Path: /profiles/create
+#            Method: post
+#
 #  DeleteProfileLambda:
 #    Type: AWS::Serverless::Function
 #    Properties:
@@ -320,26 +320,26 @@ Resources:
 #            Path: /profiles
 #            Method: get
 #
-#  CreateAppointmentLambda:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      Role: !GetAtt AccessRole.Arn
-#      CodeUri: com.nashss.se.petproscheduler
-#      Handler: com.nashss.se.petproscheduler.lambda.CreateLambda::handleRequest
-#      Runtime: java11
-#      Architectures:
-#        - x86_64
-#      MemorySize: 512
-#      Environment:
-#        Variables:
-#          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-#      Events:
-#        MusicPlaylistService:
-#          Type: Api
-#          Properties:
-#            Path: /appointments/create
-#            Method: post
-#
+  CreateAppointmentLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: petproschedulerservice.lambda.CreateAppointmentLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /appointments/create
+            Method: post
+
 #  DeleteAppointmentLambda:
 #    Type: AWS::Serverless::Function
 #    Properties:
@@ -424,21 +424,21 @@ Resources:
   #-----------------------------------------------------
   # DynamoDB Configuration
   #-----------------------------------------------------
-  ProfilesTable:
+  ClientProfilesTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
         - AttributeName: "id"
           AttributeType: "S"
-        - AttributeName: "name"
+        - AttributeName: "clientName"
           AttributeType: "S"
       KeySchema:
         - AttributeName: "id"
           KeyType: "HASH"
-        - AttributeName: "name"
+        - AttributeName: "clientName"
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "profiles"
+      TableName: "clientprofiles"
 
 
 
@@ -446,31 +446,31 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "appointmentId"
+        - AttributeName: "id"
           AttributeType: "S"
         - AttributeName: "dateTime"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "appointmentId"
+        - AttributeName: "id"
           KeyType: "HASH"
         - AttributeName: "dateTime"
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "appointments"
 
-  ServicesTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "service"
-          AttributeType: "S"
-#        - AttributeName: "price"
-#          AttributeType: "N"
-      KeySchema:
-        - AttributeName: "service"
-          KeyType: "HASH"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "services"
+#  ServicesTable:
+#    Type: AWS::DynamoDB::Table
+#    Properties:
+#      AttributeDefinitions:
+#        - AttributeName: "service"
+#          AttributeType: "S"
+##        - AttributeName: "price"
+##          AttributeType: "N"
+#      KeySchema:
+#        - AttributeName: "service"
+#          KeyType: "HASH"
+#      BillingMode: "PAY_PER_REQUEST"
+#      TableName: "services"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed
@@ -489,9 +489,9 @@ Outputs:
     Value: !Sub "${CognitoDomain}.auth.us-east-2.amazoncognito.com"
     Description: "The Cognito Domain (COGNITO_DOMAIN)."
 
-#  ApiBaseUrl:
-#    Description: "API Gateway endpoint base URL for Prod stage (API_BASE_URL)."
-#    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  ApiBaseUrl:
+    Description: "API Gateway endpoint base URL for Prod stage (API_BASE_URL)."
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
 
   CognitoRedirectSignin:
     Description: "The URL of the deployed front-end application (COGNITO_REDIRECT_SIGNIN)."
