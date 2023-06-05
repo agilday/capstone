@@ -30,6 +30,7 @@ public class ModelConverter {
                 .withId(profile.getId())
                 .withName(profile.getName())
                 .withPhone(profile.getPhone())
+                .withAddress(profile.getAddress())
                 .withNotes(notes)
                 .withPets(pets)
                 .build();
