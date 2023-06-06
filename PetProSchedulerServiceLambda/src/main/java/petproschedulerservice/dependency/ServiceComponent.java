@@ -22,7 +22,7 @@ public interface ServiceComponent {
 
     GetAllClientProfilesActivity provideGetAllClientProfilesActivity();
 
-  //  GetProfileActivity provideGetProfileActivity();
+    GetClientProfileActivity provideGetClientProfileActivity();
 
     CreateAppointmentActivity provideCreateAppointmentActivity();
 
