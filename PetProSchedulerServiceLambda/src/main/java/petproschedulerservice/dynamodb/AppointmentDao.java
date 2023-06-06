@@ -31,18 +31,12 @@ public class AppointmentDao {
     /**
      * Returns all {@link Appointment}.
      *
-     * @param id the Appointment ID
-     * @return the stored Appointment, or null if none was found.
+     * @return list of Appointments, or empty list if none were found.
      */
-    public Appointment getAllAppointments(String id) {
-        Appointment playlist = this.dynamoDbMapper.load(Appointment.class, id);
-
-        if (playlist == null) {
-            metricsPublisher.addCount(MetricsConstants.GETAPPOINTMENT_APPOINTMENTNOTFOUND_COUNT, 1);
-            throw new AppointmentNotFoundException("Could not find appointment with id " + id);
-        }
-        metricsPublisher.addCount(MetricsConstants.GETAPPOINTMENT_APPOINTMENTNOTFOUND_COUNT, 0);
-        return playlist;
+    public List<Appointment> getAllAppointments() {
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        List<Appointment> appointmentsList = dynamoDbMapper.scan(Appointment.class, scanExpression);
+        return appointmentsList;
     }
 
     /**
