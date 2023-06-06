@@ -75,9 +75,6 @@ public class ClientProfileModel {
         return new ClientProfileModel.Builder();
     }
 
-//    public String getCustomerName() {
-//        return customerName;
-//    }
 
     public static class Builder {
         private String id;

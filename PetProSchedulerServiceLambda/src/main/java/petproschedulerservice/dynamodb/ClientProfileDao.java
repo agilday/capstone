@@ -45,6 +45,12 @@ public class ClientProfileDao {
         return profile;
     }
 
+    public List<ClientProfile> getAllClientProfiles() {
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        List<ClientProfile> clientProfilesList = dynamoDbMapper.scan(ClientProfile.class, scanExpression);
+        return clientProfilesList;
+    }
+
     /**
      * Saves (creates or updates) the given profile.
      *
