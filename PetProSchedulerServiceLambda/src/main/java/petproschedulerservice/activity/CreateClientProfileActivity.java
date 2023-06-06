@@ -65,7 +65,7 @@ public class CreateClientProfileActivity {
 
         profileDao.saveClientProfile(newProfile);
 
-        ClientProfileModel profileModel = new ModelConverter().toProfileModel(newProfile);
+        ClientProfileModel profileModel = new ModelConverter().toClientProfileModel(newProfile);
         return CreateClientProfileResult.builder()
                 .withProfile(profileModel)
                 .build();
