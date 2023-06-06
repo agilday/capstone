@@ -26,7 +26,7 @@ public interface ServiceComponent {
 
     CreateAppointmentActivity provideCreateAppointmentActivity();
 
-  //  GetAppointmentsActivity provideGetAppointmentsActivity();
+    GetAllAppointmentsActivity provideGetAllAppointmentsActivity();
 
   //  GetServiceMenuActivity provideGetServiceMenuActivity();
 

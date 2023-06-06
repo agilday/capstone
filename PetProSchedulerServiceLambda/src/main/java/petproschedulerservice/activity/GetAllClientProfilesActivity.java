@@ -21,15 +21,15 @@ public class GetAllClientProfilesActivity {
     /**
      * Handles a {@link GetAllClientProfilesRequest} and returns a {@link GetAllClientProfilesResult} containing a list of all client profiles.
      *
-     * @return a {@link GetAllClientProfilesResult} containing a list of all events
+     * @return a {@link GetAllClientProfilesResult} containing a list of all client profiles
      */
     public GetAllClientProfilesResult handleRequest(){
-        log.info("Receive GetAllEventsRequest {} ", "called Get All Events");
+        log.info("Receive GetAllClientProfilesRequest {} ", "called Get All Client Profiles");
 
-        List<ClientProfile> listEvents = clientProfileDao.getAllClientProfiles();
+        List<ClientProfile> listClientProfiles = clientProfileDao.getAllClientProfiles();
 
         return GetAllClientProfilesResult.builder()
-                .withClientProfilesList(listEvents)
+                .withClientProfilesList(listClientProfiles)
                 .build();
     }
 }
