@@ -20,7 +20,7 @@ public interface ServiceComponent {
 
     CreateClientProfileActivity provideCreateClientProfileActivity();
 
-  //  GetAllProfilesActivity provideGetAllProfilesActivity();
+    GetAllClientProfilesActivity provideGetAllClientProfilesActivity();
 
   //  GetProfileActivity provideGetProfileActivity();
 

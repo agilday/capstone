@@ -75,6 +75,7 @@ metadata and add clients.
 String clientId;
 String name;
 String phone;
+String address;
 String notes;
 List<String> pets;
 ```
@@ -176,11 +177,13 @@ database.](images/example_design_document/AddSongSD.png)
 
 Map<String, Double> pricedServices;
 
+### 7.2 `profiles`
 
 ```
 id // partition key, string
 name // sort key, string
 phone // string
+address // string
 notes // string
 pets // list
 ```
