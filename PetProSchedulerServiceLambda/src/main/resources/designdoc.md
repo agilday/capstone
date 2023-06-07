@@ -203,7 +203,7 @@ service // string
 
 ```
 service // partition key, string
-price // number
+description // string
 ```
 
 ## 8. Pages
