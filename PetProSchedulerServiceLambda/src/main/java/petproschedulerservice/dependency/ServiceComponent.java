@@ -30,7 +30,7 @@ public interface ServiceComponent {
 
     GetServiceMenuActivity provideGetServiceMenuActivity();
 
-  //  UpdateServiceMenuActivity provideUpdateServiceMenuActivity();
+    UpdateServiceActivity provideUpdateServiceActivity();
 
 
 }

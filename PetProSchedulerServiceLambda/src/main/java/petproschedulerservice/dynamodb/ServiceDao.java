@@ -37,7 +37,6 @@ public class ServiceDao {
      */
     public Service getService(String title) {
         Service service = this.dynamoDbMapper.load(Service.class, title);
-
         return service;
     }
 
@@ -50,10 +49,13 @@ public class ServiceDao {
     /**
      * Saves (creates or updates) the given service.
      *
-     * @param service The service to save
+     * @param title and description of the service to save
      * @return The Service object that was saved
      */
-    public Service saveService(Service service) {
+    public Service saveService(String title, String description) {
+        Service service = new Service();
+        service.setTitle(title);
+        service.setDescription(description);
         this.dynamoDbMapper.save(service);
         return service;
     }
