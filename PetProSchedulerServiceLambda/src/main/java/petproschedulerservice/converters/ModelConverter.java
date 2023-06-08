@@ -3,8 +3,10 @@ package petproschedulerservice.converters;
 import petproschedulerservice.dynamodb.Appointment;
 import petproschedulerservice.dynamodb.ClientProfile;
 import petproschedulerservice.dynamodb.Pet;
+import petproschedulerservice.dynamodb.Service;
 import petproschedulerservice.models.AppointmentModel;
 import petproschedulerservice.models.ClientProfileModel;
+import petproschedulerservice.models.ServiceModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,36 +53,12 @@ public class ModelConverter {
                 .withService(appointment.getService())
                 .build();
     }
-//
-//    /**
-//     * Converts a list of AlbumTracks to a list of SongModels.
-//     *
-//     * @param albumTracks The AlbumTracks to convert to SongModels
-//     * @return The converted list of SongModels
-//     */
-//    public List<SongModel> toSongModelList(List<AlbumTrack> albumTracks) {
-//        List<SongModel> songModels = new ArrayList<>();
-//
-//        for (AlbumTrack albumTrack : albumTracks) {
-//            songModels.add(toSongModel(albumTrack));
-//        }
-//
-//        return songModels;
-//    }
-//
-//    /**
-//     * Converts a list of Playlists to a list of PlaylistModels.
-//     *
-//     * @param playlists The Playlists to convert to PlaylistModels
-//     * @return The converted list of PlaylistModels
-//     */
-//    public List<PlaylistModel> toPlaylistModelList(List<Playlist> playlists) {
-//        List<PlaylistModel> playlistModels = new ArrayList<>();
-//
-//        for (Playlist playlist : playlists) {
-//            playlistModels.add(toPlaylistModel(playlist));
-//        }
-//
-//        return playlistModels;
-//    }
+
+    public ServiceModel toServiceModel(Service service) {
+        return ServiceModel.builder()
+                .withTitle(service.getTitle())
+                .withDescription(service.getDescription())
+                .build();
+    }
+
 }

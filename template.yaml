@@ -464,8 +464,8 @@ Resources:
 #      AttributeDefinitions:
 #        - AttributeName: "service"
 #          AttributeType: "S"
-##        - AttributeName: "price"
-##          AttributeType: "N"
+##        - AttributeName: "description"
+##          AttributeType: "S"
 #      KeySchema:
 #        - AttributeName: "service"
 #          KeyType: "HASH"
