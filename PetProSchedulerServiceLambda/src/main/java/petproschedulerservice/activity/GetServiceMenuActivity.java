@@ -2,6 +2,7 @@ package petproschedulerservice.activity;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import petproschedulerservice.activity.requests.GetServiceMenuRequest;
 import petproschedulerservice.activity.results.GetServiceMenuResult;
 import petproschedulerservice.dynamodb.Service;
 import petproschedulerservice.dynamodb.ServiceDao;
