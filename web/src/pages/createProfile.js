@@ -6,7 +6,8 @@ import DataStore from "../util/DataStore";
 class CreateProfile extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectEditProfile','redirectAllEvents','redirectCreateEvents','redirectAllFollowing','logout','setPlaceholders'], this);
+        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectEditClientProfile','redirectAllClientProfiles',
+        'redirectCreateAppointment','redirectAllAppointments', 'redirectServiceMenu', 'logout','setPlaceholders'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         // console.log("viewprofile constructor");
@@ -22,11 +23,11 @@ class CreateProfile extends BindingClass {
             document.getElementById("welcome").innerText = "Welcome! First Lets Make Your Profile!"
         }
         document.getElementById("loading").innerText = "Loading.....";
-        document.getElementById("fname").setAttribute('placeholder', 'First Name');
-        document.getElementById("lname").setAttribute('placeholder', 'Last Name');
-        document.getElementById("dob").setAttribute('placeholder', 'Date of Birth');
-        document.getElementById("location").setAttribute('placeholder', 'Location');
-        document.getElementById("gender").setAttribute('placeholder', 'Gender');
+        document.getElementById("name").setAttribute('placeholder', 'Name');
+        document.getElementById("phone").setAttribute('placeholder', 'Phone');
+        document.getElementById("address").setAttribute('placeholder', 'Address');
+        document.getElementById("notes").setAttribute('placeholder', 'Notes');
+        document.getElementById("pets").setAttribute('placeholder', 'Pets');
         this.setPlaceholders();
 
     }
