@@ -220,66 +220,66 @@ Resources:
   #-----------------------------------------------------
   # Lambda Functions Configuration
   #-----------------------------------------------------
-#  GetProfileLambda:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      Role: !GetAtt AccessRole.Arn
-#      CodeUri: com.nashss.se.petproscheduler
-#      Handler: com.nashss.se.petproscheduler.lambda.GetProfileLambda::handleRequest
-#      Runtime: java11
-#      Architectures:
-#        - x86_64
-#      MemorySize: 512
-#      Environment:
-#        Variables:
-#          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-#      Events:
-#        MusicPlaylistService:
-#          Type: Api
-#          Properties:
-#            Path: /profiles/{id}
-#            Method: get
-#
-#  UpdateProfileLambda:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      Role: !GetAtt AccessRole.Arn
-#      CodeUri: com.nashss.se.petproscheduler
-#      Handler: com.nashss.se.petproscheduler.lambda.UpdateProfileLambda::handleRequest
-#      Runtime: java11
-#      Architectures:
-#        - x86_64
-#      MemorySize: 512
-#      Environment:
-#        Variables:
-#          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-#      Events:
-#        MusicPlaylistService:
-#          Type: Api
-#          Properties:
-#            Path: /profiles/{id}
-#            Method: put
-#
-#  CreateProfileLambda:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      Role: !GetAtt AccessRole.Arn
-#      CodeUri: PetProSchedulerServiceLambda
-#      Handler: petproschedulerservice.lambda.CreateProfileLambda::handleRequest
-#      Runtime: java11
-#      Architectures:
-#        - x86_64
-#      MemorySize: 512
-#      Environment:
-#        Variables:
-#          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-#      Events:
-#        MusicPlaylistService:
-#          Type: Api
-#          Properties:
-#            Path: /profiles/create
-#            Method: post
-#
+  GetClientProfileLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: com.nashss.se.petproscheduler
+      Handler: com.nashss.se.petproscheduler.lambda.GetProfileLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /profiles/{id}
+            Method: get
+
+  UpdateClientProfileLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: com.nashss.se.petproscheduler
+      Handler: com.nashss.se.petproscheduler.lambda.UpdateProfileLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /profiles/{id}
+            Method: put
+
+  CreateClientProfileLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: petproschedulerservice.lambda.CreateProfileLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /profiles/create
+            Method: post
+
 #  DeleteProfileLambda:
 #    Type: AWS::Serverless::Function
 #    Properties:
@@ -299,27 +299,27 @@ Resources:
 #          Properties:
 #            Path: /profiles/{id}
 #            Method: delete
-#
-#  GetAllProfilesLambda:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      Role: !GetAtt AccessRole.Arn
-#      CodeUri: com.nashss.se.petproscheduler
-#      Handler: com.nashss.se.petproscheduler.lambda.GetAllProfilesLambda::handleRequest
-#      Runtime: java11
-#      Architectures:
-#        - x86_64
-#      MemorySize: 512
-#      Environment:
-#        Variables:
-#          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-#      Events:
-#        MusicPlaylistService:
-#          Type: Api
-#          Properties:
-#            Path: /profiles
-#            Method: get
-#
+
+  GetAllClientProfilesLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: com.nashss.se.petproscheduler
+      Handler: com.nashss.se.petproscheduler.lambda.GetAllProfilesLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /profiles
+            Method: get
+
   CreateAppointmentLambda:
     Type: AWS::Serverless::Function
     Properties:
@@ -339,7 +339,7 @@ Resources:
           Properties:
             Path: /appointments/create
             Method: post
-
+#
 #  DeleteAppointmentLambda:
 #    Type: AWS::Serverless::Function
 #    Properties:
@@ -359,67 +359,67 @@ Resources:
 #          Properties:
 #            Path: /appointments/{id}
 #            Method: delete
-#
-#  GetAppointmentsLambda:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      Role: !GetAtt AccessRole.Arn
-#      CodeUri: com.nashss.se.petproscheduler
-#      Handler: com.nashss.se.petproscheduler.lambda.GetAppointmentsLambda::handleRequest
-#      Runtime: java11
-#      Architectures:
-#        - x86_64
-#      MemorySize: 512
-#      Environment:
-#        Variables:
-#          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-#      Events:
-#        MusicPlaylistService:
-#          Type: Api
-#          Properties:
-#            Path: /appointments/
-#            Method: get
-#
-#  UpdateServicesLambda:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      Role: !GetAtt AccessRole.Arn
-#      CodeUri: com.nashss.se.petproscheduler
-#      Handler: com.nashss.se.petproscheduler.lambda.UpdateServicesLambda::handleRequest
-#      Runtime: java11
-#      Architectures:
-#        - x86_64
-#      MemorySize: 512
-#      Environment:
-#        Variables:
-#          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-#      Events:
-#        MusicPlaylistService:
-#          Type: Api
-#          Properties:
-#            Path: /services/
-#            Method: put
-#
-#  GetServicesLambda:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      Role: !GetAtt AccessRole.Arn
-#      CodeUri: com.nashss.se.petproscheduler
-#      Handler: com.nashss.se.petproscheduler.lambda.GetServicesLambda::handleRequest
-#      Runtime: java11
-#      Architectures:
-#        - x86_64
-#      MemorySize: 512
-#      Environment:
-#        Variables:
-#          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-#      Events:
-#        MusicPlaylistService:
-#          Type: Api
-#          Properties:
-#            Path: /services/
-#            Method: get
-#
+
+  GetAllAppointmentsLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: com.nashss.se.petproscheduler
+      Handler: com.nashss.se.petproscheduler.lambda.GetAppointmentsLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /appointments/
+            Method: get
+
+  UpdateServiceLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: com.nashss.se.petproscheduler
+      Handler: com.nashss.se.petproscheduler.lambda.UpdateServicesLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /services/
+            Method: put
+
+  GetServiceMenuLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: com.nashss.se.petproscheduler
+      Handler: com.nashss.se.petproscheduler.lambda.GetServicesLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /services/
+            Method: get
+
 
   #-----------------------------------------------------
   # DynamoDB Configuration
@@ -458,19 +458,19 @@ Resources:
       BillingMode: "PAY_PER_REQUEST"
       TableName: "appointments"
 
-#  ServicesTable:
-#    Type: AWS::DynamoDB::Table
-#    Properties:
-#      AttributeDefinitions:
-#        - AttributeName: "service"
-#          AttributeType: "S"
-##        - AttributeName: "description"
-##          AttributeType: "S"
-#      KeySchema:
-#        - AttributeName: "service"
-#          KeyType: "HASH"
-#      BillingMode: "PAY_PER_REQUEST"
-#      TableName: "services"
+  ServicesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "service"
+          AttributeType: "S"
+        - AttributeName: "description"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "service"
+          KeyType: "HASH"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "services"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed
