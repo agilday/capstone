@@ -6,7 +6,7 @@ This design document describes PetPro Scheduler, which will allow the user to cr
 
 ## 2. Top Questions to Resolve in Review
 
-1. ?
+1. As this project will expand beyond this sprint, what can reasonably be finished before the deadline?
 
 
 ## 3. Use Cases
@@ -43,6 +43,8 @@ U10. As a user, I want to be able to edit my menu of services.
 
 * Processing and tracking payments
 * Sending alerts and appointment reminders
+* Maintaining different groomer profiles
+* Modifying levels of access for different users
 
 ## 5. Proposed Architecture Overview
 
@@ -50,18 +52,18 @@ This initial iteration will provide the minimum lovable product (MLP) including
 creating, retrieving, and updating a client profile; creating, retrieving, and updating an appointment; as well as adding to, editing, and
 retrieving a service menu.
 
-We will use API Gateway and Lambda to create 8 endpoints (`GetProfile`,
-`CreateProfile`, `UpdateProfile`,
-`CreateAppointment`, `DeleteAppointment`, `GetAppointments`, and
-`GetServiceMenu` and `UpdateMenu`)
+We will use API Gateway and Lambda to create 8 endpoints (`GetClientProfile`,
+`CreateClientProfile`, `UpdateClientProfile`, `GetAllClientProfiles`,
+`CreateAppointment`, `GetAllAppointments`, and
+`GetServiceMenu` and `UpdateServiceMenu`)
 that will handle the creation, update, and retrieval of profiles, appointments, and the service menu to satisfy our
 requirements.
 
-We will store appointments in a table in DynamoDB. services
-themselves will also be stored in DynamoDB. Client profiles will also be stored in a DynamoDB table.
+We will store appointments in a table in DynamoDB. Services
+themselves will also be stored in DynamoDB. Client Profiles will also be stored in a DynamoDB table.
 
 PetPro Scheduler will also provide a web interface for the user to manage
-appointments. A main page providing a list view of all of the appointments
+appointments. A main page providing a list view of all appointments
 will let them create new appointments and link off to pages for the service menu and client profiles to update
 metadata and add clients.
 
@@ -72,11 +74,11 @@ metadata and add clients.
 ```
 // ProfileModel
 
-String clientId;
+String id;
 String name;
 String phone;
 String address;
-String notes;
+List<String> notes;
 List<String> pets;
 ```
 
@@ -92,14 +94,14 @@ String service;
 
 ### 6.2. Get Profile Endpoint
 
-* Accepts `GET` requests to `/profiles/:id`
+* Accepts `GET` requests to `/clientprofiles/:id`
 * Accepts a clientID and returns the corresponding ClientProfileModel.
     * If the given clientID is not found, will throw a
       `ProfileNotFoundException`
 
 ### 6.3. Create Profile Endpoint
 
-* Accepts `POST` requests to `/profiles`
+* Accepts `POST` requests to `/clientprofiles`
 * Accepts data to create a new profile with a provided name, a phone number, a list of pets, and optional notes. Returns the new profile, including a unique
   clientID.
 * For security concerns, we will validate the provided profile name does not
@@ -109,7 +111,7 @@ String service;
 
 ### 6.4. Update Profile Endpoint
 
-* Accepts `PUT` requests to `/profiles/:id`
+* Accepts `PUT` requests to `/clientprofiles/:id`
 * Accepts data to update a profile including a clientID, an updated profile
   name, an updated phone number, updated notes, and updated list of pets. Returns the updated
   profile.
@@ -126,7 +128,7 @@ database.](images/example_design_document/UpdatePlaylistSD.png)
 
 ### 6.5. Delete Profile Endpoint
 
-* Accepts `DELETE` requests to `/profiles/:id/profile`
+* Accepts `DELETE` requests to `/clientprofiles/:id/profile`
 * Accepts a clientID to be deleted.
     * If the clientID is not found, will throw a `ProfileNotFoundException`
 
@@ -138,7 +140,7 @@ database.](images/example_design_document/AddSongSD.png)
 
 ### 6.6. Get All Profiles Endpoint
 
-* Accepts `GET` requests to `/profiles/`
+* Accepts `GET` requests to `/clientprofiles/`
 * Retrieves all profiles
     * Returns the profile list in alphabetical order
 * If no profiles are found, will return an empty list
@@ -184,7 +186,7 @@ id // partition key, string
 name // sort key, string
 phone // string
 address // string
-notes // string
+notes // list
 pets // list
 ```
 
