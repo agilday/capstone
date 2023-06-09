@@ -44,8 +44,8 @@ public class UpdateClientProfileResult {
 
     }
 
-    public static UpdateServiceResult.Builder builder(){
-        return new UpdateServiceResult.Builder();
+    public static UpdateClientProfileResult.Builder builder(){
+        return new UpdateClientProfileResult.Builder();
     }
 
 }
