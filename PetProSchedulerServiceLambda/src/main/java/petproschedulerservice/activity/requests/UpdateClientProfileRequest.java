@@ -35,6 +35,15 @@ public class UpdateClientProfileRequest {
     }
 
     /**
+     * Returns the name of the client.
+     *
+     * @return The name.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Returns the phone number of the client.
      *
      * @return The phone.

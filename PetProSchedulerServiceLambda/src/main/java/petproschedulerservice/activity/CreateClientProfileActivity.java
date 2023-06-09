@@ -63,7 +63,8 @@ public class CreateClientProfileActivity {
         newProfile.setNotes(new ArrayList<>());
         newProfile.setPets(new ArrayList<>());
 
-        profileDao.saveClientProfile(newProfile);
+        profileDao.saveClientProfile(newProfile.getId(), newProfile.getName(), newProfile.getPhone(),
+                newProfile.getAddress(), newProfile.getNotes(), newProfile.getPets());
 
         ClientProfileModel profileModel = new ModelConverter().toClientProfileModel(newProfile);
         return CreateClientProfileResult.builder()
