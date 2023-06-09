@@ -16,7 +16,7 @@ public interface ServiceComponent {
     /**
      * Provides the relevant activity.
      */
- //   UpdateProfileActivity provideUpdateProfileActivity();
+    UpdateClientProfileActivity provideUpdateClientProfileActivity();
 
     CreateClientProfileActivity provideCreateClientProfileActivity();
 
