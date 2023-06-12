@@ -45,10 +45,20 @@ public class AppointmentDao {
      * @param appointment The appointment to save
      * @return The Appointment object that was saved
      */
-    public Appointment saveAppointment(Appointment appointment) {
+    public void saveAppointment(Appointment appointment) {
         this.dynamoDbMapper.save(appointment);
-        return appointment;
     }
+
+    /**
+     * Deletes (creates or updates) the given appointment.
+     *
+     * @param appointment The appointment to delete
+     * @return The Appointment object that was deleted
+     */
+    public void deleteAppointment(Appointment appointment) {
+        this.dynamoDbMapper.delete(appointment);
+    }
+
 
     /**
      * Perform a search (via a "scan") of the playlist table for appointments matching the given criteria.
