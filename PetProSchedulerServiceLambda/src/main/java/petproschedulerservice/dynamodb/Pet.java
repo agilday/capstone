@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Pet {
 
-    enum Status {
+    public enum Status {
         LIVING,
         DECEASED
     }
