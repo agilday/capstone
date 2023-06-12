@@ -140,23 +140,23 @@ export default class DannaClient extends BindingClass {
     /**
      * 
      * @param  id Unique identifier for profile
-     * @param  fname first name
-     * @param  lname last name
-     * @param  location location
-     * @param  gender gender
-     * @param  dob date of birth as a string
+     * @param  name name
+     * @param  phone phone
+     * @param  address address
+     * @param  notes notes
+     * @param  pets pets
      * @param  errorCallback 
      * @returns profile metadata
      */
-    async createProfile(firstName, lastName, location, gender, dateOfBirth, errorCallback) {
+    async createProfile(name, phone, address, notes, pets, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create a profile.");
-            const response = await this.axiosClient.post(`profiles/create`, {
-                firstName: firstName,
-                lastName: lastName,
-                location: location,
-                gender: gender,
-                dateOfBirth: dateOfBirth
+            const response = await this.axiosClient.post(`clientprofiles/create`, {
+                name: name,
+                phone: phone,
+                address: address,
+                notes: notes,
+                pets: pets
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -171,26 +171,26 @@ export default class DannaClient extends BindingClass {
     }
 
     /**
-     * 
-     * @param  id Unique identifier for profile
-     * @param  fname first name
-     * @param  lname last name
-     * @param  location location
-     * @param  gender gender
-     * @param  dob date of birth as a string
-     * @param  errorCallback 
-     * @returns profile metadata
-     */
+         *
+         * @param  id Unique identifier for profile
+         * @param  name name
+         * @param  phone phone
+         * @param  address address
+         * @param  notes notes
+         * @param  pets pets
+         * @param  errorCallback
+         * @returns profile metadata
+         */
 
-    async updateProfile(id, firstName, lastName, location, gender, dateOfBirth, errorCallback) {
+    async updateProfile(id, name, phone, address, notes, pets, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can update a profile.");
             const response = await this.axiosClient.put(`profiles/${id}`, {
-                firstName: firstName,
-                lastName: lastName,
-                location: location,
-                gender: gender,
-                dateOfBirth: dateOfBirth
+                name: name,
+                phone: phone,
+                address: address,
+                notes: notes,
+                pets: pets
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -204,25 +204,21 @@ export default class DannaClient extends BindingClass {
     }
     /**
      * 
-     * @param  name name of the event
-     * @param  date date of the event
-     * @param  time time of the event
-     * @param  address address of the event 
-     * @param  category category of the event
-     * @param  description description of the event
+     * @param  client owner of pet
+     * @param  dateTime date of the appt
+     * @param  pet pet receiving service
+     * @param  service service being performed
      * @param  errorCallback 
      * @returns the event
      */
-    async createEvent(name, date, time, address, category, description, errorCallback) {
+    async createAppointment(client, dateTime, pet, service, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create an event.");
             const response = await this.axiosClient.post(`events/create`, {
-                name: name,
-                date: date,
-                time: time,
-                address: address,
-                category: category,
-                description: description
+                client: client,
+                dateTime: dateTime,
+                pet: pet,
+                service: service
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
