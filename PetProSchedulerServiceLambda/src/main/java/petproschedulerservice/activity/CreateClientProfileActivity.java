@@ -45,15 +45,9 @@ public class CreateClientProfileActivity {
         log.info("Received CreateProfileRequest {}", createClientProfileRequest);
 
         if (!PetProUtils.isValidString(createClientProfileRequest.getName())) {
-            throw new InvalidAttributeValueException("Playlist name [" + createClientProfileRequest.getName() +
+            throw new InvalidAttributeValueException("Client name [" + createClientProfileRequest.getName() +
                     "] contains illegal characters");
         }
-
-        if (!PetProUtils.isValidString(createClientProfileRequest.getId())) {
-            throw new InvalidAttributeValueException("Playlist customer ID [" + createClientProfileRequest.getId() +
-                    "] contains illegal characters");
-        }
-
 
         ClientProfile newProfile = new ClientProfile();
         newProfile.setId(PetProUtils.generateId());
