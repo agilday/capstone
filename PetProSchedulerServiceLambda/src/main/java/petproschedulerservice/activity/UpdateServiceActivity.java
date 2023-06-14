@@ -7,7 +7,6 @@ import petproschedulerservice.activity.results.UpdateServiceResult;
 import petproschedulerservice.converters.ModelConverter;
 import petproschedulerservice.dynamodb.Service;
 import petproschedulerservice.dynamodb.ServiceDao;
-import petproschedulerservice.metrics.MetricsConstants;
 import petproschedulerservice.metrics.MetricsPublisher;
 import petproschedulerservice.models.ServiceModel;
 

@@ -7,8 +7,11 @@ import petproschedulerservice.activity.results.UpdateClientProfileResult;
 import petproschedulerservice.converters.ModelConverter;
 import petproschedulerservice.dynamodb.ClientProfile;
 import petproschedulerservice.dynamodb.ClientProfileDao;
+import petproschedulerservice.exceptions.InvalidAttributeValueException;
+import petproschedulerservice.metrics.MetricsConstants;
 import petproschedulerservice.metrics.MetricsPublisher;
 import petproschedulerservice.models.ClientProfileModel;
+import petproschedulerservice.utils.PetProUtils;
 
 import javax.inject.Inject;
 
@@ -44,6 +47,12 @@ public class UpdateClientProfileActivity {
     public UpdateClientProfileResult handleRequest(final UpdateClientProfileRequest updateClientProfileRequest) {
         log.info("Received UpdateClientProfileRequest {}", updateClientProfileRequest);
 
+        if(!PetProUtils.isValidString(updateClientProfileRequest.getName())) {
+            publishExceptionMetrics(true, false);
+            throw new InvalidAttributeValueException("Client profile name [" + updateClientProfileRequest.getName() +
+                    "] contains illegal characters.");
+        }
+
         ClientProfile profile = clientProfileDao.getClientProfile(updateClientProfileRequest.getId());
 
         ClientProfile updateProfile = clientProfileDao.saveClientProfile(updateClientProfileRequest.getId(),
@@ -53,6 +62,18 @@ public class UpdateClientProfileActivity {
         return UpdateClientProfileResult.builder()
                 .withClientProfile(new ModelConverter().toClientProfileModel(updateProfile))
                 .build();
+    }
+    /**
+     * Helper method to publish exception metrics.
+     * @param isInvalidAttributeValue indicates whether InvalidAttributeValueException is thrown
+     * @param isInvalidAttributeChange indicates whether InvalidAttributeChangeException is thrown
+     */
+    private void publishExceptionMetrics(final boolean isInvalidAttributeValue,
+                                         final boolean isInvalidAttributeChange) {
+        metricsPublisher.addCount(MetricsConstants.UPDATECLIENTPROFILE_INVALIDATTRIBUTEVALUE_COUNT,
+                isInvalidAttributeValue ? 1 : 0);
+        metricsPublisher.addCount(MetricsConstants.UPDATECLIENTPROFILE_INVALIDATTRIBUTECHANGE_COUNT,
+                isInvalidAttributeChange ? 1 : 0);
     }
 
 }

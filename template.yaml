@@ -224,8 +224,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: com.nashss.se.petproscheduler
-      Handler: com.nashss.se.petproscheduler.lambda.GetProfileLambda::handleRequest
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: com.nashss.se.petproscheduler.lambda.GetClientProfileLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -244,8 +244,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: com.nashss.se.petproscheduler
-      Handler: com.nashss.se.petproscheduler.lambda.UpdateProfileLambda::handleRequest
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: com.nashss.se.petproscheduler.lambda.UpdateClientProfileLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -265,7 +265,7 @@ Resources:
     Properties:
       Role: !GetAtt AccessRole.Arn
       CodeUri: PetProSchedulerServiceLambda
-      Handler: petproschedulerservice.lambda.CreateProfileLambda::handleRequest
+      Handler: petproschedulerservice.lambda.CreateClientProfileLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -285,7 +285,7 @@ Resources:
 #    Properties:
 #      Role: !GetAtt AccessRole.Arn
 #      CodeUri: com.nashss.se.petproscheduler
-#      Handler: com.nashss.se.petproscheduler.lambda.DeleteProfileLambda::handleRequest
+#      Handler: com.nashss.se.petproscheduler.lambda.DeleteClientProfileLambda::handleRequest
 #      Runtime: java11
 #      Architectures:
 #        - x86_64
@@ -304,8 +304,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: com.nashss.se.petproscheduler
-      Handler: com.nashss.se.petproscheduler.lambda.GetAllProfilesLambda::handleRequest
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: com.nashss.se.petproscheduler.lambda.GetAllClientProfilesLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -344,7 +344,7 @@ Resources:
 #    Type: AWS::Serverless::Function
 #    Properties:
 #      Role: !GetAtt AccessRole.Arn
-#      CodeUri: com.nashss.se.petproscheduler
+#      CodeUri: PetProSchedulerServiceLambda
 #      Handler: com.nashss.se.petproscheduler.lambda.DeleteAppointmentLambda::handleRequest
 #      Runtime: java11
 #      Architectures:
@@ -364,7 +364,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: com.nashss.se.petproscheduler
+      CodeUri: PetProSchedulerServiceLambda
       Handler: com.nashss.se.petproscheduler.lambda.GetAppointmentsLambda::handleRequest
       Runtime: java11
       Architectures:
@@ -384,7 +384,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: com.nashss.se.petproscheduler
+      CodeUri: PetProSchedulerServiceLambda
       Handler: com.nashss.se.petproscheduler.lambda.UpdateServicesLambda::handleRequest
       Runtime: java11
       Architectures:
@@ -404,7 +404,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: com.nashss.se.petproscheduler
+      CodeUri: PetProSchedulerServiceLambda
       Handler: com.nashss.se.petproscheduler.lambda.GetServicesLambda::handleRequest
       Runtime: java11
       Architectures:
@@ -462,12 +462,12 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "service"
+        - AttributeName: "title"
           AttributeType: "S"
         - AttributeName: "description"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "service"
+        - AttributeName: "title"
           KeyType: "HASH"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "services"

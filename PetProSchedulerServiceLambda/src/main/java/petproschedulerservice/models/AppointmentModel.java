@@ -92,7 +92,7 @@ public class AppointmentModel {
             return this;
         }
 
-        public Builder withPet(String Pet) {
+        public Builder withPet(String pet) {
             this.pet = pet;
             return this;
         }

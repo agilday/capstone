@@ -12,8 +12,10 @@ public class MetricsConstants {
                 "DeleteAppointment.AppointmentNotFoundException.Count";
         public static final String UPDATEPROFILE_PROFILENOTFOUND_COUNT =
                 "UpdateProfile.ProfileNotFoundException.Count";
-        public static final String UPDATEPROFILE_INVALIDATTRIBUTE_COUNT =
-                "UpdateProfile.InvalidAttributeException.Count";
+        public static final String UPDATECLIENTPROFILE_INVALIDATTRIBUTEVALUE_COUNT =
+                "UpdateProfile.InvalidAttributeValueException.Count";
+        public static final String UPDATECLIENTPROFILE_INVALIDATTRIBUTECHANGE_COUNT =
+            "UpdateProfile.InvalidAttributeChangeException.Count";
         public static final String SERVICE = "Service";
         public static final String SERVICE_NAME = "petproscheduler";
         public static final String NAMESPACE_NAME = "U3/petproscheduler";
