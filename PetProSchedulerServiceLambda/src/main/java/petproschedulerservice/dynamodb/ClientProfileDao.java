@@ -54,7 +54,7 @@ public class ClientProfileDao {
     /**
      * Saves (creates or updates) the given profile.
      *
-     * @param The profile to save
+     * @param ClientProfile to save
      * @return The ClientProfile object that was saved
      */
     public ClientProfile saveClientProfile(String id, String name, String phone, String address, List<String> notes, List<Pet> pets) {
