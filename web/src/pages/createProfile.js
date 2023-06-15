@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 class CreateProfile extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectEditClientProfile','redirectAllClientProfiles',
+        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectAllClientProfiles',
         'redirectCreateAppointment','redirectAllAppointments', 'redirectServiceMenu', 'logout','setPlaceholders'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
@@ -17,7 +17,7 @@ class CreateProfile extends BindingClass {
         // const urlParams = new URLSearchParams(window.location.search);
         const identity = await this.client.getIdentity();
         this.dataStore.set('id', identity.email);
-        const profile = await this.client.getProfile(identity.email);
+        const profile = await this.client.getClientProfile(identity.email);
         this.dataStore.set('profile', profile);
         if(profile == null) {
             document.getElementById("welcome").innerText = "Welcome! First Lets Make Your Profile!"
@@ -34,10 +34,10 @@ class CreateProfile extends BindingClass {
 
     mount() {
   
-        document.getElementById('profilePic').addEventListener('click', this.redirectEditProfile);
-        document.getElementById('allEvents').addEventListener('click', this.redirectAllEvents);
-        document.getElementById('createEvents').addEventListener('click', this.redirectCreateEvents);
-        document.getElementById('allFollowing').addEventListener('click', this.redirectAllFollowing);
+        document.getElementById('profilePic').addEventListener('click', this.redirectUpdateClientProfile);
+        document.getElementById('allAppointments').addEventListener('click', this.redirectGetAllAppointments);
+        document.getElementById('createAppointment').addEventListener('click', this.redirectCreateAppointment);
+        document.getElementById('allClientProfiles').addEventListener('click', this.redirectGetAllClientProfiles);
         document.getElementById('logout').addEventListener('click', this.logout);
         document.getElementById('door').addEventListener('click', this.logout);
         document.getElementById('confirm').addEventListener('click', this.confirmRedirect);
@@ -45,7 +45,7 @@ class CreateProfile extends BindingClass {
 
       
 
-        this.client = new dannaClient();
+        this.client = new petProClient();
         this.clientLoaded();
     }
 
@@ -55,19 +55,16 @@ class CreateProfile extends BindingClass {
         if (profile == null) {
             return;
         }
-        if (profile.profileModel.firstName && profile.profileModel.lastName) {
-            document.getElementById("names").innerText =  profile.profileModel.firstName + " " +  profile.profileModel.lastName
-            document.getElementById('fname').setAttribute('placeholder', profile.profileModel.firstName);
-            document.getElementById('lname').setAttribute('placeholder', profile.profileModel.lastName);
+        if (profile.clientProfileModel.name) {
+            document.getElementById("name").innerText =  profile.clientProfileModel.name
+            document.getElementById('phone').setAttribute('placeholder', profile.clientProfileModel.phone);
+            document.getElementById('address').setAttribute('placeholder', profile.clientProfileModel.address);
         }
-        if (profile.profileModel.dateOfBirth) {
-            document.getElementById('dob').setAttribute('placeholder',profile.profileModel.dateOfBirth);
+        if (profile.clientProfileModel.notes) {
+            document.getElementById('notes').setAttribute('placeholder',profile.clientProfileModel.notes);
         }
-        if (profile.profileModel.location) {
-            document.getElementById('location').setAttribute('placeholder',profile.profileModel.location);
-        }
-        if (profile.profileModel.gender) {
-            document.getElementById('gender').setAttribute('placeholder',profile.profileModel.gender);
+        if (profile.clientProfileModel.pets) {
+            document.getElementById('location').setAttribute('placeholder',profile.clientProfileModel.pets);
         }
         document.getElementById("loading").remove();
     }
@@ -75,47 +72,47 @@ class CreateProfile extends BindingClass {
 
     async submitFormData(evt){
         evt.preventDefault();
-        const firstName = document.getElementById('fname').value || document.getElementById('fname').getAttribute('placeholder');
-        const lastName = document.getElementById('lname').value ||  document.getElementById('lname').getAttribute('placeholder');
-        const dob = document.getElementById('dob').value ||  document.getElementById('dob').getAttribute('placeholder');
-        const location = document.getElementById('location').value ||  document.getElementById('location').getAttribute('placeholder');
-        const gender = document.getElementById('gender').value || document.getElementById('gender').getAttribute('placeholder');
-        console.log(firstName, lastName, dob, location, gender);
+        const name = document.getElementById('name').value || document.getElementById('name').getAttribute('placeholder');
+        const phone = document.getElementById('phone').value ||  document.getElementById('phone').getAttribute('placeholder');
+        const address = document.getElementById('address').value ||  document.getElementById('address').getAttribute('placeholder');
+        const notes = document.getElementById('notes').value ||  document.getElementById('notes').getAttribute('placeholder');
+        const pets = document.getElementById('pets').value || document.getElementById('pets').getAttribute('placeholder');
+        console.log(name, phone, address, notes, pets);
         let profile;
-        if(document.getElementById('welcome').innerText == "Welcome! First Lets Make Your Profile!"){
-            profile = await this.client.createProfile(firstName, lastName, location, gender, dob, (error) => {
+        if(document.getElementById('welcome').innerText == "Create a new Client Profile"){
+            profile = await this.client.createClientProfile(name, phone, address, notes, pets, (error) => {
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
             });
         } else {
-            profile = await this.client.updateProfile(this.dataStore.get('id'),firstName, lastName, location, gender, dob, (error) => {
+            profile = await this.client.updateProfile(this.dataStore.get('id'), name, phone, address, notes, pets, (error) => {
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
             });
         }
         
 
         this.dataStore.set('profile', profile);
-        document.getElementById('fnameC').innerText = firstName || profile.profileModel.firstName;
-        document.getElementById('lnameC').innerText = lastName || profile.profileModel.lastName;
-        document.getElementById('dobC').innerText = dob || profile.profileModel.dateOfBirth;
-        document.getElementById('loC').innerText = location || profile.profileModel.location;
-        document.getElementById('genderC').innerText = gender ||profile.profileModel.gender;
+        document.getElementById('name').innerText = name || profile.clientProfileModel.name;
+        document.getElementById('phone').innerText = phone || profile.clientProfileModel.phone;
+        document.getElementById('address').innerText = address || profile.clientProfileModel.address;
+        document.getElementById('notes').innerText = notes || profile.clientProfileModel.notes;
+        document.getElementById('pets').innerText = pets ||profile.clientProfileModel.pets;
         document.getElementById('loading-modal').remove();
         
     }
     confirmRedirect() {
-        window.location.href = '/profile.html';
+        window.location.href = '/clientProfile.html';
     }
-    redirectEditProfile(){
-        window.location.href = '/createProfile.html';
+    redirectServiceMenu(){
+        window.location.href = '/serviceMenu.html';
     }
-    redirectAllEvents(){
-        window.location.href = '/viewAllEvents.html';
+    redirectAllAppointments(){
+        window.location.href = '/allAppointments.html';
     }
-    redirectCreateEvents(){
-        window.location.href = '/createEvents.html';
+    redirectCreateAppointment(){
+        window.location.href = '/createAppointment.html';
     }
-    redirectAllFollowing(){
-        window.location.href = '/allFollowing.html';
+    redirectAllClientProfiles(){
+        window.location.href = '/allClientProfiles.html';
     }
     logout(){
         this.client.logout();

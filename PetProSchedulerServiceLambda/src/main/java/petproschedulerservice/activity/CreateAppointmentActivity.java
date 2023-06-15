@@ -19,7 +19,7 @@ public class CreateAppointmentActivity {
     /**
      * Instantiates a new CreateAppointmentActivity object.
      *
-     * @param appDao AppointmentDao to access the playlists table.
+     * @param appDao AppointmentDao to access the appointments table.
      */
     @Inject
     public CreateAppointmentActivity(AppointmentDao appDao) {
@@ -28,7 +28,6 @@ public class CreateAppointmentActivity {
 
     /**
      * This method handles the incoming request by persisting a new Appointment
-     * with the provided playlist name and customer ID from the request.
      * <p>
      * It then returns the newly created Appointment.
      * <p>
