@@ -179,9 +179,9 @@ export default class PetProClient extends BindingClass {
              headers: {
                  Authorization: `Bearer ${token}`
                     }
-            });
+        });
               return response.data.appointment;
-        } catch (error) {
+            } catch (error) {
               this.handleError(error, errorCallback)
         }
      }
