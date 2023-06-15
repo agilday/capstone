@@ -1,8 +1,10 @@
 package petproschedulerservice.dependency;
 
 
+import com.amazonaws.services.lambda.runtime.RequestHandler;
 import dagger.Component;
 import petproschedulerservice.activity.*;
+import petproschedulerservice.activity.requests.CreateServiceRequest;
 
 import javax.inject.Singleton;
 
@@ -32,5 +34,6 @@ public interface ServiceComponent {
 
     UpdateServiceActivity provideUpdateServiceActivity();
 
+    CreateServiceActivity provideCreateServiceActivity();
 
 }
