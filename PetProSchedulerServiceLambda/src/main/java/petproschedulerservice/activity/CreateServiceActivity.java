@@ -2,17 +2,12 @@ package petproschedulerservice.activity;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import petproschedulerservice.activity.requests.CreateAppointmentRequest;
 import petproschedulerservice.activity.requests.CreateServiceRequest;
-import petproschedulerservice.activity.results.CreateAppointmentResult;
 import petproschedulerservice.activity.results.CreateServiceResult;
 import petproschedulerservice.converters.ModelConverter;
-import petproschedulerservice.dynamodb.Appointment;
 import petproschedulerservice.dynamodb.Service;
 import petproschedulerservice.dynamodb.ServiceDao;
-import petproschedulerservice.models.AppointmentModel;
 import petproschedulerservice.models.ServiceModel;
-import petproschedulerservice.utils.PetProUtils;
 
 import javax.inject.Inject;
 
