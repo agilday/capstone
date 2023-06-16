@@ -14,7 +14,7 @@ export default class Header extends BindingClass {
         ];
         this.bindClassMethods(methodsToBind, this);
 
-        this.client = new petProClient();
+        this.client = new petproClient();
     }
 
     /**

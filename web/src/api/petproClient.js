@@ -84,7 +84,7 @@ export default class petproClient extends BindingClass {
     async getClientProfile(id, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can view a client profile.");
-            const response = await this.axiosClient.get(`profiles/${id}`, {
+            const response = await this.axiosClient.get(`clientprofiles/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -183,7 +183,7 @@ export default class petproClient extends BindingClass {
     async updateClientProfile(id, name, phone, address, notes, pets, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can update a profile.");
-            const response = await this.axiosClient.put(`profiles/${id}`, {
+            const response = await this.axiosClient.put(`clientprofiles/${id}`, {
                 name: name,
                 phone: phone,
                 address: address,
@@ -212,7 +212,7 @@ export default class petproClient extends BindingClass {
     async createAppointment(client, dateTime, pet, service, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create an event.");
-            const response = await this.axiosClient.post(`events/create`, {
+            const response = await this.axiosClient.post(`appointments/create`, {
                 client: client,
                 dateTime: dateTime,
                 pet: pet,
@@ -258,7 +258,7 @@ export default class petproClient extends BindingClass {
     async addServiceToServiceMenu(service, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can add services to the menu.");
-            const response = await this.axiosClient.put(`profiles/addServiceToServiceMenu`, {
+            const response = await this.axiosClient.put(`services/addServiceToServiceMenu`, {
                 service: service
             }, {
                 headers: {
@@ -271,30 +271,6 @@ export default class petproClient extends BindingClass {
             this.handleError(error, errorCallback)
         }
     }
-
-//     /**
-//     *
-//     * @param {*} id Unique identifyer of the profile
-//     * @param {*} profileId Unique identifyer of the profile to remove from the following list
-//     * @param {*} errorCallback
-//     * @returns
-//     */
-//    async removeFromFollowing(profileId, errorCallback) {
-//        try {
-//            const token = await this.getTokenOrThrow("Only authenticated users can remove a profile.");
-//            const response = await this.axiosClient.put(`profiles/removeFollowing`, {
-//                profileId: profileId
-//            }, {
-//                headers: {
-//                    Authorization: `Bearer ${token}`,
-//                    'Content-Type': 'application/json'
-//                }
-//            });
-//            return response.data;
-//        } catch (error) {
-//            this.handleError(error, errorCallback)
-//        }
-//    }
 
     /**
      * Helper method to log the error and run any error functions.
