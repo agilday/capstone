@@ -15,9 +15,8 @@ export default class petproClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getProfile', 'getAllEvents', 'getEventDetails','createEvent',
-                                'createProfile','updateProfile','updateEvent','addEventToProfile','removeEventFromProfile','addToFollowing',
-                                'removeFromFollowing', 'isLoggedIn'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getClientProfile', 'getAllClientProfiles', 'getAllAppointments','createAppointment',
+                                'createService','updateClientProfile','updateService','createClientProfile','getServiceMenu', 'isLoggedIn'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -82,9 +81,9 @@ export default class petproClient extends BindingClass {
      * @param errorCallback (Optional) A function to execute if the call fails.
      * @returns The profile's metadata.
      */
-    async getProfile(id, errorCallback) {
+    async getClientProfile(id, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can view a profile.");
+            const token = await this.getTokenOrThrow("Only authenticated users can view a client profile.");
             const response = await this.axiosClient.get(`profiles/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -99,12 +98,12 @@ export default class petproClient extends BindingClass {
 
    /**
     * @param  errorCallback (Optional) a function to execute on a failed call
-    * @returns all the events
+    * @returns all the appointments
     */
-    async getAllEvents(errorCallback) {
+    async getAllAppointments(errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can get all events.");
-            const response = await this.axiosClient.get(`events/all/`, {
+            const token = await this.getTokenOrThrow("Only authenticated users can get all appointments.");
+            const response = await this.axiosClient.get(`appointments/all/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -118,14 +117,13 @@ export default class petproClient extends BindingClass {
     
     /**
     * 
-    * @param  id Unique identifier for a event
-    * @param  errorCallback (Optional) a funciton to execute on a failed call
-    * @returns all the event details for id
+    * @param  errorCallback (Optional) a function to execute on a failed call
+    * @returns all services
     */
-    async getEventDetails(id, errorCallback) {
+    async getServiceMenu(errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can get events.");
-            const response = await this.axiosClient.get(`events/${id}`, {
+            const token = await this.getTokenOrThrow("Only authenticated users can get service menu.");
+            const response = await this.axiosClient.get(`servicemenu/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -148,7 +146,7 @@ export default class petproClient extends BindingClass {
      * @param  errorCallback 
      * @returns profile metadata
      */
-    async createProfile(name, phone, address, notes, pets, errorCallback) {
+    async createClientProfile(name, phone, address, notes, pets, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create a profile.");
             const response = await this.axiosClient.post(`clientprofiles/create`, {
@@ -182,7 +180,7 @@ export default class petproClient extends BindingClass {
          * @returns profile metadata
          */
 
-    async updateProfile(id, name, phone, address, notes, pets, errorCallback) {
+    async updateClientProfile(id, name, phone, address, notes, pets, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can update a profile.");
             const response = await this.axiosClient.put(`profiles/${id}`, {
@@ -232,28 +230,15 @@ export default class petproClient extends BindingClass {
         }
     }
 
-      /**
-     * 
-     * @param  name name of the event
-     * @param  date date of the event
-     * @param  time time of the event
-     * @param  address address of the event 
-     * @param  category category of the event
-     * @param  description description of the event
+    /**
+     *
      * @param  errorCallback 
-     * @returns the event
+     * @returns all client profiles
      */
-    async updateEvent(name, date, time, address, category, description, errorCallback) {
+    async getAllClientProfiles(errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can update events.");
-            const response = await this.axiosClient.put(`events/${id}`, {
-                name: name,
-                date: date,
-                time: time,
-                address: address,
-                category: category,
-                description: description,
-            }, {
+            const response = await this.axiosClient.put(`clientprofiles/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -266,16 +251,15 @@ export default class petproClient extends BindingClass {
     }
     /**
      * 
-     * @param {*} id Unique identifyer of the profile
-     * @param {*} eventId Unique identifyer of the event
+     * @param {*} service the service to add to the menu
      * @param {*} errorCallback 
      * @returns 
      */
-    async addEventToProfile(eventId, errorCallback) {
+    async addServiceToServiceMenu(service, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can add events to a profile.");
-            const response = await this.axiosClient.put(`profiles/addEvent`, {
-                eventId: eventId
+            const token = await this.getTokenOrThrow("Only authenticated users can add services to the menu.");
+            const response = await this.axiosClient.put(`profiles/addServiceToServiceMenu`, {
+                service: service
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -287,75 +271,30 @@ export default class petproClient extends BindingClass {
             this.handleError(error, errorCallback)
         }
     }
-    /**
-     * 
-     * @param {*} id Unique identifyer of the profile
-     * @param {*} eventId Unique identifyer of the event
-     * @param {*} errorCallback 
-     * @returns 
-     */
-    async removeEventFromProfile(eventId, errorCallback) {
-        try {
-            const token = await this.getTokenOrThrow("Only authenticated users can remove an event from a profile.");
-            const response = await this.axiosClient.put(`profiles/removeEvent`, {
-                eventId: eventId
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-            return response.data;
-        } catch (error) {
-            this.handleError(error, errorCallback)
-        }
-    }
-    /**
-     * 
-     * @param {*} id Unique identifyer of the profile
-     * @param {*} profileId Unique identifyer of the profile to add to the following list
-     * @param {*} errorCallback 
-     * @returns 
-     */
-    async addToFollowing(profileId, errorCallback) {
-        try {
-            const token = await this.getTokenOrThrow("Only authenticated users can add to a profile.");
-            const response = await this.axiosClient.put(`profiles/addFollowing`, {
-                profileId: profileId
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-            return response.data;
-        } catch (error) {
-            this.handleError(error, errorCallback)
-        }
-    }
-     /**
-     * 
-     * @param {*} id Unique identifyer of the profile
-     * @param {*} profileId Unique identifyer of the profile to remove from the following list
-     * @param {*} errorCallback 
-     * @returns 
-     */
-    async removeFromFollowing(profileId, errorCallback) {
-        try {
-            const token = await this.getTokenOrThrow("Only authenticated users can remove a profile.");
-            const response = await this.axiosClient.put(`profiles/removeFollowing`, {
-                profileId: profileId
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-            return response.data;
-        } catch (error) {
-            this.handleError(error, errorCallback)
-        }
-    }
+
+//     /**
+//     *
+//     * @param {*} id Unique identifyer of the profile
+//     * @param {*} profileId Unique identifyer of the profile to remove from the following list
+//     * @param {*} errorCallback
+//     * @returns
+//     */
+//    async removeFromFollowing(profileId, errorCallback) {
+//        try {
+//            const token = await this.getTokenOrThrow("Only authenticated users can remove a profile.");
+//            const response = await this.axiosClient.put(`profiles/removeFollowing`, {
+//                profileId: profileId
+//            }, {
+//                headers: {
+//                    Authorization: `Bearer ${token}`,
+//                    'Content-Type': 'application/json'
+//                }
+//            });
+//            return response.data;
+//        } catch (error) {
+//            this.handleError(error, errorCallback)
+//        }
+//    }
 
     /**
      * Helper method to log the error and run any error functions.
