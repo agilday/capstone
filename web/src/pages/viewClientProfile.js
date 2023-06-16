@@ -1,4 +1,4 @@
-import dannaClient from '../api/dannaClient';
+import petproClient from '../api/petproClient';
 import BindingClass from "../util/bindingClass";
 import Header from '../components/dannaHeader';
 import DataStore from "../util/DataStore";
@@ -48,7 +48,7 @@ class ViewProfile extends BindingClass {
         document.getElementById("allFollowingListText").innerText = "Loading People You Follow...";
         //this.header.addHeaderToPage();
 
-        this.client = new dannaClient();
+        this.client = new petProClient();
         this.clientLoaded();
     }
 

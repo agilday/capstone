@@ -1,4 +1,4 @@
-import dannaClient from '../api/dannaClient';
+import petproClient from '../api/petproClient';
 import BindingClass from "../util/bindingClass";
 import Header from '../components/dannaHeader';
 import DataStore from "../util/DataStore";
@@ -41,11 +41,11 @@ class CreateProfile extends BindingClass {
         document.getElementById('logout').addEventListener('click', this.logout);
         document.getElementById('door').addEventListener('click', this.logout);
         document.getElementById('confirm').addEventListener('click', this.confirmRedirect);
-        document.getElementById('submited').addEventListener('click', this.submitFormData);
+        document.getElementById('submitted').addEventListener('click', this.submitFormData);
 
       
 
-        this.client = new dannaClient();
+        this.client = new petproClient();
         this.clientLoaded();
     }
 
