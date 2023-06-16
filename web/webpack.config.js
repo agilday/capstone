@@ -23,12 +23,14 @@ module.exports = {
     usedExports: true
   },
   entry: {
-    createPlaylist: path.resolve(__dirname, 'src', 'pages', 'createPlaylist.js'),
-    viewPlaylist: path.resolve(__dirname, 'src', 'pages', 'viewPlaylist.js'),
-    viewProfile: path.resolve(__dirname, 'src', 'pages', 'viewProfile.js'),
-    createProfile: path.resolve(__dirname, 'src', 'pages', 'createProfile.js'),
+    createAppointment: path.resolve(__dirname, 'src', 'pages', 'createAppointment.js'),
+    createClientProfile: path.resolve(__dirname, 'src', 'pages', 'createClientProfile.js'),
+    createService: path.resolve(__dirname, 'src', 'pages', 'createService.js'),
+    allAppointments: path.resolve(__dirname, 'src', 'pages', 'allAppointments.js'),
+    allClientProfiles: path.resolve(__dirname, 'src', 'pages', 'allClientProfiles.js'),
+    profile: path.resolve(__dirname, 'src', 'pages', 'profile.js'),
+    serviceMenu: path.resolve(__dirname, 'src', 'pages', 'serviceMenu.js'),
     landingPage: path.resolve(__dirname, 'src', 'pages', 'landingPage.js'),
-    searchPlaylists: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js'),
     test: path.resolve(__dirname, 'src', 'pages', 'test.js'),
   },
   output: {
