@@ -22,7 +22,7 @@ class CreateProfile extends BindingClass {
         if(profile == null) {
             document.getElementById("welcome").innerText = "Create a client profile."
         }
-        document.getElementById("loading").innerText = "Loading.....";
+        document.getElementById("loading").innerText = "Loading...";
         document.getElementById("name").setAttribute('placeholder', 'Name');
         document.getElementById("phone").setAttribute('placeholder', 'Phone');
         document.getElementById("address").setAttribute('placeholder', 'Address');
@@ -54,16 +54,16 @@ class CreateProfile extends BindingClass {
         if (profile == null) {
             return;
         }
-        if (profile.profileModel.name && profile.profileModel.phone) {
-            document.getElementById("name").innerText =  profile.profileModel.name
-            document.getElementById('phone').setAttribute('placeholder', profile.profileModel.phone);
-            document.getElementById('address').setAttribute('placeholder', profile.profileModel.address);
+        if (profile.clientProfileModel.name && profile.clientProfileModel.phone) {
+            document.getElementById("name").innerText =  profile.clientProfileModel.name
+            document.getElementById('phone').setAttribute('placeholder', profile.clientProfileModel.phone);
+            document.getElementById('address').setAttribute('placeholder', profile.clientProfileModel.address);
         }
-        if (profile.profileModel.notes) {
-            document.getElementById('notes').setAttribute('placeholder',profile.profileModel.notes);
+        if (profile.clientProfileModel.notes) {
+            document.getElementById('notes').setAttribute('placeholder',profile.clientProfileModel.notes);
         }
-        if (profile.profileModel.pets) {
-            document.getElementById('pets').setAttribute('placeholder',profile.profileModel.pets);
+        if (profile.clientProfileModel.pets) {
+            document.getElementById('pets').setAttribute('placeholder',profile.clientProfileModel.pets);
         }
         document.getElementById("loading").remove();
     }
@@ -78,7 +78,7 @@ class CreateProfile extends BindingClass {
         const pets = document.getElementById('pets').value || document.getElementById('pets').getAttribute('placeholder');
         console.log(name, phone, address, notes, pets);
         let profile;
-        if(document.getElementById('welcome').innerText == "Welcome! First Lets Make Your Profile!"){
+        if(document.getElementById('welcome').innerText == "Create a client profile."){
             profile = await this.client.createClientProfile(name, phone, address, notes, pets, (error) => {
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
             });
@@ -90,11 +90,11 @@ class CreateProfile extends BindingClass {
         
 
         this.dataStore.set('profile', profile);
-        document.getElementById('name').innerText = name || profile.profileModel.name;
-        document.getElementById('phone').innerText = phone || profile.profileModel.phone;
-        document.getElementById('address').innerText = address || profile.profileModel.address;
-        document.getElementById('notes').innerText = notes || profile.profileModel.notes;
-        document.getElementById('pets').innerText = pets ||profile.profileModel.pets;
+        document.getElementById('name').innerText = name || profile.clientProfileModel.name;
+        document.getElementById('phone').innerText = phone || profile.clientProfileModel.phone;
+        document.getElementById('address').innerText = address || profile.clientProfileModel.address;
+        document.getElementById('notes').innerText = notes || profile.clientProfileModel.notes;
+        document.getElementById('pets').innerText = pets ||profile.clientProfileModel.pets;
         document.getElementById('loading-modal').remove();
         
     }
