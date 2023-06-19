@@ -65,17 +65,20 @@
 </div>
 <body>
 <h1>All Clients</h1>
-
-<table>
+<table class="table table-bordered table-striped" id="Toptable">
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Phone</th>
-        <th>Address</th>
-        <th>Pets</th>
+        <th scope="col" class="text-center">ID</th>
+        <th scope="col" class="text-center">Name</th>
+        <th scope="col" class="text-center">Phone</th>
+        <th scope="col" class="text-center">Address</th>
+        <th scope="col" class="text-center">Notes</th>
+        <th scope="col" class="text-center">Pets</th>
+
     </tr>
     </thead>
-    <tbody id = "clientProfiles"></tbody>
+    <tbody id="client-profiles-list">
+    </tbody>
 </table>
 
 </body>

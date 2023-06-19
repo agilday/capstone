@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>All Appointments</title>
     <style>
     table {
@@ -59,14 +60,18 @@
 </div>
 <body>
 <h1>All Appointments</h1>
-
-<table>
+<table class="table table-bordered table-striped" id="Toptable">
+    <thead>
     <tr>
-        <th>Client</th>
-        <th>Date and Time</th>
-        <th>Pet</th>
-        <th>Service</th>
+        <th scope="col" class="text-center">Client</th>
+        <th scope="col" class="text-center">Date & Time</th>
+        <th scope="col" class="text-center">Pet</th>
+        <th scope="col" class="text-center">Service</th>
+
     </tr>
+    </thead>
+    <tbody id="appointments-list">
+    </tbody>
 </table>
 
 </body>

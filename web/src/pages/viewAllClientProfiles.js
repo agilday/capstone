@@ -20,7 +20,7 @@ class ViewAllClientProfiles extends BindingClass {
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         const profile = await this.client.getProfile(identity.email);
-        const events = await this.client.getAllEvents();
+        const clientprofiles = await this.client.getAllClientProfiles();
         this.dataStore.set("email", identity.email);
         this.dataStore.set('profile', clientProfile);
         this.displayClientProfiles();
@@ -45,12 +45,12 @@ class ViewAllClientProfiles extends BindingClass {
 
 
     displayClientProfiles(){
-            const events = this.dataStore.get("clientprofiles");
-            console.log(clientProfiles , "from displayClientProfiles");
-            if (clientProfiles == null) {
+            const clientprofiles = this.dataStore.get("clientprofiles");
+            console.log(clientprofiles , "from displayClientProfiles");
+            if (clientprofiles == null) {
                 document.getElementById("client-profiles-list").innerText = "No Client Profiles found";
             }
-            document.getElementById("client-profiles-list").innerHTML = this.getHTMLForSearchResults(events);
+            document.getElementById("client-profiles-list").innerHTML = this.getHTMLForSearchResults(clientprofiles);
     }
 
     getHTMLForSearchResults(searchResults) {
