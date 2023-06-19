@@ -3,13 +3,13 @@ import BindingClass from "../util/bindingClass";
 import Header from '../components/dannaHeader';
 import DataStore from "../util/DataStore";
 
-class ViewAllClientProfiles extends BindingClass {
+class ViewAllAppointments extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectEditClientProfile','redirectAllClientProfiles',
                 'redirectCreateAppointment','redirectAllAppointments', 'redirectServiceMenu', 'logout','setPlaceholders'], this);
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.displayEvents);
+        this.dataStore.addChangeListener(this.displayAppointments);
         this.header = new Header(this.dataStore);
 
     }
