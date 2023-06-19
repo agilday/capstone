@@ -1,4 +1,4 @@
-import dannaClient from '../api/dannaClient';
+import petproClient from '../api/petproClient';
 import BindingClass from "../util/bindingClass";
 import Header from '../components/dannaHeader';
 import DataStore from "../util/DataStore";
@@ -6,8 +6,8 @@ import DataStore from "../util/DataStore";
 class ViewProfile extends BindingClass {
     constructor() {+
         super();
-        this.bindClassMethods(['clientLoaded', 'mount','thisPageRemoveFrom','redirectEditProfile','redirectAllEvents',
-        'redirectCreateEvents','redirectAllFollowing','logout','addEvents','addPersonalEvents','addName','addFollowing'], this);
+        this.bindClassMethods(['clientLoaded', 'mount','thisPageRemoveFrom','redirectEditProfile','redirectAllAppointments',
+        'redirectCreateAppointment','redirectAllClients','logout','Service Menu'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         // console.log("viewprofile constructor");
@@ -48,7 +48,7 @@ class ViewProfile extends BindingClass {
         document.getElementById("allFollowingListText").innerText = "Loading People You Follow...";
         //this.header.addHeaderToPage();
 
-        this.client = new dannaClient();
+        this.client = new petProClient();
         this.clientLoaded();
     }
 

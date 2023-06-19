@@ -1,4 +1,4 @@
-import dannaClient from '../api/dannaClient';
+import petproClient from '../api/petproClient';
 import BindingClass from "../util/bindingClass";
 import Header from '../components/dannaHeader';
 import DataStore from "../util/DataStore";
@@ -9,8 +9,7 @@ class LandingPage extends BindingClass {
         this.bindClassMethods(['clientLoaded', 'mount', 'login'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        // console.log("viewprofile constructor");
-        this.client = new dannaClient();
+        this.client = new petproClient();
         this.clientLoaded();
     }
 

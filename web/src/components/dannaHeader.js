@@ -1,4 +1,4 @@
-import dannaClient from '../api/dannaClient';
+import petproClient from '../api/petproClient';
 import BindingClass from "../util/bindingClass";
 
 /**
@@ -13,7 +13,7 @@ export default class Header extends BindingClass {
         ];
         this.bindClassMethods(methodsToBind, this);
 
-        this.client = new dannaClient();
+        this.client = new petproClient();
     }
 
     /**

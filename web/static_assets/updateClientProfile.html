@@ -2,26 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>All Appointments</title>
-    <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="assets/updateClientProfile.js"></script>
+    <title>Update Client Profile</title>
 
-    th, td {
-      text-align: left;
-      padding: 8px;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-  </style>
 </head>
 <header class="header" id="header">
     <button  type="button" class="btn btn-light-custom" id="logout">Logout</button>
@@ -51,23 +35,51 @@
                         <a href="createClientProfile.html" class="nav-link px-4 py-4 align-middle" id="createClientProfile">
                             <i class="bi bi-pencil-square px-4 nav-custom-icon"></i> <span class="tooltip">Create Client Profile</span> </a>
                     </li>
+                    <li>
+                        <a href="index.html" class="nav-link px-4 py-4 align-middle" id="index">
+                            <i class="bi bi-pencil-square px-4 nav-custom-icon"></i> <span class="tooltip">Home</span> </a>
+                    </li>
                 </ul>
                 <hr>
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p  class="form-label" id="loading-modal">Loading Changes...</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                Please Confirm Your Changes.
+            </div>
+            <div class="modal-body text-center">
+                <div class="mb-3">
+                    <p  class="form-label" id="name">Name</p>
+                </div>
+                <div class="mb-3">
+                    <p  class="text-center" id="phone">Phone</p>
+                </div>
+                <div class="mb-3">
+                    <p  class="text-center" id="address">Address</p>
+                </div>
+                <div class="mb-3">
+                    <p  class="text-center" id="notes">Notes</p>
+                </div>
+                <div class="mb-3">
+                    <p  class="text-center" id="pets">Pets</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark" id="confirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
 <body>
-<h1>All Appointments</h1>
-
-<table>
-    <tr>
-        <th>Client</th>
-        <th>Date and Time</th>
-        <th>Pet</th>
-        <th>Service</th>
-    </tr>
-</table>
 
 </body>
 </html>
