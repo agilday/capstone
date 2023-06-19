@@ -2,9 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Service Menu</title>
+    <script type="text/javascript" src="assets/getServiceMenu.js"></script>
+    <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
+<header class="header" id="header">
+    <button  type="button" class="btn btn-light-custom" id="logout">Logout</button>
+</header>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li>
+                        <a href="allAppointments.html" class="nav-link px-4 py-4 align-middle" id="allAppointments">
+                            <i class="bi bi-calendar3 px-4 nav-custom-icon"></i>  <span class="tooltip">All Appointments</span></a>
+                    </li>
+                    <li>
+                        <a href="createAppointment.html" class="nav-link px-4 py-4 align-middle" id="createAppointment">
+                            <i class="bi bi-pencil-square px-4 nav-custom-icon"></i> <span class="tooltip">Create Appointment</span> </a>
+                    </li>
+                    <li>
+                        <a href="allClientProfiles.html" class="nav-link px-4 py-4 align-middle"id="allClientProfiles">
+                            <i class="bi bi-people px-4 nav-custom-icon"></i><span class="tooltip">All Clients</span></a>
+                    </li>
+                    <li>
+                        <a href="serviceMenu.html" class="nav-link px-4 py-4 align-middle"id="serviceMenu">
+                            <i class="bi bi-door-open px-4 nav-custom-icon"></i><span class="tooltip">Service Menu</span></a>
+                    </li>
+                    <li>
+                        <a href="createClientProfile.html" class="nav-link px-4 py-4 align-middle" id="createClientProfile">
+                            <i class="bi bi-pencil-square px-4 nav-custom-icon"></i> <span class="tooltip">Create Client Profile</span> </a>
+                    </li>
+                    <li>
+                        <a href="createService.html" class="nav-link px-4 py-4 align-middle" id="createService">
+                            <i class="bi bi-pencil-square px-4 nav-custom-icon"></i> <span class="tooltip">Create Service</span> </a>
+                    </li>
+                    <li>
+                        <a href="index.html" class="nav-link px-4 py-4 align-middle" id="index">
+                            <i class="bi bi-pencil-square px-4 nav-custom-icon"></i> <span class="tooltip">Home</span> </a>
+                    </li>
+                </ul>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
 <body>
+<h1>Service Menu</h1>
+
+<ul id="serviceList">
+</ul>
 
 </body>
 </html>

@@ -9,8 +9,7 @@ class LandingPage extends BindingClass {
         this.bindClassMethods(['clientLoaded', 'mount', 'login'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        // console.log("viewprofile constructor");
-        this.client = new petProClient();
+        this.client = new petproClient();
         this.clientLoaded();
     }
 

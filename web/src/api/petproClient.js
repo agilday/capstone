@@ -16,7 +16,7 @@ export default class petproClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getClientProfile', 'getAllClientProfiles', 'getAllAppointments','createAppointment',
-                                'createService','updateClientProfile','updateService','createClientProfile','getServiceMenu', 'isLoggedIn'];
+                                'createService','updateClientProfile','createClientProfile','getServiceMenu', 'isLoggedIn'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
