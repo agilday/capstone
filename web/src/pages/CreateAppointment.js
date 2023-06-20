@@ -32,10 +32,10 @@ class CreateAppointment extends BindingClass {
 
     mount() {
 
-        document.getElementById('allAppointments').addEventListener('click', this.redirectAllAppointments);
-        document.getElementById('serviceMenu').addEventListener('click', this.redirectGetServiceMenu);
-        document.getElementById('allClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
-        document.getElementById('createClientProfile').addEventListener('click', this.redirectCreateClientProfile);
+        document.getElementById('AllAppointments').addEventListener('click', this.redirectAllAppointments);
+        document.getElementById('ServiceMenu').addEventListener('click', this.redirectGetServiceMenu);
+        document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
+        document.getElementById('CreateClientProfile').addEventListener('click', this.redirectCreateClientProfile);
         document.getElementById('logout').addEventListener('click', this.logout);
         document.getElementById('confirm').addEventListener('click', this.confirmRedirect);
         document.getElementById('submitted').addEventListener('click', this.submitFormData);
@@ -75,22 +75,22 @@ class CreateAppointment extends BindingClass {
 
     }
         confirmRedirect() {
-            window.location.href = '/clientProfile.html';
+            window.location.href = '/ClientProfile.html';
         }
         redirectUpdateClientProfile(){
-            window.location.href = '/updateClientProfile.html';
+            window.location.href = '/UpdateClientProfile.html';
         }
         redirectAllClientProfiles(){
-            window.location.href = '/allClientProfiles.html';
+            window.location.href = '/AllClientProfiles.html';
         }
         redirectCreateAppointment(){
-            window.location.href = '/createAppointment.html';
+            window.location.href = '/CreateAppointment.html';
         }
         redirectAllAppointments(){
-            window.location.href = '/allAppointments.html';
+            window.location.href = '/AllAppointments.html';
         }
         redirectServiceMenu(){
-            window.location.href = '/serviceMenu.html';
+            window.location.href = '/ServiceMenu.html';
         }
         logout(){
             this.client.logout();

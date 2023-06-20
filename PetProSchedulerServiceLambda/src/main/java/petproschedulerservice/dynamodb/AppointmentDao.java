@@ -3,6 +3,7 @@ package petproschedulerservice.dynamodb;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import org.apache.logging.log4j.Logger;
 import petproschedulerservice.exceptions.AppointmentNotFoundException;
 import petproschedulerservice.exceptions.ProfileNotFoundException;
 import petproschedulerservice.metrics.MetricsConstants;
@@ -35,8 +36,10 @@ public class AppointmentDao {
      * @return list of Appointments, or empty list if none were found.
      */
     public List<Appointment> getAllAppointments() {
+        System.out.println("hello from getallappointments");
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         List<Appointment> appointmentsList = dynamoDbMapper.scan(Appointment.class, scanExpression);
+        System.out.println(appointmentsList);
         return appointmentsList;
     }
     /**

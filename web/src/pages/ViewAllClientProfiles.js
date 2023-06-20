@@ -109,7 +109,7 @@ class ViewAllClientProfiles extends BindingClass {
     async logout(){
         await this.client.logout();
         if(!this.client.isLoggedIn()){
-            window.location.href ='/landingPage.html';
+            window.location.href ='/LandingPage.html';
         }
 
     }

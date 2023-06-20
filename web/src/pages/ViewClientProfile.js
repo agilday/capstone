@@ -10,7 +10,7 @@ class ViewProfile extends BindingClass {
         'redirectCreateAppointment','redirectAllClientProfiles','logout','Service Menu'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        // console.log("viewprofile constructor");
+
     }
 
     /**
