@@ -22,9 +22,7 @@ class AllAppointments extends BindingClass {
         const profile = await this.client.getClientProfile(identity.email);
         const appointments = await this.client.getAllAppointments();
         this.dataStore.set("email", identity.email);
-        this.dataStore.set('profile', clientProfile);
         this.getAllAppointments();
-        //console.log(events);
 
     }
 
@@ -33,12 +31,12 @@ class AllAppointments extends BindingClass {
      * Add the header to the page and load the petproClient.
      */
     mount() {
-        document.getElementById('allAppointments').addEventListener('click', this.redirectAllAppointments);
-        document.getElementById('serviceMenu').addEventListener('click', this.redirectGetServiceMenu);
-        document.getElementById('allClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
-        document.getElementById('createClientProfile').addEventListener('click', this.redirectCreateClientProfile);
-        document.getElementById('updateClientProfile').addEventListener('click', this.redirectUpdateClientProfile);
-        document.getElementById('createAppointment').addEventListener('click', this.redirectCreateAppointment);
+        document.getElementById('AllAppointments').addEventListener('click', this.redirectAllAppointments);
+        document.getElementById('ServiceMenu').addEventListener('click', this.redirectGetServiceMenu);
+        document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
+        document.getElementById('CreateClientProfile').addEventListener('click', this.redirectCreateClientProfile);
+        document.getElementById('UpdateClientProfile').addEventListener('click', this.redirectUpdateClientProfile);
+        document.getElementById('CreateAppointment').addEventListener('click', this.redirectCreateAppointment);
         document.getElementById('logout').addEventListener('click', this.logout);
         this.client = new petproClient();
         this.clientLoaded();
@@ -82,37 +80,29 @@ class AllAppointments extends BindingClass {
         }
 
 
-    async addName(){
-        const client = this.dataStore.get("client");
-        if (client == null) {
-            document.getElementById("client").innerText = "Client can not be null";
-        }
-        document.getElementById("client").innerText = client;
-    }
-
 
     redirectUpdateClientProfile(){
-        window.location.href = '/updateClientProfile.html';
+        window.location.href = '/UpdateClientProfile.html';
     }
     redirectAllClientProfiles(){
-        window.location.href = '/allClientProfiles.html';
+        window.location.href = '/AllClientProfiles.html';
     }
     redirectCreateAppointment(){
-        window.location.href = '/createAppointment.html';
+        window.location.href = '/CreateAppointment.html';
     }
     redirectCreateClientProfile(){
-        window.location.href = '/createClientProfile.html'
+        window.location.href = '/CreateClientProfile.html'
     }
     redirectAllAppointments(){
-        window.location.href = '/allAppointments.html';
+        window.location.href = '/AllAppointments.html';
     }
     redirectGetServiceMenu(){
-        window.location.href = '/serviceMenu.html';
+        window.location.href = '/ServiceMenu.html';
     }
     async logout(){
         await this.client.logout();
         if(!this.client.isLoggedIn()){
-            window.location.href ='/landingPage.html';
+            window.location.href ='/LandingPage.html';
         }
 
     }

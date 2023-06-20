@@ -3,7 +3,7 @@ import BindingClass from "../util/bindingClass";
 import Authenticator from "./authenticator";
 
 /**
- * Client to call the DannaAPIService.
+ * Client to call the PetProAPIService.
  *
  * This could be a great place to explore Mixins. Currently the client is being loaded multiple times on each page,
  * which we could avoid using inheritance or Mixins.
@@ -15,7 +15,7 @@ export default class petproClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getClientProfile', 'getAllClientProfiles', 'getAllAppointments','createAppointment',
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getTokenOrThrow', 'getClientProfile', 'getAllClientProfiles', 'getAllAppointments','createAppointment',
                                 'createService','updateClientProfile','createClientProfile','getServiceMenu', 'isLoggedIn'];
         this.bindClassMethods(methodsToBind, this);
 
@@ -148,7 +148,7 @@ export default class petproClient extends BindingClass {
     async createClientProfile(name, phone, address, notes, pets, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create a profile.");
-            const response = await this.axiosClient.post(`clientprofiles/create`, {
+            const response = await this.axiosClient.post(`clientprofiles`, {
                 name: name,
                 phone: phone,
                 address: address,
@@ -211,7 +211,7 @@ export default class petproClient extends BindingClass {
     async createAppointment(client, dateTime, pet, service, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create an event.");
-            const response = await this.axiosClient.post(`appointments/create`, {
+            const response = await this.axiosClient.post(`appointments/`, {
                 client: client,
                 dateTime: dateTime,
                 pet: pet,

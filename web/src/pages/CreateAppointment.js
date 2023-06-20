@@ -3,7 +3,7 @@ import BindingClass from "../util/bindingClass";
 import Header from '../components/header';
 import DataStore from "../util/DataStore";
 
-class createAppointment extends BindingClass {
+class CreateAppointment extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectEditClientProfile','redirectAllClientProfiles',

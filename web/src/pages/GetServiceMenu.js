@@ -1,13 +1,13 @@
 import petproClient from '../api/petproClient';
 import BindingClass from "../util/bindingClass";
-import Header from '../components/dannaHeader';
+import Header from '../components/header';
 import DataStore from "../util/DataStore";
 
-class getServiceMenu extends BindingClass {
+class GetServiceMenu extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectEditClientProfile','redirectAllClientProfiles',
-                'redirectCreateAppointment','redirectAllAppointments', 'redirectServiceMenu', 'logout','setPlaceholders'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'displayServices', 'confirmRedirect','submitFormData', 'redirectUpdateClientProfile','redirectAllClientProfiles',
+                'redirectCreateAppointment', 'redirectCreateClientProfile','redirectAllAppointments', 'redirectServiceMenu', 'logout'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.displayServices);
         this.header = new Header(this.dataStore);
@@ -32,12 +32,12 @@ class getServiceMenu extends BindingClass {
      * Add the header to the page and load the petproClient.
      */
     mount() {
-        document.getElementById('allAppointments').addEventListener('click', this.redirectAllAppointments);
-        document.getElementById('serviceMenu').addEventListener('click', this.redirectGetServiceMenu);
-        document.getElementById('allClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
-        document.getElementById('createClientProfile').addEventListener('click', this.redirectCreateClientProfile);
+        document.getElementById('AllAppointments').addEventListener('click', this.redirectAllAppointments);
+        document.getElementById('CreateAppointment').addEventListener('click', this.redirectCreateAppointment);
+        document.getElementById('ServiceMenu').addEventListener('click', this.redirectGetServiceMenu);
+        document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
+        document.getElementById('CreateClientProfile').addEventListener('click', this.redirectCreateClientProfile);
         document.getElementById('logout').addEventListener('click', this.logout);
-        document.getElementById('names').innerText = "Loading ...";
         this.client = new petproClient();
         this.clientLoaded();
     }
@@ -75,24 +75,27 @@ class getServiceMenu extends BindingClass {
 
 
     redirectUpdateClientProfile(){
-        window.location.href = '/updateClientProfile.html';
+        window.location.href = '/UpdateClientProfile.html';
     }
     redirectAllClientProfiles(){
-        window.location.href = '/allClientProfiles.html';
+        window.location.href = '/AllClientProfiles.html';
     }
     redirectCreateAppointment(){
-        window.location.href = '/createAppointment.html';
+        window.location.href = '/CreateAppointment.html';
+    }
+    redirectCreateClientProfile(){
+        window.location.href = '/CreateClientProfile.html';
     }
     redirectAllAppointments(){
-        window.location.href = '/allAppointments.html';
+        window.location.href = '/AllAppointments.html';
     }
-    redirectServiceMenu(){
-        window.location.href = '/serviceMenu.html';
+    redirectGetServiceMenu(){
+        window.location.href = '/ServiceMenu.html';
     }
     async logout(){
         await this.client.logout();
         if(!this.client.isLoggedIn()){
-            window.location.href ='/landingPage.html';
+            window.location.href ='/LandingPage.html';
         }
 
     }
@@ -102,7 +105,7 @@ class getServiceMenu extends BindingClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const allServices = new allServices();
+    const allServices = new GetServiceMenu();
     allServices.mount();
 };
 

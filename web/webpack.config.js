@@ -23,14 +23,14 @@ module.exports = {
     usedExports: true
   },
   entry: {
-    createAppointment: path.resolve(__dirname, 'src', 'pages', 'createAppointment.js'),
-    createClientProfile: path.resolve(__dirname, 'src', 'pages', 'createClientProfile.js'),
-    createService: path.resolve(__dirname, 'src', 'pages', 'createService.js'),
-    allAppointments: path.resolve(__dirname, 'src', 'pages', 'allAppointments.js'),
-    viewAllClientProfiles: path.resolve(__dirname, 'src', 'pages', 'viewAllClientProfiles.js'),
-    viewClientProfile: path.resolve(__dirname, 'src', 'pages', 'viewClientProfile.js'),
-    getServiceMenu: path.resolve(__dirname, 'src', 'pages', 'getServiceMenu.js'),
-    landingPage: path.resolve(__dirname, 'src', 'pages', 'landingPage.js'),
+    createAppointment: path.resolve(__dirname, 'src', 'pages', 'CreateAppointment.js'),
+    createClientProfile: path.resolve(__dirname, 'src', 'pages', 'CreateClientProfile.js'),
+    createService: path.resolve(__dirname, 'src', 'pages', 'CreateService.js'),
+    allAppointments: path.resolve(__dirname, 'src', 'pages', 'AllAppointments.js'),
+    viewAllClientProfiles: path.resolve(__dirname, 'src', 'pages', 'ViewAllClientProfiles.js'),
+    viewClientProfile: path.resolve(__dirname, 'src', 'pages', 'ViewClientProfile.js'),
+    getServiceMenu: path.resolve(__dirname, 'src', 'pages', 'GetServiceMenu.js'),
+    landingPage: path.resolve(__dirname, 'src', 'pages', 'LandingPage.js'),
     test: path.resolve(__dirname, 'src', 'pages', 'test.js'),
   },
   output: {

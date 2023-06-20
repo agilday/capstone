@@ -1,13 +1,13 @@
 import petproClient from '../api/petproClient';
 import BindingClass from "../util/bindingClass";
-import Header from '../components/dannaHeader';
+import Header from '../components/header';
 import DataStore from "../util/DataStore";
 
 class createService extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectEditClientProfile','redirectAllClientProfiles',
-        'redirectCreateAppointment','redirectAllAppointments', 'redirectServiceMenu', 'logout','setPlaceholders'], this);
+        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectUpdateClientProfile','redirectAllClientProfiles',
+        'redirectCreateAppointment','redirectAllAppointments', 'redirectCreateClientProfile', 'redirectServiceMenu', 'setPlaceholders', 'logout'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
     }
@@ -19,7 +19,7 @@ class createService extends BindingClass {
         const profile = await this.client.getProfile(identity.email);
         this.dataStore.set('profile', profile);
         if(profile == null) {
-            document.getElementById("welcome").innerText = "Please log in or sign up to create Appointments."
+            document.getElementById("welcome").innerText = "Please log in or sign up to create Services."
         }
         document.getElementById("loading").innerText = "Loading...";
         document.getElementById("title").setAttribute('placeholder', 'Title');
@@ -27,13 +27,25 @@ class createService extends BindingClass {
         this.setPlaceholders();
 
     }
+    async setPlaceholders(){
+        const service = this.dataStore.get("service");
+        console.log("this one",service)
+        if (service == null) {
+            return;
+        }
+        if (service.serviceModel.title && service.serviceModel.description) {
+            document.getElementById("title").innerText =  service.serviceModel.title
+            document.getElementById('description').setAttribute('placeholder', service.serviceModel.description);
+        }
+        document.getElementById("loading").remove();
+    }
 
     mount() {
 
-        document.getElementById('allAppointments').addEventListener('click', this.redirectAllAppointments);
-        document.getElementById('serviceMenu').addEventListener('click', this.redirectGetServiceMenu);
-        document.getElementById('allClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
-        document.getElementById('createClientProfile').addEventListener('click', this.redirectCreateClientProfile);
+        document.getElementById('AllAppointments').addEventListener('click', this.redirectAllAppointments);
+        document.getElementById('ServiceMenu').addEventListener('click', this.redirectGetServiceMenu);
+        document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
+        document.getElementById('CreateClientProfile').addEventListener('click', this.redirectCreateClientProfile);
         document.getElementById('logout').addEventListener('click', this.logout);
         document.getElementById('confirm').addEventListener('click', this.confirmRedirect);
         document.getElementById('submitted').addEventListener('click', this.submitFormData);
@@ -69,22 +81,25 @@ class createService extends BindingClass {
 
     }
         confirmRedirect() {
-            window.location.href = '/profile.html';
+            window.location.href = '/ServiceMenu.html';
         }
         redirectUpdateClientProfile(){
-            window.location.href = '/updateClientProfile.html';
+            window.location.href = '/UpdateClientProfile.html';
         }
         redirectAllClientProfiles(){
-            window.location.href = '/allClientProfiles.html';
+            window.location.href = '/AllClientProfiles.html';
         }
         redirectCreateAppointment(){
-            window.location.href = '/createAppointment.html';
+            window.location.href = '/CreateAppointment.html';
+        }
+        redirectCreateClientProfile(){
+            window.location.href = '/CreateClientProfile.html';
         }
         redirectAllAppointments(){
-            window.location.href = '/allAppointments.html';
+            window.location.href = '/AllAppointments.html';
         }
         redirectServiceMenu(){
-            window.location.href = '/serviceMenu.html';
+            window.location.href = '/ServiceMenu.html';
         }
         logout(){
             this.client.logout();

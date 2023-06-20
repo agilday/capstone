@@ -1,6 +1,6 @@
 import petproClient from '../api/petproClient';
 import BindingClass from "../util/bindingClass";
-import Header from '../components/dannaHeader';
+import Header from '../components/header';
 import DataStore from "../util/DataStore";
 
 class LandingPage extends BindingClass {
@@ -19,9 +19,9 @@ class LandingPage extends BindingClass {
         const loggedIn = await this.client.isLoggedIn();
         console.log("HERE", loggedIn);
         if(loggedIn){
-            window.location.href= "/allAppointments.html";
+            window.location.href= "/AllAppointments.html";
         }
-        document.getElementById('logout').addEventListener('click', this.login);
+        document.getElementById('login').addEventListener('click', this.login);
         document.getElementById('logout-2').addEventListener('click', this.login);
         document.getElementById('sign-up').addEventListener('click', this.login);
 

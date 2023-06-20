@@ -1,9 +1,9 @@
 import petproClient from '../api/petproClient';
 import BindingClass from "../util/bindingClass";
-import Header from '../components/dannaHeader';
+import Header from '../components/header';
 import DataStore from "../util/DataStore";
 
-class CreateProfile extends BindingClass {
+class CreateClientProfile extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectUpdateClientProfile','redirectAllClientProfiles',
@@ -21,7 +21,6 @@ class CreateProfile extends BindingClass {
         if(profile == null) {
             document.getElementById("welcome").innerText = "Create a client profile."
         }
-        document.getElementById("loading").innerText = "Loading...";
         document.getElementById("name").setAttribute('placeholder', 'Name');
         document.getElementById("phone").setAttribute('placeholder', 'Phone');
         document.getElementById("address").setAttribute('placeholder', 'Address');
@@ -33,13 +32,13 @@ class CreateProfile extends BindingClass {
 
     mount() {
   
-        document.getElementById('allAppointments').addEventListener('click', this.redirectAllAppointments);
-        document.getElementById('serviceMenu').addEventListener('click', this.redirectServiceMenu);
-        document.getElementById('allClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
-        document.getElementById('createAppointment').addEventListener('click', this.redirectCreateAppointment);
+        document.getElementById('AllAppointments').addEventListener('click', this.redirectAllAppointments);
+        document.getElementById('ServiceMenu').addEventListener('click', this.redirectServiceMenu);
+        document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
+        document.getElementById('CreateAppointment').addEventListener('click', this.redirectCreateAppointment);
         document.getElementById('logout').addEventListener('click', this.logout);
         document.getElementById('confirm').addEventListener('click', this.confirmRedirect);
-        document.getElementById('submitted').addEventListener('click', this.submitFormData);
+        document.getElementById('submit').addEventListener('click', this.submitFormData);
 
       
 
@@ -98,22 +97,22 @@ class CreateProfile extends BindingClass {
         
     }
     confirmRedirect() {
-        window.location.href = '/profile.html';
+        window.location.href = '/ClientProfile.html';
     }
     redirectUpdateClientProfile(){
-        window.location.href = '/updateClientProfile.html';
+        window.location.href = '/UpdateClientProfile.html';
     }
     redirectAllClientProfiles(){
-        window.location.href = '/allClientProfiles.html';
+        window.location.href = '/AllClientProfiles.html';
     }
     redirectCreateAppointment(){
-        window.location.href = '/createAppointment.html';
+        window.location.href = '/CreateAppointment.html';
     }
     redirectAllAppointments(){
-        window.location.href = '/allAppointments.html';
+        window.location.href = '/AllAppointments.html';
     }
     redirectServiceMenu(){
-        window.location.href = '/serviceMenu.html';
+        window.location.href = '/ServiceMenu.html';
     }
     logout(){
         this.client.logout();
