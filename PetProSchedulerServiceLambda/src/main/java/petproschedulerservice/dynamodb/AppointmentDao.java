@@ -4,6 +4,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import petproschedulerservice.exceptions.AppointmentNotFoundException;
+import petproschedulerservice.exceptions.ProfileNotFoundException;
 import petproschedulerservice.metrics.MetricsConstants;
 import petproschedulerservice.metrics.MetricsPublisher;
 
@@ -37,6 +38,20 @@ public class AppointmentDao {
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         List<Appointment> appointmentsList = dynamoDbMapper.scan(Appointment.class, scanExpression);
         return appointmentsList;
+    }
+    /**
+     * Returns the {@link Appointment} corresponding to the specified id.
+     *
+     * @param id the Appointment ID
+     * @return the stored Appointment, or null if none was found.
+     */
+    public Appointment getAppointment(String id) {
+        Appointment appointment = this.dynamoDbMapper.load(Appointment.class, id);
+
+        if (appointment == null) {
+            throw new AppointmentNotFoundException("Could not find Appointment with id " + id);
+        }
+        return appointment;
     }
 
     /**

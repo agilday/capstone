@@ -3,7 +3,7 @@ package petproschedulerservice.activity.requests;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
-@JsonDeserialize(builder = GetAllAppointmentsRequest.Builder.class)
+@JsonDeserialize(builder = DeleteAppointmentRequest.Builder.class)
 public class DeleteAppointmentRequest {
 
     private final String id;
