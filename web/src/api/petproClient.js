@@ -148,7 +148,7 @@ export default class petproClient extends BindingClass {
     async createClientProfile(name, phone, address, notes, pets, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create a profile.");
-            const response = await this.axiosClient.post(`clientprofiles`, {
+            const response = await this.axiosClient.post(`clientprofiles/`, {
                 name: name,
                 phone: phone,
                 address: address,
@@ -237,7 +237,7 @@ export default class petproClient extends BindingClass {
     async getAllClientProfiles(errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can update events.");
-            const response = await this.axiosClient.put(`clientprofiles/`, {
+            const response = await this.axiosClient.get(`clientprofiles/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -257,7 +257,7 @@ export default class petproClient extends BindingClass {
     async createService(service, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can add services to the menu.");
-            const response = await this.axiosClient.put(`services/`, {
+            const response = await this.axiosClient.post(`services/`, {
                 service: service
             }, {
                 headers: {

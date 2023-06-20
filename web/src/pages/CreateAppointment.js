@@ -13,19 +13,14 @@ class CreateAppointment extends BindingClass {
     }
 
     async clientLoaded() {
-        // const urlParams = new URLSearchParams(window.location.search);
         const identity = await this.client.getIdentity();
-        this.dataStore.set('id', identity.email);
+        this.dataStore.set("email", identity.email);
         const appointment = await this.client.createAppointment(client, dateTime, pet, service);
         this.dataStore.set('appointment', appointment);
-        if(appointment == null) {
-            document.getElementById("welcome").innerText = "Please log in or sign up to create Appointments."
-        }
         document.getElementById("client").setAttribute('placeholder', 'Client');
         document.getElementById("dateTime").setAttribute('placeholder', 'Date/Time');
         document.getElementById("pet").setAttribute('placeholder', 'Pet');
         document.getElementById("service").setAttribute('placeholder', 'Service');
-        this.setPlaceholders();
 
     }
 
@@ -51,26 +46,29 @@ class CreateAppointment extends BindingClass {
         const pet = document.getElementById('pet').value ||  document.getElementById('pet').getAttribute('placeholder');
         const service = document.getElementById('service').value ||  document.getElementById('service').getAttribute('placeholder');
         console.log(client, dateTime, pet, service);
-        let profile;
-        if(document.getElementById('welcome').innerText == "Please log in or sign up to create Appointments."){
-            appointment = await this.client.createAppointment(client, dateTime, pet, service, (error) => {
+        try {
+            // Check that the user is authenticated
+            const user = await this.client.getIdentity();
+            if (!user) {
+                // If not authenticated, show error message
+                throw new Error('Only authenticated users can create an appointment.');
+            }
+            const apptCreator = user.email;
+            const event = await this.client.createAppointment(client, dateTime, pet, service,
+                (error) => {
+                    createButton.innerText = origButtonText;
+                    errorMessageDisplay.innerText = `Error: ${error.message}`;
+                    errorMessageDisplay.classList.remove('hidden');
+                });
+                console.log(client, dateTime, pet, service);
+            window.location.href ='/AllAppointments.html';
+            } catch (error) {
+                createButton.innerText = origButtonText;
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
-            });
-        } else {
-            appointment = await this.client.updateAppointment(this.dataStore.get('id'), client, dateTime, pet, service, (error) => {
-                errorMessageDisplay.innerText = `Error: ${error.message}`;
-            });
-        }
-
-
-        this.dataStore.set('appointment', appointment);
-        document.getElementById('client').innerText = client || appointment.appointmentModel.client;
-        document.getElementById('dateTime').innerText = dateTime || appointment.appointmentModel.dateTime;
-        document.getElementById('pet').innerText = pet || appointment.appointmentModel.pet;
-        document.getElementById('service').innerText = service || appointment.appointmentModel.service;
-        document.getElementById('loading-modal').remove();
-
+                errorMessageDisplay.classList.remove('hidden');
+            }
     }
+
         confirmRedirect() {
             window.location.href = '/ClientProfile.html';
         }
@@ -89,7 +87,7 @@ class CreateAppointment extends BindingClass {
         redirectServiceMenu(){
             window.location.href = '/ServiceMenu.html';
         }
-        logout(){
+        async logout(){
             this.client.logout();
         }
 }

@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 class ViewProfile extends BindingClass {
     constructor() {+
         super();
-        this.bindClassMethods(['clientLoaded', 'mount','thisPageRemoveFrom','redirectUpdateClientProfile','redirectAllAppointments',
+        this.bindClassMethods(['clientLoaded', 'mount', 'redirectUpdateClientProfile','redirectAllAppointments',
         'redirectCreateAppointment','redirectAllClientProfiles','logout','Service Menu'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
@@ -44,11 +44,6 @@ class ViewProfile extends BindingClass {
 
     this.client = new petproClient();
     this.clientLoaded();
-    }
-
-
-    async thisPageRemoveFrom(result){
-        this.client.removeEventFromProfile(result);
     }
 
 

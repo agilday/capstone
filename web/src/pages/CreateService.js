@@ -13,7 +13,6 @@ class CreateService extends BindingClass {
     }
 
     async clientLoaded() {
-        // const urlParams = new URLSearchParams(window.location.search);
         const identity = await this.client.getIdentity();
         this.dataStore.set('id', identity.email);
         const service = await this.client.createService(service);

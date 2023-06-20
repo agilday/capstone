@@ -1,10 +1,12 @@
 package petproschedulerservice.activity.requests;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import petproschedulerservice.dynamodb.Pet;
 
 import java.util.List;
 
+@JsonDeserialize(builder = CreateClientProfileRequest.Builder.class)
 public class CreateClientProfileRequest {
     private final String id;
     private final String name;
