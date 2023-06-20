@@ -237,7 +237,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /profiles/{id}
+            Path: /clientprofiles/{id}
             Method: get
 
   UpdateClientProfileLambda:
@@ -257,7 +257,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /profiles/{id}
+            Path: /clientprofiles/{id}
             Method: put
 
   CreateClientProfileLambda:
@@ -277,7 +277,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /profiles/create
+            Path: /clientprofiles
             Method: post
 
 #  DeleteProfileLambda:
@@ -317,7 +317,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /profiles
+            Path: /clientprofiles
             Method: get
 
   CreateAppointmentLambda:
@@ -337,28 +337,28 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /appointments/create
+            Path: /appointments
             Method: post
-#
-#  DeleteAppointmentLambda:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      Role: !GetAtt AccessRole.Arn
-#      CodeUri: PetProSchedulerServiceLambda
-#      Handler: com.nashss.se.petproscheduler.lambda.DeleteAppointmentLambda::handleRequest
-#      Runtime: java11
-#      Architectures:
-#        - x86_64
-#      MemorySize: 512
-#      Environment:
-#        Variables:
-#          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-#      Events:
-#        MusicPlaylistService:
-#          Type: Api
-#          Properties:
-#            Path: /appointments/{id}
-#            Method: delete
+
+  DeleteAppointmentLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: com.nashss.se.petproscheduler.lambda.DeleteAppointmentLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /appointments/{id}
+            Method: delete
 
   GetAllAppointmentsLambda:
     Type: AWS::Serverless::Function
@@ -377,7 +377,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /appointments/
+            Path: /appointments
             Method: get
 
   UpdateServiceLambda:
@@ -397,7 +397,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /services/
+            Path: /services
             Method: put
 
   GetServiceMenuLambda:
@@ -417,7 +417,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /services/
+            Path: /services
             Method: get
 
 

@@ -122,7 +122,7 @@ export default class petproClient extends BindingClass {
     async getServiceMenu(errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can get service menu.");
-            const response = await this.axiosClient.get(`servicemenu/`, {
+            const response = await this.axiosClient.get(`services/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -257,7 +257,7 @@ export default class petproClient extends BindingClass {
     async createService(service, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can add services to the menu.");
-            const response = await this.axiosClient.put(`services/addServiceToServiceMenu`, {
+            const response = await this.axiosClient.put(`services/`, {
                 service: service
             }, {
                 headers: {

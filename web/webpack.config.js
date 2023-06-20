@@ -31,7 +31,7 @@ module.exports = {
     viewClientProfile: path.resolve(__dirname, 'src', 'pages', 'ViewClientProfile.js'),
     getServiceMenu: path.resolve(__dirname, 'src', 'pages', 'GetServiceMenu.js'),
     landingPage: path.resolve(__dirname, 'src', 'pages', 'LandingPage.js'),
-    test: path.resolve(__dirname, 'src', 'pages', 'test.js'),
+    test: path.resolve(__dirname, 'src', 'pages', 'test.js')
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

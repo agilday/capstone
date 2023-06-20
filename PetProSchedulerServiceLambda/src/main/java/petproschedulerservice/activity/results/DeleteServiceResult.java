@@ -28,7 +28,7 @@ public class DeleteServiceResult {
     @Override
     public String toString() {
         return "DeleteServiceResult{" +
-                "appointmentModel=" + serviceModel +
+                "serviceModel=" + serviceModel +
                 '}';
     }
 

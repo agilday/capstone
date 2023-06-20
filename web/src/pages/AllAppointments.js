@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 class AllAppointments extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'redirectUpdateClientProfile','redirectAllClientProfiles', 'redirectCreateClientProfile',
+        this.bindClassMethods(['clientLoaded', 'mount', 'getAllAppointments', 'redirectUpdateClientProfile','redirectAllClientProfiles', 'redirectCreateClientProfile',
                 'redirectCreateAppointment','redirectAllAppointments', 'redirectGetServiceMenu', 'logout'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.getAllAppointments);

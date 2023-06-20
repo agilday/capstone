@@ -21,7 +21,7 @@ class LandingPage extends BindingClass {
         if(loggedIn){
             window.location.href= "/AllAppointments.html";
         }
-        document.getElementById('login').addEventListener('click', this.login);
+        document.getElementById('login').addEventListener('click', login());
         document.getElementById('logout-2').addEventListener('click', this.login);
         document.getElementById('sign-up').addEventListener('click', this.login);
 
