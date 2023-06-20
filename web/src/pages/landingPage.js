@@ -19,7 +19,7 @@ class LandingPage extends BindingClass {
         const loggedIn = await this.client.isLoggedIn();
         console.log("HERE", loggedIn);
         if(loggedIn){
-            window.location.href= "/profile.html";
+            window.location.href= "/allAppointments.html";
         }
         document.getElementById('logout').addEventListener('click', this.login);
         document.getElementById('logout-2').addEventListener('click', this.login);

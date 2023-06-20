@@ -61,6 +61,17 @@ public class ServiceDao {
     }
 
     /**
+     * Deletes (creates or updates) the given service.
+     *
+     * @param service The service to delete
+     * @return The Service object that was deleted
+     */
+    public void deleteService(Service service) {
+        this.dynamoDbMapper.delete(service);
+    }
+
+
+    /**
      * Perform a search (via a "scan") of the services table for services matching the given criteria.
      *
      * Both "title" and "tags" attributes are searched.

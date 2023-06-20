@@ -28,7 +28,6 @@ class getServiceMenu extends BindingClass {
 
     }
 
-
     /**
      * Add the header to the page and load the petproClient.
      */

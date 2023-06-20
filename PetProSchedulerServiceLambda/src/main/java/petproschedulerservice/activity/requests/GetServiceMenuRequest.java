@@ -1,7 +1,9 @@
 package petproschedulerservice.activity.requests;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
+@JsonDeserialize(builder = GetClientProfileRequest.Builder.class)
 public class GetServiceMenuRequest {
 
     public GetServiceMenuRequest() {

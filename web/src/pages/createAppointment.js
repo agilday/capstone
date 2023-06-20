@@ -1,6 +1,6 @@
 import petproClient from '../api/petproClient';
 import BindingClass from "../util/bindingClass";
-import Header from '../components/dannaHeader';
+import Header from '../components/header';
 import DataStore from "../util/DataStore";
 
 class createAppointment extends BindingClass {
@@ -56,7 +56,7 @@ class createAppointment extends BindingClass {
         console.log(client, dateTime, pet, service);
         let profile;
         if(document.getElementById('welcome').innerText == "Please log in or sign up to create Appointments."){
-            appointment = await this.client.createAppointment(client, dateTime, pet, service (error) => {
+            appointment = await this.client.createAppointment(client, dateTime, pet, service, (error) => {
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
             });
         } else {
@@ -75,7 +75,7 @@ class createAppointment extends BindingClass {
 
     }
         confirmRedirect() {
-            window.location.href = '/profile.html';
+            window.location.href = '/clientProfile.html';
         }
         redirectUpdateClientProfile(){
             window.location.href = '/updateClientProfile.html';

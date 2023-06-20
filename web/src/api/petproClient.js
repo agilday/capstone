@@ -26,7 +26,6 @@ export default class petproClient extends BindingClass {
         this.axiosClient = axios;
         this.clientLoaded();
     }
-
     /**
      * Run any functions that are supposed to be called once the client has loaded successfully.
      */
@@ -103,7 +102,7 @@ export default class petproClient extends BindingClass {
     async getAllAppointments(errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can get all appointments.");
-            const response = await this.axiosClient.get(`appointments/all/`, {
+            const response = await this.axiosClient.get(`appointments/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -255,7 +254,7 @@ export default class petproClient extends BindingClass {
      * @param {*} errorCallback 
      * @returns 
      */
-    async addServiceToServiceMenu(service, errorCallback) {
+    async createService(service, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can add services to the menu.");
             const response = await this.axiosClient.put(`services/addServiceToServiceMenu`, {

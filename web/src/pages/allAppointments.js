@@ -1,15 +1,15 @@
 import petproClient from '../api/petproClient';
 import BindingClass from "../util/bindingClass";
-import Header from '../components/dannaHeader';
+import Header from '../components/header';
 import DataStore from "../util/DataStore";
 
-class ViewAllAppointments extends BindingClass {
+class AllAppointments extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectEditClientProfile','redirectAllClientProfiles',
-                'redirectCreateAppointment','redirectAllAppointments', 'redirectServiceMenu', 'logout','setPlaceholders'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'redirectUpdateClientProfile','redirectAllClientProfiles', 'redirectCreateClientProfile',
+                'redirectCreateAppointment','redirectAllAppointments', 'redirectGetServiceMenu', 'logout'], this);
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.displayAppointments);
+        this.dataStore.addChangeListener(this.getAllAppointments);
         this.header = new Header(this.dataStore);
 
     }
@@ -19,11 +19,11 @@ class ViewAllAppointments extends BindingClass {
      */
     async clientLoaded() {
         const identity = await this.client.getIdentity();
-        const profile = await this.client.getProfile(identity.email);
+        const profile = await this.client.getClientProfile(identity.email);
         const appointments = await this.client.getAllAppointments();
         this.dataStore.set("email", identity.email);
         this.dataStore.set('profile', clientProfile);
-        this.displayAppointments();
+        this.getAllAppointments();
         //console.log(events);
 
     }
@@ -37,16 +37,17 @@ class ViewAllAppointments extends BindingClass {
         document.getElementById('serviceMenu').addEventListener('click', this.redirectGetServiceMenu);
         document.getElementById('allClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
         document.getElementById('createClientProfile').addEventListener('click', this.redirectCreateClientProfile);
+        document.getElementById('updateClientProfile').addEventListener('click', this.redirectUpdateClientProfile);
+        document.getElementById('createAppointment').addEventListener('click', this.redirectCreateAppointment);
         document.getElementById('logout').addEventListener('click', this.logout);
-        document.getElementById('names').innerText = "Loading ...";
         this.client = new petproClient();
         this.clientLoaded();
     }
 
 
-    displayAppointments(){
+    getAllAppointments(){
             const appointments = this.dataStore.get("appointments");
-            console.log(appointments , "from displayAppointments");
+            console.log(appointments , "from getAllAppointments");
             if (appointments == null) {
                 document.getElementById("appointments-list").innerText = "No Appointments found";
             }
@@ -83,7 +84,7 @@ class ViewAllAppointments extends BindingClass {
 
     async addName(){
         const client = this.dataStore.get("client");
-        if (name == null) {
+        if (client == null) {
             document.getElementById("client").innerText = "Client can not be null";
         }
         document.getElementById("client").innerText = client;
@@ -99,10 +100,13 @@ class ViewAllAppointments extends BindingClass {
     redirectCreateAppointment(){
         window.location.href = '/createAppointment.html';
     }
+    redirectCreateClientProfile(){
+        window.location.href = '/createClientProfile.html'
+    }
     redirectAllAppointments(){
         window.location.href = '/allAppointments.html';
     }
-    redirectServiceMenu(){
+    redirectGetServiceMenu(){
         window.location.href = '/serviceMenu.html';
     }
     async logout(){
@@ -118,7 +122,7 @@ class ViewAllAppointments extends BindingClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const allAppointments = new allAppointments();
+    const allAppointments = new AllAppointments();
     allAppointments.mount();
 };
 
