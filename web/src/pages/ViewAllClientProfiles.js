@@ -6,10 +6,10 @@ import DataStore from "../util/DataStore";
 class ViewAllClientProfiles extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectAllClientProfiles',
-                'redirectCreateAppointment','redirectAllAppointments', 'redirectServiceMenu', 'logout','setPlaceholders'], this);
+        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect', 'redirectCreateClientProfile', 'submitFormData', 'redirectAllClientProfiles',
+                'redirectCreateAppointment','redirectAllAppointments', 'redirectUpdateClientProfile', 'redirectServiceMenu', 'logout','setPlaceholders'], this);
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.displayEvents);
+        this.dataStore.addChangeListener(this.getAllClientProfiles);
         this.header = new Header(this.dataStore);
 
     }
@@ -19,10 +19,9 @@ class ViewAllClientProfiles extends BindingClass {
      */
     async clientLoaded() {
         const identity = await this.client.getIdentity();
-        const profile = await this.client.getProfile(identity.email);
-        const clientprofiles = await this.client.getAllClientProfiles();
+        const profiles = await this.client.getAllClientProfiles();
+        this.dataStore.set("profiles", profiles);
         this.dataStore.set("email", identity.email);
-        this.displayClientProfiles();
 
     }
 
@@ -32,11 +31,12 @@ class ViewAllClientProfiles extends BindingClass {
      */
     mount() {
         document.getElementById('AllAppointments').addEventListener('click', this.redirectAllAppointments);
+        document.getElementById('CreateAppointment').addEventListener('click', this.redirectCreateAppointment);
         document.getElementById('ServiceMenu').addEventListener('click', this.redirectGetServiceMenu);
         document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
         document.getElementById('CreateClientProfile').addEventListener('click', this.redirectCreateClientProfile);
+        document.getElementById('UpdateClientProfile').addEventListener('click', this.redirectUpdateClientProfile);
         document.getElementById('logout').addEventListener('click', this.logout);
-        document.getElementById('names').innerText = "Loading ...";
         this.client = new petproClient();
         this.clientLoaded();
     }
@@ -53,11 +53,11 @@ class ViewAllClientProfiles extends BindingClass {
 
     getHTMLForSearchResults(searchResults) {
      console.log(searchResults , "from getHTMLForSearchResults");
-            if (!searchResults || !searchResults.allClientProfilesList || searchResults.allClientProfilesList.length === 0) {
+            if (!searchResults) {
                 return '<h4>No results found</h4>';
             }
             let html = "";
-            for (const res of searchResults.allClientProfilesList) {
+            for (const res of searchResults) {
                 html += `
                 <tr>
                 <td>
@@ -84,21 +84,17 @@ class ViewAllClientProfiles extends BindingClass {
         }
 
 
-    async addName(){
-        const name = this.dataStore.get("name");
-        if (name == null) {
-            document.getElementById("name").innerText = "Name can not be null";
-        }
-        document.getElementById("name").innerText = name;
+    redirectUpdateClientProfile(){
+        window.location.href = '/UpdateClientProfile.html';
     }
-
-
-
     redirectAllClientProfiles(){
         window.location.href = '/AllClientProfiles.html';
     }
     redirectCreateAppointment(){
         window.location.href = '/CreateAppointment.html';
+    }
+    redirectCreateClientProfile(){
+        window.location.href = '/CreateClientProfile.html'
     }
     redirectAllAppointments(){
         window.location.href = '/AllAppointments.html';

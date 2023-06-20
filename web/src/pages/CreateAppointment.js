@@ -16,9 +16,9 @@ class CreateAppointment extends BindingClass {
         // const urlParams = new URLSearchParams(window.location.search);
         const identity = await this.client.getIdentity();
         this.dataStore.set('id', identity.email);
-        const profile = await this.client.getProfile(identity.email);
-        this.dataStore.set('profile', profile);
-        if(profile == null) {
+        const appointment = await this.client.createAppointment(client, dateTime, pet, service);
+        this.dataStore.set('appointment', appointment);
+        if(appointment == null) {
             document.getElementById("welcome").innerText = "Please log in or sign up to create Appointments."
         }
         document.getElementById("client").setAttribute('placeholder', 'Client');

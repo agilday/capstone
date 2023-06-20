@@ -17,9 +17,9 @@ class ViewProfile extends BindingClass {
      * Once the client is loaded, get the profile metadata.
      */
     async clientLoaded() {
-        // const urlParams = new URLSearchParams(window.location.search);
         const identity = await this.client.getIdentity();
-        const profile = await this.client.getProfile(identity.email);
+        this.dataStore.set('id', identity.email);
+        const profile = await this.client.getClientProfile(id);
         this.dataStore.set('profile', profile);
 
         this.dataStore.set('name', profile.clientProfileModel.name);
@@ -30,7 +30,7 @@ class ViewProfile extends BindingClass {
 
     }
     /**
-     * Add the header to the page and load the dannaClient.
+     * Add the header to the page and load the petproClient.
      */
     mount() {
 

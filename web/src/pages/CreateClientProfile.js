@@ -13,10 +13,9 @@ class CreateClientProfile extends BindingClass {
     }
 
     async clientLoaded() {
-        // const urlParams = new URLSearchParams(window.location.search);
         const identity = await this.client.getIdentity();
         this.dataStore.set('id', identity.email);
-        const profile = await this.client.getProfile(identity.email);
+        const profile = await this.client.createClientProfile(name, phone, address, notes, pets);
         this.dataStore.set('profile', profile);
         if(profile == null) {
             document.getElementById("welcome").innerText = "Create a client profile."
@@ -37,7 +36,6 @@ class CreateClientProfile extends BindingClass {
         document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
         document.getElementById('CreateAppointment').addEventListener('click', this.redirectCreateAppointment);
         document.getElementById('logout').addEventListener('click', this.logout);
-        document.getElementById('confirm').addEventListener('click', this.confirmRedirect);
         document.getElementById('submit').addEventListener('click', this.submitFormData);
 
       

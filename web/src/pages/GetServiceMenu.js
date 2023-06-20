@@ -19,12 +19,9 @@ class GetServiceMenu extends BindingClass {
      */
     async clientLoaded() {
         const identity = await this.client.getIdentity();
-        const profile = await this.client.getProfile(identity.email);
-        const appointments = await this.client.getServiceMenu();
+        const services = await this.client.getServiceMenu();
         this.dataStore.set("email", identity.email);
-        this.dataStore.set('profile', clientProfile);
-        this.displayServices();
-        //console.log(events);
+        this.dataStore.set("services", services);
 
     }
 
@@ -54,11 +51,11 @@ class GetServiceMenu extends BindingClass {
 
     getHTMLForSearchResults(searchResults) {
      console.log(searchResults , "from getHTMLForSearchResults");
-            if (!searchResults || !searchResults.allServicesList || searchResults.allServices.length === 0) {
+            if (!searchResults) {
                 return '<h4>No results found</h4>';
             }
             let html = "";
-            for (const res of searchResults.allServicesList) {
+            for (const res of searchResults) {
                 html += `
                 <tr>
                 <td>

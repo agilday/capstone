@@ -3,7 +3,7 @@ import BindingClass from "../util/bindingClass";
 import Header from '../components/header';
 import DataStore from "../util/DataStore";
 
-class createService extends BindingClass {
+class CreateService extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectUpdateClientProfile','redirectAllClientProfiles',
@@ -16,12 +16,11 @@ class createService extends BindingClass {
         // const urlParams = new URLSearchParams(window.location.search);
         const identity = await this.client.getIdentity();
         this.dataStore.set('id', identity.email);
-        const profile = await this.client.getProfile(identity.email);
-        this.dataStore.set('profile', profile);
-        if(profile == null) {
+        const service = await this.client.createService(service);
+        this.dataStore.set('service', service);
+        if(service == null) {
             document.getElementById("welcome").innerText = "Please log in or sign up to create Services."
         }
-        document.getElementById("loading").innerText = "Loading...";
         document.getElementById("title").setAttribute('placeholder', 'Title');
         document.getElementById("description").setAttribute('placeholder', 'Description');
         this.setPlaceholders();
@@ -47,8 +46,7 @@ class createService extends BindingClass {
         document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
         document.getElementById('CreateClientProfile').addEventListener('click', this.redirectCreateClientProfile);
         document.getElementById('logout').addEventListener('click', this.logout);
-        document.getElementById('confirm').addEventListener('click', this.confirmRedirect);
-        document.getElementById('submitted').addEventListener('click', this.submitFormData);
+        document.getElementById('submit').addEventListener('click', this.submitFormData);
 
 
 
