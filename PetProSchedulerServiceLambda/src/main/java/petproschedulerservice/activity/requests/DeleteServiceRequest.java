@@ -44,7 +44,7 @@ public class DeleteServiceRequest {
         private String title;
 
 
-        public DeleteServiceRequest.Builder withId(String title) {
+        public DeleteServiceRequest.Builder withTitle(String title) {
             this.title = title;
             return this;
         }

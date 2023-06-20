@@ -36,5 +36,6 @@ public interface ServiceComponent {
 
     CreateServiceActivity provideCreateServiceActivity();
     DeleteAppointmentActivity provideDeleteAppointmentActivity();
+    DeleteServiceActivity provideDeleteServiceActivity();
 
 }
