@@ -6,8 +6,8 @@ import DataStore from "../util/DataStore";
 class CreateAppointment extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectEditClientProfile','redirectAllClientProfiles',
-        'redirectCreateAppointment','redirectAllAppointments', 'redirectServiceMenu', 'logout','setPlaceholders'], this);
+        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectUpdateClientProfile','redirectAllClientProfiles',
+        'redirectCreateAppointment','redirectAllAppointments', 'redirectServiceMenu', 'logout'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
     }
@@ -21,7 +21,6 @@ class CreateAppointment extends BindingClass {
         if(profile == null) {
             document.getElementById("welcome").innerText = "Please log in or sign up to create Appointments."
         }
-        document.getElementById("loading").innerText = "Loading...";
         document.getElementById("client").setAttribute('placeholder', 'Client');
         document.getElementById("dateTime").setAttribute('placeholder', 'Date/Time');
         document.getElementById("pet").setAttribute('placeholder', 'Pet');
@@ -37,9 +36,7 @@ class CreateAppointment extends BindingClass {
         document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
         document.getElementById('CreateClientProfile').addEventListener('click', this.redirectCreateClientProfile);
         document.getElementById('logout').addEventListener('click', this.logout);
-        document.getElementById('confirm').addEventListener('click', this.confirmRedirect);
-        document.getElementById('submitted').addEventListener('click', this.submitFormData);
-
+        document.getElementById('submit').addEventListener('click', this.submitFormData);
 
 
         this.client = new petproClient();

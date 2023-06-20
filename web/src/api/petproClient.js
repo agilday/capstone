@@ -108,7 +108,7 @@ export default class petproClient extends BindingClass {
                     'Content-Type': 'application/json'
                 }
             });
-            return response.data;
+            return response.data.allAppointmentsList;
         } catch (error) {
             this.handleError(error, errorCallback)
         }

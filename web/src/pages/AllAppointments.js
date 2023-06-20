@@ -19,10 +19,9 @@ class AllAppointments extends BindingClass {
      */
     async clientLoaded() {
         const identity = await this.client.getIdentity();
-        const profile = await this.client.getClientProfile(identity.email);
         const appointments = await this.client.getAllAppointments();
+        this.dataStore.set("appointments", appointments);
         this.dataStore.set("email", identity.email);
-        this.getAllAppointments();
 
     }
 
@@ -54,11 +53,11 @@ class AllAppointments extends BindingClass {
 
     getHTMLForSearchResults(searchResults) {
      console.log(searchResults , "from getHTMLForSearchResults");
-            if (!searchResults || !searchResults.allAppointmentsList || searchResults.allAppointments.length === 0) {
+            if (!searchResults) {
                 return '<h4>No results found</h4>';
             }
             let html = "";
-            for (const res of searchResults.allAppointmentsList) {
+            for (const res of searchResults) {
                 html += `
                 <tr>
                 <td>
