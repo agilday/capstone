@@ -6,8 +6,8 @@ import DataStore from "../util/DataStore";
 class ViewAllClientProfiles extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect', 'redirectCreateClientProfile', 'submitFormData', 'redirectAllClientProfiles',
-                'redirectCreateAppointment','redirectAllAppointments', 'redirectUpdateClientProfile', 'redirectServiceMenu', 'logout','setPlaceholders'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'redirectCreateClientProfile', 'redirectAllClientProfiles',
+                'redirectCreateAppointment','redirectAllAppointments', 'redirectGetServiceMenu', 'logout'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.getAllClientProfiles);
         this.header = new Header(this.dataStore);
@@ -19,8 +19,8 @@ class ViewAllClientProfiles extends BindingClass {
      */
     async clientLoaded() {
         const identity = await this.client.getIdentity();
-        const profiles = await this.client.getAllClientProfiles();
-        this.dataStore.set("profiles", profiles);
+        const clientprofiles = await this.client.getAllClientProfiles();
+        this.dataStore.set("clientprofiles", clientprofiles);
         this.dataStore.set("email", identity.email);
 
     }
@@ -35,14 +35,13 @@ class ViewAllClientProfiles extends BindingClass {
         document.getElementById('ServiceMenu').addEventListener('click', this.redirectGetServiceMenu);
         document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
         document.getElementById('CreateClientProfile').addEventListener('click', this.redirectCreateClientProfile);
-        document.getElementById('UpdateClientProfile').addEventListener('click', this.redirectUpdateClientProfile);
         document.getElementById('logout').addEventListener('click', this.logout);
         this.client = new petproClient();
         this.clientLoaded();
     }
 
 
-    displayClientProfiles(){
+    getAllClientProfiles(){
             const clientprofiles = this.dataStore.get("clientprofiles");
             console.log(clientprofiles , "from displayClientProfiles");
             if (clientprofiles == null) {
@@ -84,9 +83,6 @@ class ViewAllClientProfiles extends BindingClass {
         }
 
 
-    redirectUpdateClientProfile(){
-        window.location.href = '/UpdateClientProfile.html';
-    }
     redirectAllClientProfiles(){
         window.location.href = '/AllClientProfiles.html';
     }
@@ -99,7 +95,7 @@ class ViewAllClientProfiles extends BindingClass {
     redirectAllAppointments(){
         window.location.href = '/AllAppointments.html';
     }
-    redirectServiceMenu(){
+    redirectGetServiceMenu(){
         window.location.href = '/ServiceMenu.html';
     }
     async logout(){

@@ -32,9 +32,10 @@ class CreateClientProfile extends BindingClass {
     mount() {
   
         document.getElementById('AllAppointments').addEventListener('click', this.redirectAllAppointments);
-        document.getElementById('ServiceMenu').addEventListener('click', this.redirectServiceMenu);
+        document.getElementById('ServiceMenu').addEventListener('click', this.redirectGetServiceMenu);
         document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
         document.getElementById('CreateAppointment').addEventListener('click', this.redirectCreateAppointment);
+        document.getElementById('UpdateClientProfile').addEventListener('click', this.redirectUpdateClientProfile);
         document.getElementById('logout').addEventListener('click', this.logout);
         document.getElementById('submit').addEventListener('click', this.submitFormData);
 
