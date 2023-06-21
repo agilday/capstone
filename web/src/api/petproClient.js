@@ -243,7 +243,7 @@ export default class petproClient extends BindingClass {
                     'Content-Type': 'application/json'
                 }
             });
-            return response.data;
+            return response.data.clientProfilesList;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
@@ -254,11 +254,12 @@ export default class petproClient extends BindingClass {
      * @param {*} errorCallback 
      * @returns 
      */
-    async createService(service, errorCallback) {
+    async createService(title, description, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can add services to the menu.");
             const response = await this.axiosClient.post(`services/`, {
-                service: service
+                title: title,
+                description: description
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,

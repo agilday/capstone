@@ -44,7 +44,6 @@ class CreateClientProfile extends BindingClass {
 
     async setPlaceholders(){
         const profile = this.dataStore.get("profile");
-        //console.log("this one",profile)
         if (profile == null) {
             return;
         }

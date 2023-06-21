@@ -6,47 +6,31 @@ import DataStore from "../util/DataStore";
 class CreateService extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectUpdateClientProfile','redirectAllClientProfiles',
-        'redirectCreateAppointment','redirectAllAppointments', 'redirectCreateClientProfile', 'redirectServiceMenu', 'setPlaceholders', 'logout'], this);
+        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectAllClientProfiles',
+        'redirectCreateAppointment','redirectAllAppointments', 'redirectCreateClientProfile', 'redirectGetServiceMenu', 'logout'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
     }
 
     async clientLoaded() {
         const identity = await this.client.getIdentity();
-        this.dataStore.set('id', identity.email);
-        const service = await this.client.createService(service);
+        this.dataStore.set("email", identity.email);
+        const service = await this.client.createService(title, description);
         this.dataStore.set('service', service);
-        if(service == null) {
-            document.getElementById("welcome").innerText = "Please log in or sign up to create Services."
-        }
         document.getElementById("title").setAttribute('placeholder', 'Title');
         document.getElementById("description").setAttribute('placeholder', 'Description');
-        this.setPlaceholders();
 
-    }
-    async setPlaceholders(){
-        const service = this.dataStore.get("service");
-        console.log("this one",service)
-        if (service == null) {
-            return;
-        }
-        if (service.serviceModel.title && service.serviceModel.description) {
-            document.getElementById("title").innerText =  service.serviceModel.title
-            document.getElementById('description').setAttribute('placeholder', service.serviceModel.description);
-        }
-        document.getElementById("loading").remove();
     }
 
     mount() {
 
         document.getElementById('AllAppointments').addEventListener('click', this.redirectAllAppointments);
+        document.getElementById('CreateAppointment').addEventListener('click', this.redirectCreateAppointment);
         document.getElementById('ServiceMenu').addEventListener('click', this.redirectGetServiceMenu);
         document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
         document.getElementById('CreateClientProfile').addEventListener('click', this.redirectCreateClientProfile);
         document.getElementById('logout').addEventListener('click', this.logout);
         document.getElementById('submit').addEventListener('click', this.submitFormData);
-
 
 
         this.client = new petproClient();
@@ -58,30 +42,32 @@ class CreateService extends BindingClass {
         evt.preventDefault();
         const title = document.getElementById('title').value || document.getElementById('title').getAttribute('placeholder');
         const description = document.getElementById('description').value ||  document.getElementById('description').getAttribute('placeholder');
-        console.log(client, dateTime, pet, service);
-        let profile;
-        if(document.getElementById('welcome').innerText == "Please log in or sign up to create Services."){
-            service = await this.client.createService(title, description, (error) => {
-                errorMessageDisplay.innerText = `Error: ${error.message}`;
-            });
-        } else {
-            service = await this.client.updateService(title, description, (error) => {
-                errorMessageDisplay.innerText = `Error: ${error.message}`;
-            });
-        }
-
-
-        this.dataStore.set('service', service);
-        document.getElementById('title').innerText = title || service.serviceModel.title;
-        document.getElementById('description').innerText = description || service.serviceModel.description;
-        document.getElementById('loading-modal').remove();
-
+        console.log(title, description);
+         try {
+             // Check that the user is authenticated
+             const user = await this.client.getIdentity();
+             if (!user) {
+                  // If not authenticated, show error message
+                  throw new Error('Only authenticated users can create a service.');
+             }
+             const serviceCreator = user.email;
+             const event = await this.client.createService(title, description,
+                   (error) => {
+                       createButton.innerText = origButtonText;
+                       errorMessageDisplay.innerText = `Error: ${error.message}`;
+                       errorMessageDisplay.classList.remove('hidden');
+                   });
+                   console.log(title, description);
+                window.location.href ='/ServiceMenu.html';
+                } catch (error) {
+                    createButton.innerText = origButtonText;
+                    errorMessageDisplay.innerText = `Error: ${error.message}`;
+                    errorMessageDisplay.classList.remove('hidden');
+            }
     }
+
         confirmRedirect() {
             window.location.href = '/ServiceMenu.html';
-        }
-        redirectUpdateClientProfile(){
-            window.location.href = '/UpdateClientProfile.html';
         }
         redirectAllClientProfiles(){
             window.location.href = '/AllClientProfiles.html';
@@ -95,7 +81,7 @@ class CreateService extends BindingClass {
         redirectAllAppointments(){
             window.location.href = '/AllAppointments.html';
         }
-        redirectServiceMenu(){
+        redirectGetServiceMenu(){
             window.location.href = '/ServiceMenu.html';
         }
         logout(){
