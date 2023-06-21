@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 class ViewAllClientProfiles extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'redirectCreateClientProfile', 'redirectAllClientProfiles',
+        this.bindClassMethods(['clientLoaded', 'mount', 'getAllClientProfiles', 'redirectCreateClientProfile', 'redirectAllClientProfiles',
                 'redirectCreateAppointment','redirectAllAppointments', 'redirectGetServiceMenu', 'logout'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.getAllClientProfiles);
@@ -43,7 +43,7 @@ class ViewAllClientProfiles extends BindingClass {
 
     getAllClientProfiles(){
             const clientprofiles = this.dataStore.get("clientprofiles");
-            console.log(clientprofiles , "from displayClientProfiles");
+            console.log(clientprofiles , "from getAllClientProfiles");
             if (clientprofiles == null) {
                 document.getElementById("client-profiles-list").innerText = "No Client Profiles found";
             }
