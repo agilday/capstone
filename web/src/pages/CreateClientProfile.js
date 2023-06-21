@@ -42,6 +42,7 @@ class CreateClientProfile extends BindingClass {
 
     async submitFormData(evt){
         evt.preventDefault();
+        const errorMessageDisplay = document.getElementById('error-message');
         const name = document.getElementById('name').value || document.getElementById('name').getAttribute('placeholder');
         const phone = document.getElementById('phone').value ||  document.getElementById('phone').getAttribute('placeholder');
         const address = document.getElementById('address').value ||  document.getElementById('address').getAttribute('placeholder');
@@ -58,7 +59,7 @@ class CreateClientProfile extends BindingClass {
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
             });
         }
-        
+
 
         this.dataStore.set('profile', profile);
         document.getElementById('name').innerText = name || profile.clientProfileModel.name;
@@ -66,8 +67,7 @@ class CreateClientProfile extends BindingClass {
         document.getElementById('address').innerText = address || profile.clientProfileModel.address;
         document.getElementById('notes').innerText = notes || profile.clientProfileModel.notes;
         document.getElementById('pets').innerText = pets ||profile.clientProfileModel.pets;
-        document.getElementById('loading-modal').remove();
-        
+
     }
     confirmRedirect() {
         window.location.href = '/AllClientProfiles.html';

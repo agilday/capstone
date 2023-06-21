@@ -10,18 +10,20 @@ import petproschedulerservice.metrics.MetricsConstants;
 import petproschedulerservice.metrics.MetricsPublisher;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Singleton
 public class AppointmentDao {
     private final DynamoDBMapper dynamoDbMapper;
     private final MetricsPublisher metricsPublisher;
 
     /**
-     * Instantiates a PlaylistDao object.
+     * Instantiates an AppointmentDao object.
      *
-     * @param dynamoDbMapper   the {@link DynamoDBMapper} used to interact with the playlists table
+     * @param dynamoDbMapper   the {@link DynamoDBMapper} used to interact with the appointments table
      * @param metricsPublisher the {@link MetricsPublisher} used to record metrics.
      */
     @Inject

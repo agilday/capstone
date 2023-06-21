@@ -15,7 +15,6 @@ class CreateService extends BindingClass {
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         this.dataStore.set("email", identity.email);
-        this.dataStore.set('service', service);
         document.getElementById("title").setAttribute('placeholder', 'Title');
         document.getElementById("description").setAttribute('placeholder', 'Description');
 

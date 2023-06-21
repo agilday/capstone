@@ -48,8 +48,8 @@ public class CreateClientProfileRequest {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", notes=" + notes + '\'' +
-                ", pets=" + pets +
+                ", notes='" + notes + '\'' +
+                ", pets='" + pets + '\'' +
                 '}';
     }
 

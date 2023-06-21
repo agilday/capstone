@@ -209,7 +209,7 @@ Resources:
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/clientprofiles"
 
-        - PolicyName: 'AccessAppointmentTable'
+        - PolicyName: 'AccessAppointmentsTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:

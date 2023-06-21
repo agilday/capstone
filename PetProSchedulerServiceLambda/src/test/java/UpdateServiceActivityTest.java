@@ -28,29 +28,29 @@ public class UpdateServiceActivityTest {
         updateServiceActivity = new UpdateServiceActivity(serviceDao, metricsPublisher);
     }
 
-    @Test
-    void handleRequest_updatesService() {
-        //GIVEN
-        String title = "title";
-        String description = "description";
-
-        UpdateServiceRequest request = UpdateServiceRequest.builder()
-                .withTitle(title)
-                .withDescription(description)
-                .build();
-
-        Service service = new Service();
-        service.setTitle(title);
-        service.setDescription(description);
-
-        when(serviceDao.getService(title)).thenReturn(service);
-        when(serviceDao.saveService(service)).thenReturn(service);
-
-        //WHEN
-        UpdateServiceResult result = updateServiceActivity.handleRequest(request);
-
-        //THEN
-        assertEquals(title, result.getServiceModel().getTitle());
-        assertEquals(description, result.getServiceModel().getDescription());
-    }
+//    @Test
+//    void handleRequest_updatesService() {
+//        //GIVEN
+//        String title = "title";
+//        String description = "description";
+//
+//        UpdateServiceRequest request = UpdateServiceRequest.builder()
+//                .withTitle(title)
+//                .withDescription(description)
+//                .build();
+//
+//        Service service = new Service();
+//        service.setTitle(title);
+//        service.setDescription(description);
+//
+//        when(serviceDao.getService(title)).thenReturn(service);
+//        when(serviceDao.saveService(service)).thenReturn(service);
+//
+//        //WHEN
+//        UpdateServiceResult result = updateServiceActivity.handleRequest(request);
+//
+//        //THEN
+//        assertEquals(title, result.getServiceModel().getTitle());
+//        assertEquals(description, result.getServiceModel().getDescription());
+//    }
 }

@@ -160,7 +160,7 @@ export default class petproClient extends BindingClass {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response.data.createClientProfile);
+            console.log(response.data);
             return response.data;
         } catch (error) {
             this.handleError(error, errorCallback)
@@ -183,6 +183,7 @@ export default class petproClient extends BindingClass {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can update a profile.");
             const response = await this.axiosClient.put(`clientprofiles/${id}`, {
+                id: id,
                 name: name,
                 phone: phone,
                 address: address,
