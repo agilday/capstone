@@ -61,8 +61,8 @@ public class CreateClientProfileRequest {
     }
 
     //CHECKSTYLE:OFF:Builder
-    public static CreateClientProfileRequest.Builder builder() {
-        return new CreateClientProfileRequest.Builder();
+    public static Builder builder() {
+        return new Builder();
     }
 
     @JsonPOJOBuilder
@@ -74,32 +74,32 @@ public class CreateClientProfileRequest {
         private List<String> notes;
         private List<Pet> pets;
 
-        public CreateClientProfileRequest.Builder withId(String id) {
+        public Builder withId(String id) {
             this.id = id;
             return this;
         }
 
-        public CreateClientProfileRequest.Builder withName(String name) {
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public CreateClientProfileRequest.Builder withPhone(String phone) {
+        public Builder withPhone(String phone) {
             this.phone = phone;
             return this;
         }
 
-        public CreateClientProfileRequest.Builder withAddress(String address) {
+        public Builder withAddress(String address) {
             this.address = address;
             return this;
         }
 
-        public CreateClientProfileRequest.Builder withNotes(List<String> notes) {
+        public Builder withNotes(List<String> notes) {
             this.notes = notes;
             return this;
         }
 
-        public CreateClientProfileRequest.Builder withPets(List<Pet> pets) {
+        public Builder withPets(List<Pet> pets) {
             this.pets = pets;
             return this;
         }

@@ -17,9 +17,6 @@ class CreateClientProfile extends BindingClass {
         this.dataStore.set('id', identity.email);
         const profile = await this.client.createClientProfile(name, phone, address, notes, pets);
         this.dataStore.set('profile', profile);
-        if(profile == null) {
-            document.getElementById("welcome").innerText = "Create a client profile."
-        }
         document.getElementById("name").setAttribute('placeholder', 'Name');
         document.getElementById("phone").setAttribute('placeholder', 'Phone');
         document.getElementById("address").setAttribute('placeholder', 'Address');
@@ -47,7 +44,7 @@ class CreateClientProfile extends BindingClass {
 
     async setPlaceholders(){
         const profile = this.dataStore.get("profile");
-        console.log("this one",profile)
+        //console.log("this one",profile)
         if (profile == null) {
             return;
         }

@@ -19,9 +19,9 @@ public class CreateClientProfileActivity {
     private final ClientProfileDao profileDao;
 
     /**
-     * Instantiates a new CreatePlaylistActivity object.
+     * Instantiates a new CreateClientProfileActivity object.
      *
-     * @param profileDao PlaylistDao to access the profile table.
+     * @param profileDao ProfileDao to access the clientprofiles table.
      */
     @Inject
     public CreateClientProfileActivity(ClientProfileDao profileDao) {

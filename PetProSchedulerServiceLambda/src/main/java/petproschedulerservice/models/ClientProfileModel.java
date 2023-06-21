@@ -71,10 +71,9 @@ public class ClientProfileModel {
     }
 
     //CHECKSTYLE:OFF:Builder
-    public static ClientProfileModel.Builder builder() {
-        return new ClientProfileModel.Builder();
+    public static Builder builder() {
+        return new Builder();
     }
-
 
     public static class Builder {
         private String id;
@@ -84,32 +83,32 @@ public class ClientProfileModel {
         private List<String> notes;
         private List<Pet> pets;
 
-        public ClientProfileModel.Builder withId(String id) {
+        public Builder withId(String id) {
             this.id = id;
             return this;
         }
 
-        public ClientProfileModel.Builder withName(String name) {
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public ClientProfileModel.Builder withPhone(String phone) {
+        public Builder withPhone(String phone) {
             this.phone = phone;
             return this;
         }
 
-        public ClientProfileModel.Builder withAddress(String address) {
+        public Builder withAddress(String address) {
             this.address = address;
             return this;
         }
 
-        public ClientProfileModel.Builder withNotes(List<String> notes) {
+        public Builder withNotes(List<String> notes) {
             this.notes = notes;
             return this;
         }
 
-        public ClientProfileModel.Builder withPets(List<Pet> pets) {
+        public Builder withPets(List<Pet> pets) {
             this.pets = pets;
             return this;
         }
