@@ -51,20 +51,30 @@ public class ClientProfileDao {
         return clientProfilesList;
     }
 
+    // /**
+    //  * Saves (creates or updates) the given profile.
+    //  *
+    //  * @param ClientProfile to save
+    //  * @return The ClientProfile object that was saved
+    //  */
+    // public ClientProfile saveClientProfile(String id, String name, String phone, String address, List<String> notes, List<Pet> pets) {
+    //     ClientProfile profile = new ClientProfile();
+    //     profile.setId(id);
+    //     profile.setName(name);
+    //     profile.setPhone(phone);
+    //     profile.setAddress(address);
+    //     profile.setNotes(notes);
+    //     profile.setPets(pets);
+    //     this.dynamoDbMapper.save(profile);
+    //     return profile;
+    // }
     /**
      * Saves (creates or updates) the given profile.
      *
      * @param ClientProfile to save
      * @return The ClientProfile object that was saved
      */
-    public ClientProfile saveClientProfile(String id, String name, String phone, String address, List<String> notes, List<Pet> pets) {
-        ClientProfile profile = new ClientProfile();
-        profile.setId(id);
-        profile.setName(name);
-        profile.setPhone(phone);
-        profile.setAddress(address);
-        profile.setNotes(notes);
-        profile.setPets(pets);
+    public ClientProfile saveClientProfile(ClientProfile profile) {
         this.dynamoDbMapper.save(profile);
         return profile;
     }

@@ -148,7 +148,7 @@ export default class petproClient extends BindingClass {
     async createClientProfile(name, phone, address, notes, pets, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create a profile.");
-            const response = await this.axiosClient.post(`clientprofiles/`, {
+            const response = await this.axiosClient.post(`clientprofiles`, {
                 name: name,
                 phone: phone,
                 address: address,
@@ -160,7 +160,7 @@ export default class petproClient extends BindingClass {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response.data);
+            console.log(response.data.createClientProfile);
             return response.data;
         } catch (error) {
             this.handleError(error, errorCallback)
@@ -243,7 +243,7 @@ export default class petproClient extends BindingClass {
                     'Content-Type': 'application/json'
                 }
             });
-            return response.data.clientProfilesList;
+            return response.data.getAllClientProfiles;
         } catch (error) {
             this.handleError(error, errorCallback)
         }

@@ -1,6 +1,5 @@
 package petproschedulerservice.activity.results;
 
-
 import petproschedulerservice.models.AppointmentModel;
 
 public class CreateAppointmentResult {

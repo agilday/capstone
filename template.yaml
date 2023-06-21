@@ -216,6 +216,13 @@ Resources:
               - Effect: Allow
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/appointments"
+        - PolicyName: 'AccessServicesTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/services"
 
   #-----------------------------------------------------
   # Lambda Functions Configuration
@@ -234,7 +241,7 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
             Path: /clientprofiles/{id}
@@ -254,7 +261,7 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
             Path: /clientprofiles/{id}
@@ -274,7 +281,7 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
             Path: /clientprofiles
@@ -294,7 +301,7 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
             Path: /services/title
@@ -314,7 +321,7 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
             Path: /clientprofiles
@@ -334,7 +341,7 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
             Path: /appointments
@@ -354,7 +361,7 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
             Path: /appointments/{id}
@@ -374,7 +381,7 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
             Path: /appointments
@@ -394,7 +401,7 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
             Path: /services/title
@@ -414,7 +421,7 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
             Path: /services

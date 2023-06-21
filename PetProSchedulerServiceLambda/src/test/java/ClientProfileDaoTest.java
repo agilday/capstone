@@ -42,7 +42,7 @@ public class ClientProfileDaoTest {
         ashley.setPets(pets);
 
         //WHEN
-        target.saveClientProfile(ashley.getId(), ashley.getName(), ashley.getPhone(), ashley.getAddress(), ashley.getNotes(), ashley.getPets());
+        target.saveClientProfile(ashley);
 
         //THEN
         verify(dynamoDBMapper).save(ashley);

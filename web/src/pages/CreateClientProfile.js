@@ -7,7 +7,7 @@ class CreateClientProfile extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectUpdateClientProfile','redirectAllClientProfiles',
-        'redirectCreateAppointment','redirectAllAppointments', 'redirectServiceMenu', 'logout','setPlaceholders'], this);
+        'redirectCreateAppointment','redirectAllAppointments', 'redirectGetServiceMenu', 'logout'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
     }
@@ -15,14 +15,11 @@ class CreateClientProfile extends BindingClass {
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         this.dataStore.set("email", identity.email);
-        const profile = await this.client.createClientProfile(name, phone, address, notes, pets);
-        this.dataStore.set('profile', profile);
         document.getElementById("name").setAttribute('placeholder', 'Name');
         document.getElementById("phone").setAttribute('placeholder', 'Phone');
         document.getElementById("address").setAttribute('placeholder', 'Address');
         document.getElementById("notes").setAttribute('placeholder', 'Notes');
         document.getElementById("pets").setAttribute('placeholder', 'Pets');
-        this.setPlaceholders();
 
     }
 
@@ -42,25 +39,6 @@ class CreateClientProfile extends BindingClass {
         this.clientLoaded();
     }
 
-    async setPlaceholders(){
-        const profile = this.dataStore.get("profile");
-        if (profile == null) {
-            return;
-        }
-        if (profile.clientProfileModel.name && profile.clientProfileModel.phone) {
-            document.getElementById("name").innerText =  profile.clientProfileModel.name
-            document.getElementById('phone').setAttribute('placeholder', profile.clientProfileModel.phone);
-            document.getElementById('address').setAttribute('placeholder', profile.clientProfileModel.address);
-        }
-        if (profile.clientProfileModel.notes) {
-            document.getElementById('notes').setAttribute('placeholder',profile.clientProfileModel.notes);
-        }
-        if (profile.clientProfileModel.pets) {
-            document.getElementById('pets').setAttribute('placeholder',profile.clientProfileModel.pets);
-        }
-        document.getElementById("loading").remove();
-    }
-
 
     async submitFormData(evt){
         evt.preventDefault();
@@ -71,7 +49,7 @@ class CreateClientProfile extends BindingClass {
         const pets = document.getElementById('pets').value || document.getElementById('pets').getAttribute('placeholder');
         console.log(name, phone, address, notes, pets);
         let profile;
-        if(document.getElementById('welcome').innerText == "Create a client profile."){
+        if(document.getElementById('welcome').innerText == "Create Profile"){
             profile = await this.client.createClientProfile(name, phone, address, notes, pets, (error) => {
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
             });
@@ -92,7 +70,7 @@ class CreateClientProfile extends BindingClass {
         
     }
     confirmRedirect() {
-        window.location.href = '/ClientProfile.html';
+        window.location.href = '/AllClientProfiles.html';
     }
     redirectUpdateClientProfile(){
         window.location.href = '/UpdateClientProfile.html';
@@ -106,7 +84,7 @@ class CreateClientProfile extends BindingClass {
     redirectAllAppointments(){
         window.location.href = '/AllAppointments.html';
     }
-    redirectServiceMenu(){
+    redirectGetServiceMenu(){
         window.location.href = '/ServiceMenu.html';
     }
     logout(){

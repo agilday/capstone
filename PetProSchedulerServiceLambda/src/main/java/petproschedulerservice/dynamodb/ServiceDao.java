@@ -46,16 +46,26 @@ public class ServiceDao {
         return servicesList;
     }
 
-    /**
+    // /**
+    //  * Saves (creates or updates) the given service.
+    //  *
+    //  * @param title and description of the service to save
+    //  * @return The Service object that was saved
+    //  */
+    // public Service saveService(String title, String description) {
+    //     Service service = new Service();
+    //     service.setTitle(title);
+    //     service.setDescription(description);
+    //     this.dynamoDbMapper.save(service);
+    //     return service;
+    // }
+        /**
      * Saves (creates or updates) the given service.
      *
      * @param title and description of the service to save
      * @return The Service object that was saved
      */
-    public Service saveService(String title, String description) {
-        Service service = new Service();
-        service.setTitle(title);
-        service.setDescription(description);
+    public Service saveService(Service service) {
         this.dynamoDbMapper.save(service);
         return service;
     }
