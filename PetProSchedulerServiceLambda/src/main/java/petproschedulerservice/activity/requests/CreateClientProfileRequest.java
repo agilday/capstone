@@ -8,24 +8,18 @@ import java.util.List;
 
 @JsonDeserialize(builder = CreateClientProfileRequest.Builder.class)
 public class CreateClientProfileRequest {
-    private final String id;
     private final String name;
     private final String phone;
     private final String address;
     private final List<String> notes;
     private final List<Pet> pets;
 
-    private CreateClientProfileRequest(String id, String name, String phone, String address, List<String> notes, List<Pet> pets) {
-        this.id = id;
+    private CreateClientProfileRequest(String name, String phone, String address, List<String> notes, List<Pet> pets) {
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.notes = notes;
         this.pets = pets;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getName() {
@@ -51,11 +45,10 @@ public class CreateClientProfileRequest {
     @Override
     public String toString() {
         return "CreateProfileRequest{" +
-                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", notes=" + notes +
+                ", notes=" + notes + '\'' +
                 ", pets=" + pets +
                 '}';
     }
@@ -67,17 +60,12 @@ public class CreateClientProfileRequest {
 
     @JsonPOJOBuilder
     public static class Builder {
-        private String id;
         private String name;
         private String phone;
         private String address;
         private List<String> notes;
         private List<Pet> pets;
 
-        public Builder withId(String id) {
-            this.id = id;
-            return this;
-        }
 
         public Builder withName(String name) {
             this.name = name;
@@ -105,7 +93,7 @@ public class CreateClientProfileRequest {
         }
 
         public CreateClientProfileRequest build() {
-            return new CreateClientProfileRequest(id, name, phone, address, notes, pets);
+            return new CreateClientProfileRequest(name, phone, address, notes, pets);
         }
     }
 }

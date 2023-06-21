@@ -39,7 +39,7 @@ public class CreateAppointmentRequest {
         return "CreateAppointmentRequest{" +
                 ", client='" + client + '\'' +
                 ", dateTime='" + dateTime + '\'' +
-                ", pet=" + pet +
+                ", pet=" + pet + '\'' +
                 ", service=" + service +
                 '}';
     }

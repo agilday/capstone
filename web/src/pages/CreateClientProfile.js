@@ -14,7 +14,7 @@ class CreateClientProfile extends BindingClass {
 
     async clientLoaded() {
         const identity = await this.client.getIdentity();
-        this.dataStore.set('id', identity.email);
+        this.dataStore.set("email", identity.email);
         const profile = await this.client.createClientProfile(name, phone, address, notes, pets);
         this.dataStore.set('profile', profile);
         document.getElementById("name").setAttribute('placeholder', 'Name');
