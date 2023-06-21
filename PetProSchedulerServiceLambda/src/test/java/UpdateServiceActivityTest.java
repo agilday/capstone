@@ -44,7 +44,7 @@ public class UpdateServiceActivityTest {
         service.setDescription(description);
 
         when(serviceDao.getService(title)).thenReturn(service);
-        when(serviceDao.saveService(service.getTitle(), service.getDescription())).thenReturn(service);
+        when(serviceDao.saveService(service)).thenReturn(service);
 
         //WHEN
         UpdateServiceResult result = updateServiceActivity.handleRequest(request);

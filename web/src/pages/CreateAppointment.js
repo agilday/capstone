@@ -69,7 +69,7 @@ class CreateAppointment extends BindingClass {
     }
 
         confirmRedirect() {
-            window.location.href = '/ClientProfile.html';
+            window.location.href = '/AllAppointments.html';
         }
         redirectUpdateClientProfile(){
             window.location.href = '/UpdateClientProfile.html';

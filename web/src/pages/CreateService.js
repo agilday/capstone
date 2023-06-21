@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 class CreateService extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount','confirmRedirect','submitFormData', 'redirectAllClientProfiles',
+        this.bindClassMethods(['clientLoaded', 'mount','submitFormData', 'redirectAllClientProfiles',
         'redirectCreateAppointment','redirectAllAppointments', 'redirectCreateClientProfile', 'redirectGetServiceMenu', 'logout'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
@@ -15,7 +15,6 @@ class CreateService extends BindingClass {
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         this.dataStore.set("email", identity.email);
-        const service = await this.client.createService(title, description);
         this.dataStore.set('service', service);
         document.getElementById("title").setAttribute('placeholder', 'Title');
         document.getElementById("description").setAttribute('placeholder', 'Description');
@@ -40,6 +39,9 @@ class CreateService extends BindingClass {
 
     async submitFormData(evt){
         evt.preventDefault();
+        const errorMessageDisplay = document.getElementById('error-message');
+        const createButton = document.getElementById('submit');
+        const origButtonText = createButton.innerText;
         const title = document.getElementById('title').value || document.getElementById('title').getAttribute('placeholder');
         const description = document.getElementById('description').value ||  document.getElementById('description').getAttribute('placeholder');
         console.log(title, description);
@@ -66,9 +68,7 @@ class CreateService extends BindingClass {
             }
     }
 
-        confirmRedirect() {
-            window.location.href = '/ServiceMenu.html';
-        }
+        
         redirectAllClientProfiles(){
             window.location.href = '/AllClientProfiles.html';
         }

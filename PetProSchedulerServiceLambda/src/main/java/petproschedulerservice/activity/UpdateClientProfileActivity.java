@@ -55,9 +55,14 @@ public class UpdateClientProfileActivity {
 
         ClientProfile profile = clientProfileDao.getClientProfile(updateClientProfileRequest.getId());
 
-        ClientProfile updateProfile = clientProfileDao.saveClientProfile(updateClientProfileRequest.getId(),
-                updateClientProfileRequest.getName(), updateClientProfileRequest.getPhone(), updateClientProfileRequest.getAddress(),
-                updateClientProfileRequest.getNotes(), updateClientProfileRequest.getPets());
+        ClientProfile updateProfile = new ClientProfile();
+                updateProfile.setId(updateClientProfileRequest.getId());
+                updateProfile.setName(updateClientProfileRequest.getName()); 
+                updateProfile.setPhone(updateClientProfileRequest.getPhone());
+                updateProfile.setAddress(updateClientProfileRequest.getAddress());
+                updateProfile.setNotes(updateClientProfileRequest.getNotes());
+                updateProfile.setPets(updateClientProfileRequest.getPets());
+                clientProfileDao.saveClientProfile(updateProfile);
 
         return UpdateClientProfileResult.builder()
                 .withClientProfile(new ModelConverter().toClientProfileModel(updateProfile))

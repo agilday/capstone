@@ -6,8 +6,8 @@ import DataStore from "../util/DataStore";
 class GetServiceMenu extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'displayServices', 'confirmRedirect','submitFormData', 'redirectUpdateClientProfile','redirectAllClientProfiles',
-                'redirectCreateAppointment', 'redirectCreateClientProfile','redirectAllAppointments', 'redirectServiceMenu', 'logout'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'displayServices', 'redirectCreateService', 'redirectAllClientProfiles',
+                'redirectCreateAppointment', 'redirectCreateClientProfile','redirectAllAppointments', 'logout'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.displayServices);
         this.header = new Header(this.dataStore);
@@ -31,7 +31,7 @@ class GetServiceMenu extends BindingClass {
     mount() {
         document.getElementById('AllAppointments').addEventListener('click', this.redirectAllAppointments);
         document.getElementById('CreateAppointment').addEventListener('click', this.redirectCreateAppointment);
-        document.getElementById('ServiceMenu').addEventListener('click', this.redirectGetServiceMenu);
+        document.getElementById('CreateService').addEventListener('click', this.redirectCreateService);
         document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
         document.getElementById('CreateClientProfile').addEventListener('click', this.redirectCreateClientProfile);
         document.getElementById('logout').addEventListener('click', this.logout);
@@ -71,23 +71,20 @@ class GetServiceMenu extends BindingClass {
         }
 
 
-    redirectUpdateClientProfile(){
-        window.location.href = '/UpdateClientProfile.html';
-    }
     redirectAllClientProfiles(){
         window.location.href = '/AllClientProfiles.html';
     }
     redirectCreateAppointment(){
         window.location.href = '/CreateAppointment.html';
     }
+    redirectCreateService(){
+        window.location.href = '/CreateService.html';
+    }
     redirectCreateClientProfile(){
         window.location.href = '/CreateClientProfile.html';
     }
     redirectAllAppointments(){
         window.location.href = '/AllAppointments.html';
-    }
-    redirectGetServiceMenu(){
-        window.location.href = '/ServiceMenu.html';
     }
     async logout(){
         await this.client.logout();

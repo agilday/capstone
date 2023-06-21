@@ -48,8 +48,7 @@ public class UpdateClientProfileActivityTest {
         profile.setName(expectedName);
 
         when(profileDao.getClientProfile(id)).thenReturn(profile);
-        when(profileDao.saveClientProfile(profile.getId(), profile.getName(),
-                profile.getPhone(), profile.getAddress(), profile.getNotes(), profile.getPets())).thenReturn(profile);
+        when(profileDao.saveClientProfile(profile)).thenReturn(profile);
 
         //WHEN
         UpdateClientProfileResult result = updateClientProfileActivity.handleRequest(request);
