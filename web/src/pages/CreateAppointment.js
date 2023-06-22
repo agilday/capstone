@@ -39,6 +39,7 @@ class CreateAppointment extends BindingClass {
 
     async submitFormData(evt){
         evt.preventDefault();
+        const createButton = document.getElementById('submit');
         const client = document.getElementById('client').value || document.getElementById('client').getAttribute('placeholder');
         const dateTime = document.getElementById('dateTime').value ||  document.getElementById('dateTime').getAttribute('placeholder');
         const pet = document.getElementById('pet').value ||  document.getElementById('pet').getAttribute('placeholder');
@@ -54,16 +55,10 @@ class CreateAppointment extends BindingClass {
             const apptCreator = user.email;
             const event = await this.client.createAppointment(client, dateTime, pet, service,
                 (error) => {
-                    createButton.innerText = origButtonText;
-                    errorMessageDisplay.innerText = `Error: ${error.message}`;
-                    errorMessageDisplay.classList.remove('hidden');
                 });
                 console.log(client, dateTime, pet, service);
             window.location.href ='/AllAppointments.html';
             } catch (error) {
-                createButton.innerText = origButtonText;
-                errorMessageDisplay.innerText = `Error: ${error.message}`;
-                errorMessageDisplay.classList.remove('hidden');
             }
     }
 

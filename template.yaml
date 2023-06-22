@@ -427,6 +427,7 @@ Resources:
           Properties:
             Path: /services
             Method: get
+
   CreateServiceMenuLambda:
     Type: AWS::Serverless::Function
     Properties:
