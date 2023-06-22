@@ -6,10 +6,10 @@ import DataStore from "../util/DataStore";
 class GetServiceMenu extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'displayServices', 'redirectCreateService', 'redirectAllClientProfiles',
+        this.bindClassMethods(['clientLoaded', 'mount', 'getServiceMenu', 'redirectCreateService', 'redirectAllClientProfiles',
                 'redirectCreateAppointment', 'redirectCreateClientProfile','redirectAllAppointments', 'logout'], this);
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.displayServices);
+        this.dataStore.addChangeListener(this.getServiceMenu);
         this.header = new Header(this.dataStore);
 
     }
@@ -40,9 +40,9 @@ class GetServiceMenu extends BindingClass {
     }
 
 
-    displayServices(){
+    getServiceMenu(){
             const services = this.dataStore.get("services");
-            console.log(services , "from displayServices");
+            console.log(services , "from getServiceMenu");
             if (services == null) {
                 document.getElementById("services-list").innerText = "No services found";
             }

@@ -89,7 +89,7 @@ export default class petproClient extends BindingClass {
                     'Content-Type': 'application/json'
                 }
             });
-            return response.data;
+            return response.data.clientProfile;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
@@ -128,7 +128,7 @@ export default class petproClient extends BindingClass {
                     'Content-Type': 'application/json'
                 }
             });
-            return response.data;
+            return response.data.allServices;
         } catch (error) {
             this.handleError(error, errorCallback)
         }

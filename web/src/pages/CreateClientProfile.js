@@ -67,6 +67,7 @@ class CreateClientProfile extends BindingClass {
         document.getElementById('address').innerText = address || profile.clientProfileModel.address;
         document.getElementById('notes').innerText = notes || profile.clientProfileModel.notes;
         document.getElementById('pets').innerText = pets ||profile.clientProfileModel.pets;
+        window.location.href ='/AllClientProfiles.html';
 
     }
     confirmRedirect() {

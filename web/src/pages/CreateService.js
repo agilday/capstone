@@ -55,7 +55,7 @@ class CreateService extends BindingClass {
                    (error) => {
                    });
                    console.log(title, description);
-                //window.location.href ='/ServiceMenu.html';
+                window.location.href ='/ServiceMenu.html';
                 } catch (error) {
             }
     }
