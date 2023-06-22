@@ -101,7 +101,7 @@ export default class petproClient extends BindingClass {
     */
     async getAllAppointments(errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can get all appointments.");
+            const token = await this.getTokenOrThrow("Only authenticated users can view all appointments.");
             const response = await this.axiosClient.get(`appointments/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -121,7 +121,7 @@ export default class petproClient extends BindingClass {
     */
     async getServiceMenu(errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can get service menu.");
+            const token = await this.getTokenOrThrow("Only authenticated users can view the service menu.");
             const response = await this.axiosClient.get(`services/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -210,7 +210,7 @@ export default class petproClient extends BindingClass {
      */
     async createAppointment(client, dateTime, pet, service, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can create an event.");
+            const token = await this.getTokenOrThrow("Only authenticated users can create an appointment.");
             const response = await this.axiosClient.post(`appointments/`, {
                 client: client,
                 dateTime: dateTime,
@@ -236,7 +236,7 @@ export default class petproClient extends BindingClass {
      */
     async getAllClientProfiles(errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can update events.");
+            const token = await this.getTokenOrThrow("Only authenticated users can view all client profiles.");
             const response = await this.axiosClient.get(`clientprofiles/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,

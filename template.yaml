@@ -428,12 +428,12 @@ Resources:
             Path: /services
             Method: get
 
-  CreateServiceMenuLambda:
+  CreateServiceLambda:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
       CodeUri: PetProSchedulerServiceLambda
-      Handler: petproschedulerservice.lambda.CreateServiceMenuLambda::handleRequest
+      Handler: petproschedulerservice.lambda.CreateServiceLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64

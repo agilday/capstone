@@ -38,7 +38,6 @@ class CreateService extends BindingClass {
 
     async submitFormData(evt){
         evt.preventDefault();
-        const errorMessageDisplay = document.getElementById('error-message');
         const createButton = document.getElementById('submit');
         const origButtonText = createButton.innerText;
         const title = document.getElementById('title').value || document.getElementById('title').getAttribute('placeholder');
@@ -54,16 +53,10 @@ class CreateService extends BindingClass {
              const serviceCreator = user.email;
              const event = await this.client.createService(title, description,
                    (error) => {
-                       createButton.innerText = origButtonText;
-                       errorMessageDisplay.innerText = `Error: ${error.message}`;
-                       errorMessageDisplay.classList.remove('hidden');
                    });
                    console.log(title, description);
                 //window.location.href ='/ServiceMenu.html';
                 } catch (error) {
-                    createButton.innerText = origButtonText;
-                    errorMessageDisplay.innerText = `Error: ${error.message}`;
-                    errorMessageDisplay.classList.remove('hidden');
             }
     }
 
