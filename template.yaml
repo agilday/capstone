@@ -216,6 +216,7 @@ Resources:
               - Effect: Allow
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/appointments"
+
         - PolicyName: 'AccessServicesTable'
           PolicyDocument:
             Version: '2012-10-17'
@@ -465,7 +466,6 @@ Resources:
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "clientprofiles"
-
 
 
   AppointmentsTable:
