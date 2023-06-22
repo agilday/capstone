@@ -66,10 +66,6 @@ public class AppointmentModel {
         return new Builder();
     }
 
-//    public String getCustomerName() {
-//        return customerName;
-//    }
-
     public static class Builder {
         private String id;
         private String client;

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="assets/allAppointments.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>All Appointments</title>
+    <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<header class="header" id="header">
+    <button  type="button" class="btn btn-light-custom" id="logout">Logout</button>
+</header>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li>
+                        <a href="AllAppointments.html" class="nav-link px-4 py-4 align-middle" id="AllAppointments">
+                            <i class="bi bi-calendar3 px-4 nav-custom-icon"></i>  <span class="tooltip">All Appointments</span></a>
+                    </li>
+                    <li>
+                        <a href="CreateAppointment.html" class="nav-link px-4 py-4 align-middle" id="CreateAppointment">
+                            <i class="bi bi-pencil-square px-4 nav-custom-icon"></i> <span class="tooltip">Create Appointment</span> </a>
+                    </li>
+                    <li>
+                        <a href="AllClientProfiles.html" class="nav-link px-4 py-4 align-middle"id="AllClientProfiles">
+                            <i class="bi bi-people px-4 nav-custom-icon"></i><span class="tooltip">All Clients</span></a>
+                    </li>
+                    <li>
+                        <a href="ServiceMenu.html" class="nav-link px-4 py-4 align-middle"id="ServiceMenu">
+                            <i class="bi bi-door-open px-4 nav-custom-icon"></i><span class="tooltip">Service Menu</span></a>
+                    </li>
+                    <li>
+                        <a href="CreateClientProfile.html" class="nav-link px-4 py-4 align-middle" id="CreateClientProfile">
+                            <i class="bi bi-pencil-square px-4 nav-custom-icon"></i> <span class="tooltip">Create Client Profile</span> </a>
+                    </li>
+                    <li>
+                        <a href="UpdateClientProfile.html" class="nav-link px-4 py-4 align-middle" id="UpdateClientProfile">
+                            <i class="bi bi-pencil-square px-4 nav-custom-icon"></i> <span class="tooltip">Update Client Profile</span> </a>
+                    </li>
+                    <li>
+                        <a href="index.html" class="nav-link px-4 py-4 align-middle" id="index">
+                            <i class="bi bi-pencil-square px-4 nav-custom-icon"></i> <span class="tooltip">Home</span> </a>
+                    </li>
+                </ul>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+<body>
+<h1>All Appointments</h1>
+<table class="table table-bordered table-striped" id="Toptable">
+    <thead>
+    <tr>
+        <th scope="col" class="text-center">Client</th>
+        <th scope="col" class="text-center">Date & Time</th>
+        <th scope="col" class="text-center">Pet</th>
+        <th scope="col" class="text-center">Service</th>
+
+    </tr>
+    </thead>
+    <tbody id="appointments-list">
+    </tbody>
+</table>
+
+</body>
+</html>

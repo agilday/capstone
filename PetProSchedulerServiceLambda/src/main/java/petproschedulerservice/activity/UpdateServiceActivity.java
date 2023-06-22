@@ -47,8 +47,10 @@ public class UpdateServiceActivity {
 
         Service service = serviceDao.getService(updateServiceRequest.getTitle());
 
-        Service updateService = serviceDao.saveService(updateServiceRequest.getTitle(),
-                updateServiceRequest.getDescription());
+        Service updateService = new Service();
+                updateService.setTitle(updateServiceRequest.getTitle());
+                updateService.setDescription(updateServiceRequest.getDescription());
+                serviceDao.saveService(updateService);
 
         return UpdateServiceResult.builder()
                 .withService(new ModelConverter().toServiceModel(updateService))

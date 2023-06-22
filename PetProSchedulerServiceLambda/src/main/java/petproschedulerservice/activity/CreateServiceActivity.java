@@ -42,7 +42,7 @@ public class CreateServiceActivity {
         newService.setTitle(createServiceRequest.getTitle());
         newService.setDescription(createServiceRequest.getDescription());;
 
-        serviceDao.saveService(newService.getTitle(), newService.getDescription());
+        serviceDao.saveService(newService);
 
         ServiceModel serviceModel = new ModelConverter().toServiceModel(newService);
         return CreateServiceResult.builder()

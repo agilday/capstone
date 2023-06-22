@@ -5,6 +5,7 @@ import petproschedulerservice.activity.CreateClientProfileActivity;
 import petproschedulerservice.activity.requests.CreateClientProfileRequest;
 import petproschedulerservice.activity.results.CreateClientProfileResult;
 import petproschedulerservice.dynamodb.ClientProfileDao;
+import petproschedulerservice.dynamodb.ClientProfile;
 import petproschedulerservice.dynamodb.Pet;
 
 import javax.management.InvalidAttributeValueException;
@@ -35,7 +36,7 @@ public class CreateClientProfileActivityTest {
         String expectedPhone = "123-456-7890";
         String expectedAddress = "123 demonbreun";
         List<String> notes = new ArrayList<>();
-        List<Pet> pets = new ArrayList<>();
+        List<String> pets = new ArrayList<>();
 
         CreateClientProfileRequest request = CreateClientProfileRequest.builder()
                 .withName(expectedName)
@@ -47,10 +48,17 @@ public class CreateClientProfileActivityTest {
 
         //WHEN
         CreateClientProfileResult result = createClientProfileActivity.handleRequest(request);
+        ClientProfile profile = new ClientProfile();
+        profile.setId(result.getProfile().getId());
+        profile.setName(result.getProfile().getName());
+        profile.setPhone(result.getProfile().getPhone());
+        profile.setAddress(result.getProfile().getAddress());
+        profile.setNotes(result.getProfile().getNotes());
+        profile.setPets(result.getProfile().getPets());
+
 
         //THEN
-        verify(profileDao).saveClientProfile(result.getProfile().getId(), result.getProfile().getName(),
-                result.getProfile().getPhone(), result.getProfile().getAddress(), result.getProfile().getNotes(), result.getProfile().getPets());
+        verify(profileDao).saveClientProfile(profile);
 
         assertNotNull(result.getProfile().getId());
         assertEquals(expectedName, result.getProfile().getName());
@@ -67,7 +75,7 @@ public class CreateClientProfileActivityTest {
         String expectedPhone = "123-456-7890";
         String expectedAddress = "123 demonbreun";
         List<String> notes = new ArrayList<>();
-        List<Pet> pets = new ArrayList<>();
+        List<String> pets = new ArrayList<>();
 
         CreateClientProfileRequest request = CreateClientProfileRequest.builder()
                 .withName(expectedName)

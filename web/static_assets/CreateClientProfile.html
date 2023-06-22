@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Cache-control" content="public">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+        <script type="text/javascript" src="assets/createClientProfile.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <title>Create Client Profile</title>
+    </head>
+        <header class="header" id="header">
+            <button  type="button" class="btn btn-light-custom" id="logout">Logout</button>
+        </header>
+        <body>
+        <!-- Modal -->
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                            <li>
+                                <a href="AllAppointments.html" class="nav-link px-4 py-4 align-middle" id="AllAppointments">
+                                    <i class="bi bi-calendar3 px-4 nav-custom-icon"></i>  <span class="tooltip">All Appointments</span></a>
+                            </li>
+                            <li>
+                                <a href="CreateAppointment.html" class="nav-link px-4 py-4 align-middle" id="CreateAppointment">
+                                    <i class="bi bi-pencil-square px-4 nav-custom-icon"></i> <span class="tooltip">Create Appointment</span> </a>
+                            </li>
+                            <li>
+                                <a href="AllClientProfiles.html" class="nav-link px-4 py-4 align-middle"id="AllClientProfiles">
+                                    <i class="bi bi-people px-4 nav-custom-icon"></i><span class="tooltip">All Clients</span></a>
+                            </li>
+                            <li>
+                                <a href="UpdateClientProfile.html" class="nav-link px-4 py-4 align-middle" id="UpdateClientProfile">
+                                    <i class="bi bi-pencil-square px-4 nav-custom-icon"></i> <span class="tooltip">Update Client Profile</span> </a>
+                            </li>
+                            <li>
+                                <a href="ServiceMenu.html" class="nav-link px-4 py-4 align-middle"id="ServiceMenu">
+                                    <i class="bi bi-door-open px-4 nav-custom-icon"></i><span class="tooltip">Service Menu</span></a>
+                            </li>
+                            <li>
+                                <a href="index.html" class="nav-link px-4 py-4 align-middle" id="index">
+                                    <i class="bi bi-pencil-square px-4 nav-custom-icon"></i> <span class="tooltip">Home</span> </a>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col py-3 page-body-background">
+                    <div class="container py-5">
+                        <div class="row justify-content-center">
+                          <div class="col-lg-6">
+                            <div class="card">
+                              <div class="card-body">
+                                <h1 class="card-title text-center" id="loading"></h1>
+                                <h3 class="card-title text-center" id="welcome">Create Profile</h3>
+                                <hr>
+                                <form>
+                                    <p class="hidden error" id="error-message"> </p>
+                                  <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Name">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone</label>
+                                    <input type="text" class="form-control" id="phone" placeholder="Phone">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="address" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="address" placeholder="Address">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="notes" class="form-label">Notes</label>
+                                    <input type="text" class="form-control" id="notes" placeholder="Notes">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="pets" class="form-label">Pets</label>
+                                    <input type="text" class="form-control" id="pets" placeholder="Pets">
+                                  </div>
+                                  <div class="text-end">
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#confirmModal" id="submit">Submit</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+        </body>
+</html>

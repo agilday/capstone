@@ -2,6 +2,7 @@ package petproschedulerservice.activity;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import petproschedulerservice.activity.requests.GetAllAppointmentsRequest;
 import petproschedulerservice.activity.results.GetAllAppointmentsResult;
 import petproschedulerservice.dynamodb.Appointment;
 import petproschedulerservice.dynamodb.AppointmentDao;
@@ -24,10 +25,13 @@ public class GetAllAppointmentsActivity {
      * @return a {@link GetAllAppointmentsResult} containing a list of all appointments
      */
     public GetAllAppointmentsResult handleRequest(){
-        log.info("Receive GetAllAppointmentsRequest {} ", "called Get All Appointments");
+        log.error("Receive GetAllAppointmentsRequest {} ", "called Get All Appointments");
 
         List<Appointment> listAppointments = appointmentDao.getAllAppointments();
-
+        log.error(listAppointments + "this is not right");
+        log.error(GetAllAppointmentsResult.builder()
+                .withAppointmentsList(listAppointments)
+                .build());
         return GetAllAppointmentsResult.builder()
                 .withAppointmentsList(listAppointments)
                 .build();

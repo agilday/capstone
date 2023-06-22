@@ -30,9 +30,9 @@ public class ClientProfileDaoTest {
     @Test
     void saveClientProfile_givenClientProfileToSave_savesClientProfile() {
         //GIVEN
-        List<Pet> pets = new ArrayList<>();
+        List<String> pets = new ArrayList<>();
         Pet scotch = new Pet("Scotch", "feline", "bengal", "aug 2023", false, new ArrayList<>(), Pet.Status.LIVING);
-        pets.add(scotch);
+        pets.add("scotch");
         ClientProfile ashley = new ClientProfile();
         ashley.setId("123");
         ashley.setName("ashley");
@@ -42,7 +42,7 @@ public class ClientProfileDaoTest {
         ashley.setPets(pets);
 
         //WHEN
-        target.saveClientProfile(ashley.getId(), ashley.getName(), ashley.getPhone(), ashley.getAddress(), ashley.getNotes(), ashley.getPets());
+        target.saveClientProfile(ashley);
 
         //THEN
         verify(dynamoDBMapper).save(ashley);

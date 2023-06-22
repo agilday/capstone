@@ -8,10 +8,12 @@ import petproschedulerservice.metrics.MetricsConstants;
 import petproschedulerservice.metrics.MetricsPublisher;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Singleton
 public class ClientProfileDao {
     private final DynamoDBMapper dynamoDbMapper;
     private final MetricsPublisher metricsPublisher;
@@ -54,19 +56,11 @@ public class ClientProfileDao {
     /**
      * Saves (creates or updates) the given profile.
      *
-     * @param ClientProfile to save
+     * @param ClientProfile profile to save
      * @return The ClientProfile object that was saved
      */
-    public ClientProfile saveClientProfile(String id, String name, String phone, String address, List<String> notes, List<Pet> pets) {
-        ClientProfile profile = new ClientProfile();
-        profile.setId(id);
-        profile.setName(name);
-        profile.setPhone(phone);
-        profile.setAddress(address);
-        profile.setNotes(notes);
-        profile.setPets(pets);
+    public void saveClientProfile(ClientProfile profile) {
         this.dynamoDbMapper.save(profile);
-        return profile;
     }
 
     /**

@@ -4,8 +4,6 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import petproschedulerservice.activity.requests.CreateClientProfileRequest;
 import petproschedulerservice.activity.results.CreateClientProfileResult;
-import petproschedulerservice.lambda.LambdaActivityRunner;
-import petproschedulerservice.lambda.LambdaResponse;
 
 import javax.management.InvalidAttributeValueException;
 
@@ -16,13 +14,14 @@ public class CreateClientProfileLambda extends LambdaActivityRunner<CreateClient
         return super.runActivity(
                 () -> {
                     CreateClientProfileRequest unauthenticatedRequest = input.fromBody(CreateClientProfileRequest.class);
-                    return CreateClientProfileRequest.builder()
+                    return input.fromUserClaims(claims ->
+                            CreateClientProfileRequest.builder()
                             .withName(unauthenticatedRequest.getName())
                             .withPhone(unauthenticatedRequest.getPhone())
                             .withAddress(unauthenticatedRequest.getAddress())
                             .withNotes(unauthenticatedRequest.getNotes())
                             .withPets(unauthenticatedRequest.getPets())
-                            .build();
+                            .build());
 
                 },
                 (request, serviceComponent) ->

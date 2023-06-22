@@ -7,21 +7,23 @@ import petproschedulerservice.activity.results.CreateClientProfileResult;
 import petproschedulerservice.converters.ModelConverter;
 import petproschedulerservice.dynamodb.ClientProfile;
 import petproschedulerservice.dynamodb.ClientProfileDao;
+import petproschedulerservice.dynamodb.Pet;
 import petproschedulerservice.models.ClientProfileModel;
 import petproschedulerservice.utils.PetProUtils;
 
 import javax.inject.Inject;
 import javax.management.InvalidAttributeValueException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CreateClientProfileActivity {
     private final Logger log = LogManager.getLogger();
     private final ClientProfileDao profileDao;
 
     /**
-     * Instantiates a new CreatePlaylistActivity object.
+     * Instantiates a new CreateClientProfileActivity object.
      *
-     * @param profileDao PlaylistDao to access the profile table.
+     * @param profileDao ClientProfileDao to access the clientprofiles table.
      */
     @Inject
     public CreateClientProfileActivity(ClientProfileDao profileDao) {
@@ -42,11 +44,19 @@ public class CreateClientProfileActivity {
      * @return createProfileResult result object containing the API defined {@link ClientProfileModel}
      */
     public CreateClientProfileResult handleRequest(final CreateClientProfileRequest createClientProfileRequest) throws InvalidAttributeValueException {
-        log.info("Received CreateProfileRequest {}", createClientProfileRequest);
+        log.info("Received CreateClientProfileRequest {}", createClientProfileRequest);
 
         if (!PetProUtils.isValidString(createClientProfileRequest.getName())) {
             throw new InvalidAttributeValueException("Client name [" + createClientProfileRequest.getName() +
                     "] contains illegal characters");
+        }
+        List<String> notes = null;
+        if(createClientProfileRequest.getNotes() != null) {
+            notes = new ArrayList<>(createClientProfileRequest.getNotes());
+        }
+        List<String> pets = null;
+        if(createClientProfileRequest.getPets() != null) {
+            pets = new ArrayList<>(createClientProfileRequest.getPets());
         }
 
         ClientProfile newProfile = new ClientProfile();
@@ -54,11 +64,10 @@ public class CreateClientProfileActivity {
         newProfile.setName(createClientProfileRequest.getName());
         newProfile.setPhone(createClientProfileRequest.getPhone());
         newProfile.setAddress(createClientProfileRequest.getAddress());
-        newProfile.setNotes(new ArrayList<>());
-        newProfile.setPets(new ArrayList<>());
+        newProfile.setNotes(notes);
+        newProfile.setPets(pets);
 
-        profileDao.saveClientProfile(newProfile.getId(), newProfile.getName(), newProfile.getPhone(),
-                newProfile.getAddress(), newProfile.getNotes(), newProfile.getPets());
+        profileDao.saveClientProfile(newProfile);
 
         ClientProfileModel profileModel = new ModelConverter().toClientProfileModel(newProfile);
         return CreateClientProfileResult.builder()

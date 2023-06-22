@@ -19,7 +19,7 @@ public class ModelConverter {
      * @return the converted profile
      */
     public ClientProfileModel toClientProfileModel(ClientProfile profile) {
-        List<Pet> pets = null;
+        List<String> pets = null;
         if (profile.getPets() != null) {
             pets = new ArrayList<>(profile.getPets());
         }

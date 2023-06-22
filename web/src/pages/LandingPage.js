@@ -1,6 +1,6 @@
-import dannaClient from '../api/dannaClient';
+import petproClient from '../api/petproClient';
 import BindingClass from "../util/bindingClass";
-import Header from '../components/dannaHeader';
+import Header from '../components/header';
 import DataStore from "../util/DataStore";
 
 class LandingPage extends BindingClass {
@@ -9,8 +9,7 @@ class LandingPage extends BindingClass {
         this.bindClassMethods(['clientLoaded', 'mount', 'login'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        // console.log("viewprofile constructor");
-        this.client = new dannaClient();
+        this.client = new petproClient();
         this.clientLoaded();
     }
 
@@ -20,9 +19,9 @@ class LandingPage extends BindingClass {
         const loggedIn = await this.client.isLoggedIn();
         console.log("HERE", loggedIn);
         if(loggedIn){
-            window.location.href= "/profile.html";
+            window.location.href= "/AllAppointments.html";
         }
-        document.getElementById('logout').addEventListener('click', this.login);
+        document.getElementById('login').addEventListener('click', this.login);
         document.getElementById('logout-2').addEventListener('click', this.login);
         document.getElementById('sign-up').addEventListener('click', this.login);
 

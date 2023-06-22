@@ -2,6 +2,7 @@ package petproschedulerservice.activity;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import petproschedulerservice.activity.requests.GetAllClientProfilesRequest;
 import petproschedulerservice.activity.results.GetAllClientProfilesResult;
 import petproschedulerservice.dynamodb.ClientProfile;
 import petproschedulerservice.dynamodb.ClientProfileDao;

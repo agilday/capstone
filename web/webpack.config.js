@@ -23,13 +23,15 @@ module.exports = {
     usedExports: true
   },
   entry: {
-    createPlaylist: path.resolve(__dirname, 'src', 'pages', 'createPlaylist.js'),
-    viewPlaylist: path.resolve(__dirname, 'src', 'pages', 'viewPlaylist.js'),
-    viewProfile: path.resolve(__dirname, 'src', 'pages', 'viewProfile.js'),
-    createProfile: path.resolve(__dirname, 'src', 'pages', 'createProfile.js'),
-    landingPage: path.resolve(__dirname, 'src', 'pages', 'landingPage.js'),
-    searchPlaylists: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js'),
-    test: path.resolve(__dirname, 'src', 'pages', 'test.js'),
+    createAppointment: path.resolve(__dirname, 'src', 'pages', 'CreateAppointment.js'),
+    createClientProfile: path.resolve(__dirname, 'src', 'pages', 'CreateClientProfile.js'),
+    createService: path.resolve(__dirname, 'src', 'pages', 'CreateService.js'),
+    allAppointments: path.resolve(__dirname, 'src', 'pages', 'AllAppointments.js'),
+    viewAllClientProfiles: path.resolve(__dirname, 'src', 'pages', 'ViewAllClientProfiles.js'),
+    viewClientProfile: path.resolve(__dirname, 'src', 'pages', 'ViewClientProfile.js'),
+    getServiceMenu: path.resolve(__dirname, 'src', 'pages', 'GetServiceMenu.js'),
+    landingPage: path.resolve(__dirname, 'src', 'pages', 'LandingPage.js'),
+    test: path.resolve(__dirname, 'src', 'pages', 'test.js')
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

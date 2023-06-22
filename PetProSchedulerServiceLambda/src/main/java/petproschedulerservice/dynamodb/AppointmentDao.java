@@ -3,23 +3,27 @@ package petproschedulerservice.dynamodb;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import org.apache.logging.log4j.Logger;
 import petproschedulerservice.exceptions.AppointmentNotFoundException;
+import petproschedulerservice.exceptions.ProfileNotFoundException;
 import petproschedulerservice.metrics.MetricsConstants;
 import petproschedulerservice.metrics.MetricsPublisher;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Singleton
 public class AppointmentDao {
     private final DynamoDBMapper dynamoDbMapper;
     private final MetricsPublisher metricsPublisher;
 
     /**
-     * Instantiates a PlaylistDao object.
+     * Instantiates an AppointmentDao object.
      *
-     * @param dynamoDbMapper   the {@link DynamoDBMapper} used to interact with the playlists table
+     * @param dynamoDbMapper   the {@link DynamoDBMapper} used to interact with the appointments table
      * @param metricsPublisher the {@link MetricsPublisher} used to record metrics.
      */
     @Inject
@@ -34,9 +38,25 @@ public class AppointmentDao {
      * @return list of Appointments, or empty list if none were found.
      */
     public List<Appointment> getAllAppointments() {
+        System.out.println("hello from getallappointments");
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         List<Appointment> appointmentsList = dynamoDbMapper.scan(Appointment.class, scanExpression);
+        System.out.println(appointmentsList);
         return appointmentsList;
+    }
+    /**
+     * Returns the {@link Appointment} corresponding to the specified id.
+     *
+     * @param id the Appointment ID
+     * @return the stored Appointment, or null if none was found.
+     */
+    public Appointment getAppointment(String id) {
+        Appointment appointment = this.dynamoDbMapper.load(Appointment.class, id);
+
+        if (appointment == null) {
+            throw new AppointmentNotFoundException("Could not find Appointment with id " + id);
+        }
+        return appointment;
     }
 
     /**

@@ -209,13 +209,21 @@ Resources:
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/clientprofiles"
 
-        - PolicyName: 'AccessAppointmentTable'
+        - PolicyName: 'AccessAppointmentsTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/appointments"
+
+        - PolicyName: 'AccessServicesTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/services"
 
   #-----------------------------------------------------
   # Lambda Functions Configuration
@@ -225,7 +233,7 @@ Resources:
     Properties:
       Role: !GetAtt AccessRole.Arn
       CodeUri: PetProSchedulerServiceLambda
-      Handler: com.nashss.se.petproscheduler.lambda.GetClientProfileLambda::handleRequest
+      Handler: petproschedulerservice.lambda.GetClientProfileLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -234,10 +242,10 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
-            Path: /profiles/{id}
+            Path: /clientprofiles/{id}
             Method: get
 
   UpdateClientProfileLambda:
@@ -245,7 +253,7 @@ Resources:
     Properties:
       Role: !GetAtt AccessRole.Arn
       CodeUri: PetProSchedulerServiceLambda
-      Handler: com.nashss.se.petproscheduler.lambda.UpdateClientProfileLambda::handleRequest
+      Handler: petproschedulerservice.lambda.UpdateClientProfileLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -254,10 +262,10 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
-            Path: /profiles/{id}
+            Path: /clientprofiles/{id}
             Method: put
 
   CreateClientProfileLambda:
@@ -274,38 +282,18 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
-            Path: /profiles/create
+            Path: /clientprofiles
             Method: post
 
-#  DeleteProfileLambda:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      Role: !GetAtt AccessRole.Arn
-#      CodeUri: com.nashss.se.petproscheduler
-#      Handler: com.nashss.se.petproscheduler.lambda.DeleteClientProfileLambda::handleRequest
-#      Runtime: java11
-#      Architectures:
-#        - x86_64
-#      MemorySize: 512
-#      Environment:
-#        Variables:
-#          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-#      Events:
-#        MusicPlaylistService:
-#          Type: Api
-#          Properties:
-#            Path: /profiles/{id}
-#            Method: delete
-
-  GetAllClientProfilesLambda:
+  DeleteServiceLambda:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
       CodeUri: PetProSchedulerServiceLambda
-      Handler: com.nashss.se.petproscheduler.lambda.GetAllClientProfilesLambda::handleRequest
+      Handler: petproschedulerservice.lambda.DeleteServiceLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -314,10 +302,30 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
-            Path: /profiles
+            Path: /services/{title}
+            Method: delete
+
+  GetAllClientProfilesLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: petproschedulerservice.lambda.GetAllClientProfilesLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        PetProSchedulerService:
+          Type: Api
+          Properties:
+            Path: /clientprofiles
             Method: get
 
   CreateAppointmentLambda:
@@ -334,38 +342,18 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
-            Path: /appointments/create
+            Path: /appointments
             Method: post
-#
-#  DeleteAppointmentLambda:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      Role: !GetAtt AccessRole.Arn
-#      CodeUri: PetProSchedulerServiceLambda
-#      Handler: com.nashss.se.petproscheduler.lambda.DeleteAppointmentLambda::handleRequest
-#      Runtime: java11
-#      Architectures:
-#        - x86_64
-#      MemorySize: 512
-#      Environment:
-#        Variables:
-#          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-#      Events:
-#        MusicPlaylistService:
-#          Type: Api
-#          Properties:
-#            Path: /appointments/{id}
-#            Method: delete
 
-  GetAllAppointmentsLambda:
+  DeleteAppointmentLambda:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
       CodeUri: PetProSchedulerServiceLambda
-      Handler: com.nashss.se.petproscheduler.lambda.GetAppointmentsLambda::handleRequest
+      Handler: petproschedulerservice.lambda.DeleteAppointmentLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -374,10 +362,30 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
-            Path: /appointments/
+            Path: /appointments/{id}
+            Method: delete
+
+  GetAllAppointmentsLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: petproschedulerservice.lambda.GetAllAppointmentsLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        PetProSchedulerService:
+          Type: Api
+          Properties:
+            Path: /appointments
             Method: get
 
   UpdateServiceLambda:
@@ -385,7 +393,7 @@ Resources:
     Properties:
       Role: !GetAtt AccessRole.Arn
       CodeUri: PetProSchedulerServiceLambda
-      Handler: com.nashss.se.petproscheduler.lambda.UpdateServicesLambda::handleRequest
+      Handler: petproschedulerservice.lambda.UpdateServiceLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -394,10 +402,10 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
-            Path: /services/
+            Path: /services/title
             Method: put
 
   GetServiceMenuLambda:
@@ -405,7 +413,7 @@ Resources:
     Properties:
       Role: !GetAtt AccessRole.Arn
       CodeUri: PetProSchedulerServiceLambda
-      Handler: com.nashss.se.petproscheduler.lambda.GetServicesLambda::handleRequest
+      Handler: petproschedulerservice.lambda.GetServiceMenuLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -414,11 +422,31 @@ Resources:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
-        MusicPlaylistService:
+        PetProSchedulerService:
           Type: Api
           Properties:
-            Path: /services/
+            Path: /services
             Method: get
+
+  CreateServiceLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: petproschedulerservice.lambda.CreateServiceLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        PetProSchedulerService:
+          Type: Api
+          Properties:
+            Path: /services
+            Method: post
 
 
   #-----------------------------------------------------
@@ -439,7 +467,6 @@ Resources:
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "clientprofiles"
-
 
 
   AppointmentsTable:
@@ -463,8 +490,6 @@ Resources:
     Properties:
       AttributeDefinitions:
         - AttributeName: "title"
-          AttributeType: "S"
-        - AttributeName: "description"
           AttributeType: "S"
       KeySchema:
         - AttributeName: "title"
