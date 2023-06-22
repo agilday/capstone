@@ -16,7 +16,7 @@ public class ClientProfile {
     private String phone;
     private String address;
     private List<String> notes;
-    private List<Pet> pets;
+    private List<String> pets;
 
     @DynamoDBHashKey(attributeName = "id")
     public String getId() {
@@ -65,15 +65,15 @@ public class ClientProfile {
     }
 
     @DynamoDBAttribute(attributeName = "pets")
-    public List<Pet> getPets() {
+    public List<String> getPets() {
         return pets;
     }
 
-    public void addPet(Pet pet) {
+    public void addPet(String pet) {
         this.pets.add(pet);
     }
 
-    public void setPets(List<Pet> pets) {
+    public void setPets(List<String> pets) {
         this.pets = pets;
     }
 

@@ -51,11 +51,11 @@ class CreateClientProfile extends BindingClass {
         console.log(name, phone, address, notes, pets);
         let profile;
         if(document.getElementById('welcome').innerText == "Create Profile"){
-            profile = await this.client.createClientProfile(name, phone, address, notes, pets, (error) => {
+            profile = await this.client.createClientProfile(name, phone, address, [notes], [pets], (error) => {
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
             });
         } else {
-            profile = await this.client.updateClientProfile(this.dataStore.get('id'), name, phone, address, notes, pets, (error) => {
+            profile = await this.client.updateClientProfile(this.dataStore.get('id'), name, phone, address, [notes], [pets], (error) => {
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
             });
         }

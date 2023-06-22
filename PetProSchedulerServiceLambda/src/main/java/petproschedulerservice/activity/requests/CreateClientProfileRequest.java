@@ -12,9 +12,9 @@ public class CreateClientProfileRequest {
     private final String phone;
     private final String address;
     private final List<String> notes;
-    private final List<Pet> pets;
+    private final List<String> pets;
 
-    private CreateClientProfileRequest(String name, String phone, String address, List<String> notes, List<Pet> pets) {
+    private CreateClientProfileRequest(String name, String phone, String address, List<String> notes, List<String> pets) {
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -38,13 +38,13 @@ public class CreateClientProfileRequest {
         return notes;
     }
 
-    public List<Pet> getPets() {
+    public List<String> getPets() {
         return pets;
     }
 
     @Override
     public String toString() {
-        return "CreateProfileRequest{" +
+        return "CreateClientProfileRequest{" +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
@@ -64,7 +64,7 @@ public class CreateClientProfileRequest {
         private String phone;
         private String address;
         private List<String> notes;
-        private List<Pet> pets;
+        private List<String> pets;
 
 
         public Builder withName(String name) {
@@ -87,7 +87,7 @@ public class CreateClientProfileRequest {
             return this;
         }
 
-        public Builder withPets(List<Pet> pets) {
+        public Builder withPets(List<String> pets) {
             this.pets = pets;
             return this;
         }

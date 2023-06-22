@@ -36,7 +36,7 @@ public class CreateClientProfileActivityTest {
         String expectedPhone = "123-456-7890";
         String expectedAddress = "123 demonbreun";
         List<String> notes = new ArrayList<>();
-        List<Pet> pets = new ArrayList<>();
+        List<String> pets = new ArrayList<>();
 
         CreateClientProfileRequest request = CreateClientProfileRequest.builder()
                 .withName(expectedName)
@@ -75,7 +75,7 @@ public class CreateClientProfileActivityTest {
         String expectedPhone = "123-456-7890";
         String expectedAddress = "123 demonbreun";
         List<String> notes = new ArrayList<>();
-        List<Pet> pets = new ArrayList<>();
+        List<String> pets = new ArrayList<>();
 
         CreateClientProfileRequest request = CreateClientProfileRequest.builder()
                 .withName(expectedName)

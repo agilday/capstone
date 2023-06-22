@@ -15,7 +15,7 @@ public class CreateClientProfileResult {
 
     @Override
     public String toString() {
-        return "CreateProfileResult{" +
+        return "CreateClientProfileResult{" +
                 "clientprofile=" + profile +
                 '}';
     }

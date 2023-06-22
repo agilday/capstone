@@ -36,7 +36,7 @@ public class GetClientProfileActivityTest {
         String expectedPhone = "789-456-1230";
         String expectedAddress = "222 division st";
         List<String> expectedNotes = new ArrayList<>();
-        List<Pet> expectedPets = new ArrayList<>();
+        List<String> expectedPets = new ArrayList<>();
 
         ClientProfile profile = new ClientProfile();
         profile.setId(expectedId);

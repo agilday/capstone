@@ -11,10 +11,10 @@ public class ClientProfileModel {
     private final String phone;
     private final String address;
     private final List<String> notes;
-    private final List<Pet> pets;
+    private final List<String> pets;
 
     private ClientProfileModel(String id, String name, String phone, String address,
-                             List<String> notes, List<Pet> pets) {
+                             List<String> notes, List<String> pets) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -43,7 +43,7 @@ public class ClientProfileModel {
         return notes;
     }
 
-    public List<Pet> getPets() {
+    public List<String> getPets() {
         return pets;
     }
 
@@ -81,7 +81,7 @@ public class ClientProfileModel {
         private String phone;
         private String address;
         private List<String> notes;
-        private List<Pet> pets;
+        private List<String> pets;
 
         public Builder withId(String id) {
             this.id = id;
@@ -108,7 +108,7 @@ public class ClientProfileModel {
             return this;
         }
 
-        public Builder withPets(List<Pet> pets) {
+        public Builder withPets(List<String> pets) {
             this.pets = pets;
             return this;
         }

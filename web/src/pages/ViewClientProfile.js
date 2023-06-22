@@ -3,11 +3,11 @@ import BindingClass from "../util/bindingClass";
 import Header from '../components/header';
 import DataStore from "../util/DataStore";
 
-class ViewProfile extends BindingClass {
+class ViewClientProfile extends BindingClass {
     constructor() {+
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'redirectUpdateClientProfile','redirectAllAppointments',
-        'redirectCreateAppointment','redirectAllClientProfiles','logout','Service Menu'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'getClientProfile', 'redirectUpdateClientProfile','redirectAllAppointments',
+        'redirectCreateAppointment','redirectAllClientProfiles','logout','redirectServiceMenu'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
 
@@ -17,6 +17,8 @@ class ViewProfile extends BindingClass {
      * Once the client is loaded, get the profile metadata.
      */
     async clientLoaded() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
         const identity = await this.client.getIdentity();
         this.dataStore.set('id', identity.email);
         const profile = await this.client.getClientProfile(id);
@@ -38,18 +40,22 @@ class ViewProfile extends BindingClass {
     document.getElementById('ServiceMenu').addEventListener('click', this.redirectGetServiceMenu);
     document.getElementById('AllClientProfiles').addEventListener('click', this.redirectAllClientProfiles);
     document.getElementById('CreateClientProfile').addEventListener('click', this.redirectCreateClientProfile);
+    document.getElementById('UpdateClientProfile').addEventListener('click', this.redirectUpdateClientProfile);
     document.getElementById('logout').addEventListener('click', this.logout);
-    document.getElementById('confirm').addEventListener('click', this.confirmRedirect);
-    document.getElementById('submitted').addEventListener('click', this.submitFormData);
 
     this.client = new petproClient();
     this.clientLoaded();
     }
 
-
-    confirmRedirect() {
-        window.location.href = '/ClientProfile.html';
+    async getClientProfile(id) {
+        document.getElementById('name').textContext = profile.name;
+        document.getElementById('phone').textContext = profile.phone;
+        document.getElementById('address').textContext = profile.address;
+        document.getElementById('notes').textContext = profile.notes;
+        document.getElementById('pets').textContext = profile.pets;
     }
+
+
     redirectUpdateClientProfile(){
         window.location.href = '/UpdateClientProfile.html';
     }

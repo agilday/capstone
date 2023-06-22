@@ -15,7 +15,6 @@ class CreateAppointment extends BindingClass {
     async clientLoaded() {
         const identity = await this.client.getIdentity();
         this.dataStore.set("email", identity.email);
-        this.dataStore.set('appointment', appointment);
         document.getElementById("client").setAttribute('placeholder', 'Client');
         document.getElementById("dateTime").setAttribute('placeholder', 'Date/Time');
         document.getElementById("pet").setAttribute('placeholder', 'Pet');

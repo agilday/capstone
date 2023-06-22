@@ -59,7 +59,7 @@ class CreateService extends BindingClass {
                        errorMessageDisplay.classList.remove('hidden');
                    });
                    console.log(title, description);
-                window.location.href ='/ServiceMenu.html';
+                //window.location.href ='/ServiceMenu.html';
                 } catch (error) {
                     createButton.innerText = origButtonText;
                     errorMessageDisplay.innerText = `Error: ${error.message}`;

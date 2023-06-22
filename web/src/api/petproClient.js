@@ -136,7 +136,6 @@ export default class petproClient extends BindingClass {
 
     /**
      * 
-     * @param  id Unique identifier for profile
      * @param  name name
      * @param  phone phone
      * @param  address address
@@ -148,7 +147,7 @@ export default class petproClient extends BindingClass {
     async createClientProfile(name, phone, address, notes, pets, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create a profile.");
-            const response = await this.axiosClient.post(`clientprofiles`, {
+            const response = await this.axiosClient.post(`clientprofiles/`, {
                 name: name,
                 phone: phone,
                 address: address,
