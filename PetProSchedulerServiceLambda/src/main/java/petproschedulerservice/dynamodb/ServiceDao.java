@@ -64,7 +64,9 @@ public class ServiceDao {
      * @param service The service to delete
      * @return The Service object that was deleted
      */
-    public void deleteService(Service service) {
+    public void deleteService(String title) {
+        Service service = new Service();
+        service.setTitle(title);
         this.dynamoDbMapper.delete(service);
     }
 

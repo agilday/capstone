@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 class GetServiceMenu extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'getServiceMenu', 'redirectCreateService', 'redirectAllClientProfiles',
+        this.bindClassMethods(['clientLoaded', 'mount', 'deleteService', 'getServiceMenu', 'redirectCreateService', 'redirectAllClientProfiles',
                 'redirectCreateAppointment', 'redirectCreateClientProfile','redirectAllAppointments', 'logout'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.getServiceMenu);
@@ -54,22 +54,30 @@ class GetServiceMenu extends BindingClass {
             if (!searchResults) {
                 return '<h4>No results found</h4>';
             }
+            const servicesTable = document.getElementById("Toptable");
             let html = "";
             for (const res of searchResults) {
-                html += `
-                <tr>
-                <td>
-                         ${res.title}
-                 </td>
-                 <td>
-                         ${res.description}
-                  </td>
-
-                </tr>`;
+                  const row = document.createElement('tr');
+                  row.innerHTML = `<td><a id="title-${res.title}" href="#offcanvas-update-record" data-bs-toggle="offcanvas" data-toggle="collapse">${res.title}</a></td>
+                  <td id="description-${res.description}">${res.description}</td>
+                  <td><button id="deleteButton-${res.title}" data-title="${res.title}">Delete</button></td>
+                  </tr>`;
+                servicesTable.appendChild(row);
+                const deleteButton = `#deleteButton-${res.title}`;
+                document.getElementById(`deleteButton-${res.title}`).addEventListener('click', () => this.deleteService(res.title));
             }
             return html;
         }
 
+
+    async deleteService(title){
+            if(confirm("Delete this service?")){
+                console.log(title);
+                await this.client.deleteService(title);
+                alert(title + " has been deleted.");
+                location.reload();
+            }
+        }
 
     redirectAllClientProfiles(){
         window.location.href = '/AllClientProfiles.html';

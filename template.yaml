@@ -305,7 +305,7 @@ Resources:
         PetProSchedulerService:
           Type: Api
           Properties:
-            Path: /services/title
+            Path: /services/{title}
             Method: delete
 
   GetAllClientProfilesLambda:

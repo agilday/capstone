@@ -206,7 +206,6 @@ export default class petproClient extends BindingClass {
      * @param  pet pet receiving service
      * @param  service service being performed
      * @param  errorCallback 
-     * @returns the event
      */
     async createAppointment(client, dateTime, pet, service, errorCallback) {
         try {
@@ -228,6 +227,29 @@ export default class petproClient extends BindingClass {
             this.handleError(error, errorCallback)
         }
     }
+
+    /**
+         *
+         * @param  id of appointment to delete
+         */
+        async deleteAppointment(id, dateTime, errorCallback) {
+            try {
+                const token = await this.getTokenOrThrow("Only authenticated users can delete an appointment.");
+                const response = await this.axiosClient.delete(`appointments/${id}`, {
+                    id: id,
+                    dateTime: dateTime
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+
+                    }
+                });
+                return response.data;
+            } catch (error) {
+                this.handleError(error, errorCallback)
+            }
+        }
 
     /**
      *
@@ -271,6 +293,29 @@ export default class petproClient extends BindingClass {
             this.handleError(error, errorCallback)
         }
     }
+
+    /**
+         *
+         * @param {*} service the service to delete
+         * @param {*} errorCallback
+         * @returns
+         */
+        async deleteService(title, errorCallback) {
+            try {
+                const token = await this.getTokenOrThrow("Only authenticated users can delete services.");
+                const response = await this.axiosClient.delete(`services/${title}`, {
+                    title: title
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                return response.data;
+            } catch (error) {
+                this.handleError(error, errorCallback)
+            }
+        }
 
     /**
      * Helper method to log the error and run any error functions.

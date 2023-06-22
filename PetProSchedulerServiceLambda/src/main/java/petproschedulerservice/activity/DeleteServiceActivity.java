@@ -30,8 +30,10 @@ public class DeleteServiceActivity {
 
 
         String title = deleteServiceRequest.getTitle();
-        Service service = serviceDao.getService(title);
+        serviceDao.deleteService(title);
 
+        Service service = new Service();
+        service.setTitle(title);
         ServiceModel serviceModel = new ModelConverter().toServiceModel(service);
 
         return DeleteServiceResult.builder()
