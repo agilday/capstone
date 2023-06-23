@@ -5,7 +5,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import org.apache.logging.log4j.Logger;
 import petproschedulerservice.exceptions.AppointmentNotFoundException;
-import petproschedulerservice.exceptions.ProfileNotFoundException;
 import petproschedulerservice.metrics.MetricsConstants;
 import petproschedulerservice.metrics.MetricsPublisher;
 

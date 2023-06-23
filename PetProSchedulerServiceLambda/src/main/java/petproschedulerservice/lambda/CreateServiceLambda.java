@@ -2,7 +2,6 @@ package petproschedulerservice.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import petproschedulerservice.activity.requests.CreateServiceRequest;
 import petproschedulerservice.activity.results.CreateServiceResult;
 
