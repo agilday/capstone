@@ -2,7 +2,7 @@
 
 [PetPro Scheduler] is an application designed to assist a busy pet groomer in keeping his days organized and flowing well.
 
-This design document describes PetPro Scheduler, which will allow the user to create and manage appointments, keep client profiles, and maintain a menu of services.
+This design document describes PetPro Scheduler, which will allow the user to create and manage appointments, keep client and groomer profiles, and maintain a menu of services.
 
 ## 2. Top Questions to Resolve in Review
 
@@ -232,28 +232,26 @@ title // partition key, string
 description // string
 ```
 
-## PHASE 1 EXPANSION
+
+
+## GROOMER PROFILE EXPANSION
 
 ### Overview and project scope:
 In this first major alteration/expansion, the following features will be implemented:
-* changing appointment dateTime to a DateTime data type.
-* fixing deleteService bug (deleted services are still appearing on our service menu page)
-* implementing individual groomer profiles
-* implementing individual pet profiles
+* implementing and giving functionality to individual groomer profiles
 
 ## 2. Proposed Architecture Overview
 
 This initial iteration will provide the minimum lovable product (MLP) including
-creating, retrieving, and updating a groomer profile; creating, retrieving, and updating a pet profile; as well as updating dateTimme data type in appointments.
+creating, retrieving, deleting, and updating a groomer profile.
 
 We will use API Gateway and Lambda to create 11 endpoints (`GetGroomerProfile`,
 `CreateGroomerProfile`, `UpdateGroomerProfile`, `GetAllGroomerProfiles`,
-`CreatePetProfile`, `GetAllPetProfiles`, `GetPetProfile`, and
-`UpdatePetProfile`)
-that will handle the creation, update, and retrieval of groomer and pet profiles to satisfy our
+`DeleteGroomerProfile`)
+that will handle the creation, updating, deletion, and retrieval of groomer profiles to satisfy our
 requirements.
 
-We will store groomer profiles in a table in DynamoDB. Pet profiles will also be stored in DynamoDB.
+We will store groomer profiles in a table in DynamoDB.
 
 PetPro Scheduler will also provide a web interface for the user to manage
 profiles.
@@ -265,154 +263,67 @@ profiles.
 ```
 // GroomerProfileModel
 
-String id;
-String name;
+String fname;
+String lname;
 String phone;
-String address;
+String availability;
 List<String> notes;
-List<String> pets;
+Boolean groomsCats;
 ```
 
-```
-// PetProfileModel
 
-String appointmentId;
-String client;
-String dateTime;
-String pet;
-String service;
-```
+### 6.2. Get Groomer Profile Endpoint
 
-### 6.2. Get Client Profile Endpoint
+* Accepts `GET` requests to `/groomerprofiles/:id`
+* Accepts a name and returns the corresponding GroomerProfileModel.
+  * If the given name is not found, will throw a
+    `GroomerProfileNotFoundException`
 
-* Accepts `GET` requests to `/clientprofiles/:id`
-* Accepts a clientID and returns the corresponding ClientProfileModel.
-  * If the given clientID is not found, will throw a
-    `ClientProfileNotFoundException`
+### 6.3. Create Groomer Profile Endpoint
 
-### 6.3. Create Client Profile Endpoint
-
-* Accepts `POST` requests to `/clientprofiles`
-* Accepts data to create a new profile with a provided name, a phone number, a list of pets, and optional notes. Returns the new profile, including a unique
-  ID.
+* Accepts `POST` requests to `/groomerprofiles`
+* Accepts data to create a new groomer profile with a provided first and last name, a phone number, availability, optional notes, and whether this person grooms cats. Returns the new profile.
 * For security concerns, we will validate the provided profile name does not
   contain any invalid characters: `" ' \`
-  * If the playlist name contains any of the invalid characters, will throw an
+  * If the profile name contains any of the invalid characters, will throw an
     `InvalidAttributeValueException`.
 
-### 6.4. Update Profile Endpoint
+### 6.4. Update Groomer Profile Endpoint
 
-* Accepts `PUT` requests to `/clientprofiles/:id`
-* Accepts data to update a profile including a clientID, an updated profile
-  name, an updated phone number, updated notes, and updated list of pets. Returns the updated
+* Accepts `PUT` requests to `/groomerprofiles/:id`
+* Accepts data to update a profile including an updated profile first and last
+  name, an updated phone number, updated availability, updated notes, and updated groomsCats boolean. Returns the updated
   profile.
-  * If the clientID is not found, will throw a `ClientProfileNotFoundException`
+  * If the name is not found, will throw a `GroomerProfileNotFoundException`
 * For security concerns, we will validate the provided profile name does not
   contain invalid characters: `" ' \`
   * If the profile name contains invalid characters, will throw an
     `InvalidAttributeValueException`
 
 
-### 6.5. Delete Profile Endpoint
+### 6.5. Delete Groomer Profile Endpoint
 
-* Accepts `DELETE` requests to `/clientprofiles/:id`
-* Accepts a clientID to be deleted.
-  * If the clientID is not found, will throw a `ClientProfileNotFoundException`
+* Accepts `DELETE` requests to `/groomerprofiles/:id`
+* Accepts a name to be deleted.
+  * If the name is not found, will throw a `GroomerProfileNotFoundException`
 
 
 
-### 6.6. Get All Profiles Endpoint
+### 6.6. Get All Groomer Profiles Endpoint
 
-* Accepts `GET` requests to `/clientprofiles/`
-* Retrieves all profiles
+* Accepts `GET` requests to `/groomerprofiles/`
+* Retrieves all groomer profiles
   * Returns the profile list
 * If no profiles are found, will return an empty list
 
 
-### 6.7. Create Appointment Endpoint
-
-* Accepts `POST` requests to `/appointments`
-* Accepts data to create a new appointment with a provided client name, a given date and time,
-  a pet, and the service(s) to be performed. Returns the new appointment with a given appointmentId.
-
-
-### 6.8. Delete Appointment Endpoint
-
-* Accepts `DELETE` requests to `/appointments/:id`
-* Accepts a appointmentID to be deleted.
-  * If the appointmentID is not found, will throw an `AppointmentNotFoundException`
-
-
-
-### 6.9. Get Appointments Endpoint
-
-* Accepts `GET` requests to `/appointments/`
-* Retrieves all appointments
-  * Returns the appointment list in chronological order
-* If no appointments are found, will return an empty list
-
+### 7.4 `groomerprofiles`
 
 ```
-//ServiceMenuModel
-
-String title
-String description
-```
-### 7.0. Get Service Menu Endpoint
-
-* Accepts `GET` requests to `/services`
-* Retrieves all services
-* If no services are found, will return an empty list
-
-
-
-### 7.1. Delete Service Endpoint
-
-* Accepts `DELETE` requests to `/services/:title`
-* Accepts a title to be deleted.
-
-
-
-### 7.2. Create Service Endpoint
-
-* Accepts `POST` requests to `/services`
-* Accepts data to create a new service with a provided title and description. Returns the new service.
-
-
-
-### 7.3. Update Service Endpoint
-
-* Accepts `PUT` requests to `/services/:title`
-* Accepts data to update a service including a title and description. Returns the updated
-  service.
-
-
-### 7.4 `clientprofiles`
-
-```
-id // partition key, string
-name // sort key, string
+lname // partition key, string
+fname // string
 phone // string
-address // string
+availability // string
 notes // list
-pets // list
+groomsCats // boolean
 ```
-
-
-### 7.5. `appointments`
-
-```
-id // partition key, string
-dateTime // sort key, string
-client // string
-pet // string
-service // string
-```
-
-### 7.6. `services`
-
-```
-title // partition key, string
-description // string
-```
-
