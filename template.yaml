@@ -448,6 +448,107 @@ Resources:
             Path: /services
             Method: post
 
+  GetGroomerProfileLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: petproschedulerservice.lambda.GetGroomerProfileLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        PetProSchedulerService:
+          Type: Api
+          Properties:
+            Path: /groomerprofiles/{lname}
+            Method: get
+
+  UpdateGroomerProfileLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: petproschedulerservice.lambda.UpdateGroomerProfileLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        PetProSchedulerService:
+          Type: Api
+          Properties:
+            Path: /groomerprofiles/{lname}
+            Method: put
+
+  CreateGroomerProfileLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: petproschedulerservice.lambda.CreateGroomerProfileLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        PetProSchedulerService:
+          Type: Api
+          Properties:
+            Path: /groomerprofiles
+            Method: post
+
+  GetAllGroomerProfilesLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: petproschedulerservice.lambda.GetAllGroomerProfilesLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        PetProSchedulerService:
+          Type: Api
+          Properties:
+            Path: /groomerprofiles
+            Method: get
+
+  DeleteGroomerProfileLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: PetProSchedulerServiceLambda
+      Handler: petproschedulerservice.lambda.DeleteGroomerProfileLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        PetProSchedulerService:
+          Type: Api
+          Properties:
+            Path: /groomerprofiles/{lname}
+            Method: delete
+
+
 
   #-----------------------------------------------------
   # DynamoDB Configuration
@@ -468,6 +569,21 @@ Resources:
       BillingMode: "PAY_PER_REQUEST"
       TableName: "clientprofiles"
 
+  GroomerProfilesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "lname"
+          AttributeType: "S"
+        - AttributeName: "fname"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "lname"
+          KeyType: "HASH"
+        - AttributeName: "fname"
+          KeyType: "RANGE"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "groomerprofiles"
 
   AppointmentsTable:
     Type: AWS::DynamoDB::Table
