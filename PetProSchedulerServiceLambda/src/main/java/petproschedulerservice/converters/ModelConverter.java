@@ -1,11 +1,9 @@
 package petproschedulerservice.converters;
 
-import petproschedulerservice.dynamodb.Appointment;
-import petproschedulerservice.dynamodb.ClientProfile;
-import petproschedulerservice.dynamodb.Pet;
-import petproschedulerservice.dynamodb.Service;
+import petproschedulerservice.dynamodb.*;
 import petproschedulerservice.models.AppointmentModel;
 import petproschedulerservice.models.ClientProfileModel;
+import petproschedulerservice.models.GroomerProfileModel;
 import petproschedulerservice.models.ServiceModel;
 
 import java.util.ArrayList;
@@ -35,6 +33,28 @@ public class ModelConverter {
                 .withAddress(profile.getAddress())
                 .withNotes(notes)
                 .withPets(pets)
+                .build();
+    }
+
+    /**
+     * Converts a provided {@link GroomerProfile} into a {@link GroomerProfileModel} representation.
+     *
+     * @param profile the profile to convert
+     * @return the converted profile
+     */
+    public GroomerProfileModel toGroomerProfileModel(GroomerProfile profile) {
+        List<String> notes = null;
+        if (profile.getNotes() != null) {
+            notes = new ArrayList<>(profile.getNotes());
+        }
+
+        return GroomerProfileModel.builder()
+                .withLname(profile.getLname())
+                .withFname(profile.getFname())
+                .withPhone(profile.getPhone())
+                .withAvailability(profile.getAvailability())
+                .withNotes(notes)
+                .withGroomsCats(profile.getGroomsCats())
                 .build();
     }
 
