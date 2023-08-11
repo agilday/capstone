@@ -2,16 +2,11 @@ package petproschedulerservice.activity;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import petproschedulerservice.activity.requests.CreateClientProfileRequest;
 import petproschedulerservice.activity.requests.CreateGroomerProfileRequest;
-import petproschedulerservice.activity.results.CreateClientProfileResult;
 import petproschedulerservice.activity.results.CreateGroomerProfileResult;
 import petproschedulerservice.converters.ModelConverter;
-import petproschedulerservice.dynamodb.ClientProfile;
-import petproschedulerservice.dynamodb.ClientProfileDao;
 import petproschedulerservice.dynamodb.GroomerProfile;
 import petproschedulerservice.dynamodb.GroomerProfileDao;
-import petproschedulerservice.models.ClientProfileModel;
 import petproschedulerservice.models.GroomerProfileModel;
 import petproschedulerservice.utils.PetProUtils;
 
