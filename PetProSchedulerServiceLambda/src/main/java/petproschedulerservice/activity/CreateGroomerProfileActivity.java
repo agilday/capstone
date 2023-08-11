@@ -63,7 +63,7 @@ public class CreateGroomerProfileActivity {
         newProfile.setLname(createGroomerProfileRequest.getLname());
         newProfile.setFname(createGroomerProfileRequest.getFname());
         newProfile.setPhone(createGroomerProfileRequest.getPhone());
-        newProfile.setAvailability(createGroomerProfileRequest.getAvalability());
+        newProfile.setAvailability(createGroomerProfileRequest.getAvailability());
         newProfile.setNotes(notes);
         newProfile.setGroomsCats(createGroomerProfileRequest.getGroomsCats());
 

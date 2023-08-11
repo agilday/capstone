@@ -35,7 +35,7 @@ public class CreateGroomerProfileRequest {
         return phone;
     }
 
-    public String getAvalability() {
+    public String getAvailability() {
         return availability;
     }
 

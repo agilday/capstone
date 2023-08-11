@@ -26,6 +26,8 @@ public interface ServiceComponent {
 
     GetClientProfileActivity provideGetClientProfileActivity();
 
+    CreateGroomerProfileActivity provideCreateGroomerProfileActivity();
+
     CreateAppointmentActivity provideCreateAppointmentActivity();
 
     GetAllAppointmentsActivity provideGetAllAppointmentsActivity();
