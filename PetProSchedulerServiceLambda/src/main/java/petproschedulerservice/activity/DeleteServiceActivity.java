@@ -23,7 +23,7 @@ public class DeleteServiceActivity {
      * Handles a request for deleting a service by its title.
      *
      * @param deleteServiceRequest the request object containing the service title.
-     * @return a {@code DeleteAppointmentResult} object containing the deleted service.
+     * @return a {@code DeleteServiceResult} object containing the deleted service.
      */
     public DeleteServiceResult handleRequest(final DeleteServiceRequest deleteServiceRequest){
         log.info("Receive DeleteServiceResult {} ", deleteServiceRequest);

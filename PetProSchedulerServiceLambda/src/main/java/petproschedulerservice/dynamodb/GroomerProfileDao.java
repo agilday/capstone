@@ -19,7 +19,7 @@ public class GroomerProfileDao {
     private final MetricsPublisher metricsPublisher;
 
     /**
-     * Instantiates a ClientProfileDao object.
+     * Instantiates a GroomerProfileDao object.
      *
      * @param dynamoDbMapper   the {@link DynamoDBMapper} used to interact with the profiles table
      * @param metricsPublisher the {@link MetricsPublisher} used to record metrics.
@@ -46,6 +46,23 @@ public class GroomerProfileDao {
         metricsPublisher.addCount(MetricsConstants.GETPROFILE_PROFILENOTFOUND_COUNT, 0);
         return profile;
     }
+
+    /**
+     * Deletes (creates or updates) the given service.
+     *
+     * @param service The service to delete
+     * @return The Service object that was deleted
+     */
+    public void deleteGroomerProfile(String lname) {
+        GroomerProfile profile = new GroomerProfile();
+        profile.setLname(lname);
+        this.dynamoDbMapper.delete(lname);
+    }
+
+    /**
+     * Retrieves all groomer profiles
+     * @return all groomer profiles
+     */
 
     public List<GroomerProfile> getAllGroomerProfiles() {
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
