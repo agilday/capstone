@@ -40,4 +40,6 @@ public interface ServiceComponent {
     DeleteAppointmentActivity provideDeleteAppointmentActivity();
     DeleteServiceActivity provideDeleteServiceActivity();
 
+    DeleteGroomerProfileActivity provideDeleteGroomerProfileActivity();
+
 }
